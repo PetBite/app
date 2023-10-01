@@ -1,4 +1,5 @@
 import 'package:app/pages/login/login.dart';
+import 'package:app/pages/register/register.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -71,6 +72,8 @@ class MyApp extends StatelessWidget {
                     return SettingsView(controller: settingsController);
                   case LoginPage.routeName:
                     return const LoginPage();
+                  case RegisterPage.routeName:
+                    return const RegisterPage();
                   default:
                     return const SampleItemListView();
                 }
