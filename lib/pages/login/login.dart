@@ -6,7 +6,7 @@ class LoginPage extends StatefulWidget {
   static const routeName = '/';
 
   @override
-  _LoginPageState createState() => _LoginPageState();
+  State<LoginPage> createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
@@ -16,10 +16,10 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Center(
+        body: SafeArea(
       child: ListView(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        children: [
+        padding: const EdgeInsets.symmetric(horizontal: 35),
+        children: <Widget>[
           const SizedBox(height: 50),
           Image.asset('assets/images/loginpic.png', width: 150, height: 150),
           const Text(
@@ -28,44 +28,35 @@ class _LoginPageState extends State<LoginPage> {
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 50),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30),
-            child: TextField(
-              controller: _emailController,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Email',
-              ),
+          TextField(
+            controller: _emailController,
+            decoration: const InputDecoration(
+              border: OutlineInputBorder(),
+              labelText: 'Email',
             ),
           ),
           const SizedBox(height: 20),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30),
-            child: TextField(
-              controller: _passwordController,
-              obscureText: true,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Password',
-              ),
+          TextField(
+            controller: _passwordController,
+            obscureText: true,
+            decoration: const InputDecoration(
+              border: OutlineInputBorder(),
+              labelText: 'Password',
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Row(
-              children: [
-                Checkbox(
-                  value: true,
-                  onChanged: (value) {},
-                ),
-                const Text('Remember me'),
-                const Spacer(),
-                TextButton(
-                  onPressed: () {},
-                  child: const Text('Forgot Password?'),
-                ),
-              ],
-            ),
+          Row(
+            children: [
+              Checkbox(
+                value: true,
+                onChanged: (value) {},
+              ),
+              const Text('Remember me'),
+              const Spacer(),
+              TextButton(
+                onPressed: () {},
+                child: const Text('Forgot Password?'),
+              ),
+            ],
           ),
           const SizedBox(height: 10),
           Align(
@@ -77,7 +68,7 @@ class _LoginPageState extends State<LoginPage> {
               style: ElevatedButton.styleFrom(
                 shape: const StadiumBorder(),
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 130, vertical: 16),
+                    const EdgeInsets.symmetric(horizontal: 140, vertical: 16),
               ),
               child: const Text(
                 'Login',
