@@ -76,7 +76,7 @@ class MyApp extends StatelessWidget {
                   case Home.routeName:
                     return const Home();
                   default:
-                    return const SampleItemListView();
+                    return const ActivityLogPage();
                 }
               },
             );

@@ -1,16 +1,23 @@
 import 'package:flutter/material.dart';
 
-/// Displays detailed information about a SampleItem.
-class ActivityLog extends StatelessWidget {
-  const ActivityLog({super.key});
+class ActivityLogPage extends StatefulWidget {
+  const ActivityLogPage({Key? key}) : super(key: key);
 
   static const routeName = '/activity_log';
 
   @override
+  State<ActivityLogPage> createState() => _ActivityLogPageState();
+}
+
+class _ActivityLogPageState extends State<ActivityLogPage> {
+  @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Text('Activity Log Page'),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Activity Log'),
+      ),
+      body: const Center(
+        child: Text('Activity Log'),
       ),
     );
   }
