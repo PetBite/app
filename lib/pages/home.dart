@@ -1,5 +1,9 @@
+import 'package:app/pages/activity_log/activity_log.dart';
+import 'package:app/pages/feeding_schedule/feeding_schedule.dart';
+import 'package:app/pages/pet_details/pet_details.dart';
+import 'package:app/pages/pet_food/pet_food.dart';
+import 'package:app/pages/settings/settings.dart';
 import 'package:flutter/material.dart';
-
 import 'home/home_page.dart';
 
 class Home extends StatefulWidget {
@@ -12,16 +16,22 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  final int _selectedIndex = 0;
+  int _selectedIndex = 0;
 
   List<Widget> pageList = [
     const HomePage(),
-    const HomePage(),
-    const HomePage(),
-    const HomePage(),
-    const HomePage(),
-    const HomePage(),
+    const FeedingSchedule(),
+    const ActivityLog(),
+    const PetFood(),
+    const PetDetails(),
+    const Settings(),
   ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,28 +70,7 @@ class _HomeState extends State<Home> {
           currentIndex: _selectedIndex,
           selectedItemColor: const Color(0xFF334192),
           unselectedItemColor: Colors.grey,
-          onTap: (index){
-            switch(index){
-              case 0:
-                Navigator.pushNamed(context, "/first");
-                break;
-              case 1:
-                Navigator.pushNamed(context, "/second");
-                break;
-              case 2:
-                Navigator.pushNamed(context, "/third");
-                break;
-              case 3:
-                Navigator.pushNamed(context, "/fourth");
-                break;
-              case 4:
-                Navigator.pushNamed(context, "/fifth");
-                break;
-              case 5:
-                Navigator.pushNamed(context, "/sixth");
-                break;
-            }
-          },
+          onTap: _onItemTapped,
         ),
       ),
     );
