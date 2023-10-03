@@ -45,6 +45,8 @@ class _HomeState extends State<Home> {
           child: pageList.elementAt(_selectedIndex),
         ),
         bottomNavigationBar: BottomNavigationBar(
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
