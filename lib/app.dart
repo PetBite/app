@@ -2,6 +2,8 @@ import 'package:app/pages/activity_log/activity_log.dart';
 import 'package:app/pages/login/login.dart';
 import 'package:app/pages/home.dart';
 import 'package:app/pages/register/register.dart';
+import 'package:app/pages/register/register.dart';
+import 'package:app/pages/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
