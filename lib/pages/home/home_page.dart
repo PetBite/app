@@ -16,7 +16,7 @@ class HomePage extends StatelessWidget {
           const SizedBox(height: 30),
           Image.asset('assets/images/homepagepic.png', width: 400, height: 210),
             Container(
-              padding: const EdgeInsets.only(left: 50.0, right: 50, top: 50, bottom: 20),
+              padding: const EdgeInsets.only(left: 50.0, right: 50, top: 20, bottom: 20),
             alignment: Alignment.center,
               child: Container(
                 decoration: BoxDecoration(
@@ -47,7 +47,7 @@ class HomePage extends StatelessWidget {
             ),
             ),
             Container(
-              margin: const EdgeInsets.all(30.0),
+              margin: const EdgeInsets.only(top: 10.0, left: 30.0, right: 30.0, bottom: 20.0),
             alignment: Alignment.center,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

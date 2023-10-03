@@ -37,6 +37,58 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        appBar: AppBar(
+          actions: <Widget>[
+            Container(
+              padding: const EdgeInsets.all(4.0),
+              height: 50,
+              width: 50,
+              child: GestureDetector(
+                onTap: () {
+                  setState(() {
+                    //add changing screens
+                  });
+                },
+                child: Image.asset(
+                  'assets/images/navbar_filler1.jpg',
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.all(4.0),
+              height: 50,
+              width: 50,
+              child: GestureDetector(
+                onTap: () {
+                  setState(() {
+                    //add changing screens
+                  });
+                },
+                child: Image.asset(
+                  'assets/images/navbar_filler2.jpg',
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.all(4.0),
+              height: 50,
+              width: 50,
+              child: GestureDetector(
+                onTap: () {
+                  setState(() {
+                    //add changing screens
+                  });
+                },
+                child: Image.asset(
+                  'assets/images/navbar_filler3.jpg',
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+          ],
+        ),
         body: Center(
           child: pageList.elementAt(_selectedIndex),
         ),
