@@ -1,4 +1,6 @@
 import 'package:app/pages/activity_log/activity_log.dart';
+import 'package:app/pages/community_forum/community_forum.dart';
+import 'package:app/pages/direct_messages/direct_messages.dart';
 import 'package:app/pages/feeding_schedule/feeding_schedule.dart';
 import 'package:app/pages/pet_details/pet_details.dart';
 import 'package:app/pages/pet_food/pet_food.dart';
@@ -24,6 +26,8 @@ class _HomeState extends State<Home> {
     const ActivityLog(),
     const PetFood(),
     const PetDetails(),
+    const CommunityForum(),
+    const DirectMessages(),
     const Settings(),
   ];
 
@@ -61,6 +65,14 @@ class _HomeState extends State<Home> {
             BottomNavigationBarItem(
               icon: Icon(Icons.pets),
               label: 'Pet Details',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.people_alt_sharp),
+              label: 'Community',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.message),
+              label: 'Messaging',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.settings),
