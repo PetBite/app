@@ -1,4 +1,3 @@
-import 'package:app/components/activity.dart';
 import 'package:flutter/material.dart';
 
 class ActivityLogPage extends StatefulWidget {
@@ -19,7 +18,7 @@ class _ActivityLogPageState extends State<ActivityLogPage> {
       ),
       body: ListView(
         padding: const EdgeInsets.symmetric(horizontal: 25),
-        children: <Widget>[
+        children: const <Widget>[
           SizedBox(height: 30),
           Text(
             'Today',
