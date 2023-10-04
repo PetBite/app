@@ -9,38 +9,54 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
+List<Widget> generatePetItem(int count) {
+  return List.generate(
+    count,
+    (index) => Ink(
+        decoration: const ShapeDecoration(
+          color: Colors.lightBlue,
+          shape: CircleBorder(),
+        ),
+        child: IconButton(
+          iconSize: 48.0,
+          icon: Image.asset('assets/images/navbar_filler1.jpg'),
+          color: Colors.white,
+          onPressed: () {},
+        )),
+  );
+}
+
 class _HomePageState extends State<HomePage> {
   bool _showPetBar = false;
+  final ScrollController _scrollController = ScrollController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-          child: ListView(children: <Widget>[
-        GestureDetector(
-          onVerticalDragUpdate: (details) {
-            // Detects swipe direction
-            if (details.delta.dy > 0) {
-              // Swiped Down
-              setState(() {
-                _showPetBar = true;
-              });
-            } else if (details.delta.dy < 0) {
-              // Swiped Up
-              setState(() {
-                _showPetBar = false;
-              });
-            }
-          },
-          child: Center(child: Text('Swipe down to show navbar')),
-        ),
+        body: GestureDetector(
+      onVerticalDragEnd: (details) {
+        // Only react to gestures when at the top of the ListView
+        if (_scrollController.position.atEdge &&
+            _scrollController.position.pixels == 0) {
+          if (details.primaryVelocity! > 0) {
+            setState(() {
+              _showPetBar = true;
+            });
+          } else if (details.primaryVelocity! < 0) {
+            setState(() {
+              _showPetBar = false;
+            });
+          }
+        }
+      },
+      child: SafeArea(
+          child: ListView(controller: _scrollController, children: <Widget>[
         if (_showPetBar)
-          Positioned(
-            top: 0,
-            left: 0,
-            right: 0,
-            child: AppBar(
-              title: Text('Navbar'),
-              backgroundColor: Colors.blue.withOpacity(0.8),
+          Container(
+            color: Colors.blue,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: generatePetItem(6),
             ),
           ),
         const SizedBox(height: 30),
@@ -161,6 +177,6 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ])),
-    );
+    ));
   }
 }
