@@ -1,17 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:app/components/feeding_card.dart';
 
-/// Displays detailed information about a SampleItem.
-class FeedingSchedule extends StatelessWidget {
-  const FeedingSchedule({super.key});
+class FeedingSchedulePage extends StatefulWidget {
+  const FeedingSchedulePage({Key? key}) : super(key: key);
 
   static const routeName = '/feeding_schedule';
 
   @override
+  State<FeedingSchedulePage> createState() => _FeedingSchedulePageState();
+}
+
+class _FeedingSchedulePageState extends State<FeedingSchedulePage> {
+  @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Text('Feeding Schedule Page'),
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text(
+          'Feeding Schedule',
+          textAlign: TextAlign.center,
+        ),
       ),
+      body: const FeedingCard()
     );
   }
 }
