@@ -22,7 +22,7 @@ class _HomeState extends State<Home> {
 
   List<Widget> pageList = [
     const HomePage(),
-    const FeedingSchedule(),
+    const FeedingSchedulePage(),
     const ActivityLogPage(),
     const PetFood(),
     const PetDetails(),
