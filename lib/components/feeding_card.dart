@@ -7,48 +7,56 @@ class FeedingCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: Center(
-        child: ListView(
-          children: const [
-            Card(
+          child: ListView(
+        children: [
+          Card(
               child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    "4/20/24",
-                    textAlign: TextAlign.center,
-                  ),
-                  ListTile(
-                    title: Text("Breakfast"),
-                    subtitle: Text("8:00 AM"),
-                  ),
-                ],
-              )
-            ),
-            Card(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Text(
+                "4/20/24",
+                textAlign: TextAlign.center,
+              ),
+              ListTile(
+                title: const Text("Breakfast"),
+                subtitle: const Text("8:00 AM"),
+                trailing: Checkbox(
+                  value: true,
+                  onChanged: (value) {},
+                ),
+              ),
+            ],
+          )),
+          Card(
               child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  ListTile(
-                      title: Text("Lunch"),
-                    subtitle: Text("2:00 PM"),
-                  ),
-                ],
-              )
-            ),
-            Card(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ListTile(
+                title: const Text("Lunch"),
+                subtitle: const Text("2:00 PM"),
+                trailing: Checkbox(
+                  value: true,
+                  onChanged: (value) {},
+                ),
+              ),
+            ],
+          )),
+          Card(
               child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  ListTile(
-                      title: Text("Dinner"),
-                    subtitle: Text("8:00 PM"),
-                  ),
-                ],
-              )
-            )
-          ],
-        )
-      ),
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ListTile(
+                title: const Text("Dinner"),
+                subtitle: const Text("8:00 PM"),
+                trailing: Checkbox(
+                  value: true,
+                  onChanged: (value) {},
+                ),
+              ),
+            ],
+          ))
+        ],
+      )),
     );
   }
 }

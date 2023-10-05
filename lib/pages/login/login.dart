@@ -62,22 +62,24 @@ class _LoginPageState extends State<LoginPage> {
           Align(
             alignment: Alignment.center,
             child: ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/home');
-              },
-              style: ElevatedButton.styleFrom(
-                shape: const StadiumBorder(),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 140, vertical: 16),
-              ),
-              child: const Text(
-                'Login',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
+                onPressed: () {
+                  Navigator.pushNamed(context, '/home');
+                },
+                style: ElevatedButton.styleFrom(
+                  shape: const StadiumBorder(),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 140, vertical: 16),
                 ),
-              ),
-            ),
+                child: const FittedBox(
+                  fit: BoxFit.fitWidth,
+                  child: Text(
+                    'Login',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                    ),
+                  ),
+                )),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
