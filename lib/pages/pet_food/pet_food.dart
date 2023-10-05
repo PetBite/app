@@ -1,3 +1,4 @@
+import 'package:app/pages/pet_food/detailed_pet_food.dart';
 import 'package:flutter/material.dart';
 
 /// Displays detailed information about a SampleItem.
@@ -71,8 +72,8 @@ class _PetFoodState extends State<PetFood> {
                       const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
                   child: Material(
                       elevation: 10,
-                      child: _buildItem(
-                          'assets/images/cesar.jpg', 'cesar', '\$8.99')),
+                      child: _buildItem('assets/images/cesar.jpg', 'cesar',
+                          '\$8.99', context)),
                 ),
                 Container(
                   margin:
@@ -80,7 +81,7 @@ class _PetFoodState extends State<PetFood> {
                   child: Material(
                     elevation: 10,
                     child: _buildItem(
-                        'assets/images/hills.jpg', 'hills', '\$10.79'),
+                        'assets/images/hills.jpg', 'hills', '\$10.79', context),
                   ),
                 ),
                 Container(
@@ -88,8 +89,8 @@ class _PetFoodState extends State<PetFood> {
                       const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
                   child: Material(
                     elevation: 10,
-                    child: _buildItem(
-                        'assets/images/pedigree.jpg', 'pedigree', '\$9.49'),
+                    child: _buildItem('assets/images/pedigree.jpg', 'pedigree',
+                        '\$9.49', context),
                   ),
                 ),
                 Container(
@@ -97,8 +98,8 @@ class _PetFoodState extends State<PetFood> {
                       const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
                   child: Material(
                     elevation: 10,
-                    child: _buildItem(
-                        'assets/images/purina.png', 'purina', '\$11.15'),
+                    child: _buildItem('assets/images/purina.png', 'purina',
+                        '\$11.15', context),
                   ),
                 ),
               ],
@@ -146,22 +147,29 @@ class _PetFoodState extends State<PetFood> {
     );
   }
 
-  Widget _buildItem(String img, String name, String price) {
-    return Column(
-      children: [
-        Expanded(
-          flex: 5,
-          child: Image.asset(img),
-        ),
-        Expanded(
-          flex: 1,
-          child: Text(name),
-        ),
-        Expanded(
-          flex: 1,
-          child: Text(price),
-        ),
-      ],
+  Widget _buildItem(
+      String img, String name, String price, BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const PetFoodPage()));
+      },
+      child: Column(
+        children: [
+          Expanded(
+            flex: 5,
+            child: Image.asset(img),
+          ),
+          Expanded(
+            flex: 1,
+            child: Text(name),
+          ),
+          Expanded(
+            flex: 1,
+            child: Text(price),
+          ),
+        ],
+      ),
     );
   }
 }
