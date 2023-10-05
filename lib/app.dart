@@ -2,6 +2,7 @@ import 'package:app/pages/activity_log/activity_log.dart';
 import 'package:app/pages/community_forum/forum_home.dart';
 import 'package:app/pages/login/login.dart';
 import 'package:app/pages/home.dart';
+import 'package:app/pages/pet_food/detailed_pet_food.dart';
 import 'package:app/pages/register/register.dart';
 import 'package:app/pages/settings/settings.dart';
 import 'package:flutter/material.dart';
@@ -85,8 +86,9 @@ class MyApp extends StatelessWidget {
                     return const Settings();
                   case ForumHomePage.routeName:
                     return const ForumHomePage();
+
                   default:
-                    return const ForumHomePage();
+                    return const PetFoodPage();
                 }
               },
             );
