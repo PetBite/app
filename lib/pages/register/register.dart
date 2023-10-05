@@ -88,7 +88,7 @@ class _RegisterPageState extends State<RegisterPage> {
             alignment: Alignment.center,
             child: ElevatedButton(
               onPressed: () {
-                Navigator.pushReplacementNamed(context, '/home');
+                Navigator.pushReplacementNamed(context, '/404');
               },
               style: ElevatedButton.styleFrom(
                 shape: const StadiumBorder(),
