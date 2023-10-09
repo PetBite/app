@@ -1,5 +1,6 @@
-import 'package:app/components/forum_post.dart';
+import 'package:app/pages/community_forum/create_post.dart';
 import 'package:flutter/material.dart';
+import 'package:app/components/forum_post.dart';
 
 class ForumHomePage extends StatefulWidget {
   const ForumHomePage({Key? key}) : super(key: key);
@@ -101,7 +102,10 @@ class _ForumHomePageState extends State<ForumHomePage> {
         ],
       )),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const CreatePost()));
+        },
         child: const Icon(Icons.add),
       ),
     );
