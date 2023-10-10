@@ -1,6 +1,6 @@
 import 'package:app/pages/activity_log/activity_log.dart';
 import 'package:app/pages/community_forum/forum_home.dart';
-import 'package:app/pages/direct_messages/direct_messages.dart';
+import 'package:app/pages/direct_messages/direct_message_list.dart';
 import 'package:app/pages/feeding_schedule/feeding_schedule.dart';
 import 'package:app/pages/pet_details/pet_details.dart';
 import 'package:app/pages/pet_food/pet_food.dart';
@@ -27,7 +27,7 @@ class _HomeState extends State<Home> {
     const PetFood(),
     const PetDetails(),
     const ForumHomePage(),
-    const DirectMessages(),
+    const DirectMessageList(),
     const Settings(),
   ];
 
