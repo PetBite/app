@@ -17,12 +17,31 @@ class _ForumHomePageState extends State<ForumHomePage> {
   Widget build(BuildContext context) {
     List<String> communityIDs = communityDB.getCommunityIDs();
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Community'),
+        automaticallyImplyLeading: false,
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.search),
+            onPressed: () {},
+          ),
+          IconButton(
+            icon: const Icon(Icons.message),
+            onPressed: () {
+              Navigator.pushNamed(context, '/direct_messages');
+            },
+          ),
+          IconButton(
+            icon: const Icon(Icons.notifications),
+            onPressed: () {},
+          ),
+        ],
+      ),
       body: SafeArea(
           child: ListView(
         padding: const EdgeInsets.symmetric(horizontal: 15),
         children: [
-          const Text('Forum Home'),
-          const SizedBox(height: 30),
+          const SizedBox(height: 10),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: communityIDs

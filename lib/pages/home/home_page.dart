@@ -1,3 +1,4 @@
+import 'package:app/pages/pet_details/pet_details.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -88,6 +89,19 @@ class _HomePageState extends State<HomePage> {
                   Icon(Icons.male, color: Colors.black, size: 40)
                 ]),
           ),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Icon(Icons.pets),
+            const SizedBox(width: 10),
+            const Text('About Kurt'),
+            IconButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, PetDetails.routeName);
+                },
+                icon: const Icon(Icons.edit_note))
+          ],
         ),
         Container(
           margin: const EdgeInsets.only(
