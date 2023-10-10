@@ -1,3 +1,4 @@
+import 'package:app/data_model/community_db.dart';
 import 'package:flutter/material.dart';
 
 class CreatePost extends StatefulWidget {
@@ -8,6 +9,8 @@ class CreatePost extends StatefulWidget {
 }
 
 class _CreatePostState extends State<CreatePost> {
+  CommunityData? selectedCommunity;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,8 +25,22 @@ class _CreatePostState extends State<CreatePost> {
               child: Column(
                 children: [
                   const SizedBox(height: 20),
-                  const DropdownMenu(
-                    dropdownMenuEntries: [],
+                  const Text('Select a community'),
+                  DropdownButtonFormField<CommunityData>(
+                    value: selectedCommunity,
+                    onChanged: (CommunityData? community) {
+                      setState(() {
+                        selectedCommunity = community;
+                      });
+                    },
+                    items: communityDB
+                        .getCommunityIDs()
+                        .map((element) => DropdownMenuItem<CommunityData>(
+                              value: communityDB.getCommunityById(element),
+                              child: Text(
+                                  communityDB.getCommunityById(element).name),
+                            ))
+                        .toList(),
                   ),
                   const SizedBox(height: 20),
                   const Text("Title:"),
@@ -47,7 +64,18 @@ class _CreatePostState extends State<CreatePost> {
                   const SizedBox(height: 20),
                   ElevatedButton(
                     onPressed: () {},
-                    child: const Text('Post'),
+                    style: ElevatedButton.styleFrom(
+                      shape: const StadiumBorder(),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 140, vertical: 16),
+                    ),
+                    child: const Text(
+                      'Post',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                    ),
                   ),
                 ],
               )),
