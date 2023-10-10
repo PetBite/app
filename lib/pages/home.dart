@@ -1,6 +1,5 @@
 import 'package:app/pages/activity_log/activity_log.dart';
 import 'package:app/pages/community_forum/forum_home.dart';
-import 'package:app/pages/direct_messages/direct_message_list.dart';
 import 'package:app/pages/feeding_schedule/feeding_schedule.dart';
 import 'package:app/pages/pet_food/pet_food.dart';
 import 'package:app/pages/settings/settings.dart';

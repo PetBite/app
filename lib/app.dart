@@ -70,7 +70,6 @@ class MyApp extends StatelessWidget {
           // Define a function to handle named routes in order to support
           // Flutter web url navigation and deep linking.
           onGenerateRoute: (RouteSettings routeSettings) {
-            print("Navigating to: ${routeSettings.name}");
             return MaterialPageRoute<void>(
               settings: routeSettings,
               builder: (BuildContext context) {
