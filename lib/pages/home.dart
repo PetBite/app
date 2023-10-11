@@ -1,7 +1,6 @@
 import 'package:app/pages/activity_log/activity_log.dart';
-import 'package:app/pages/community_forum/forum_home.dart';
+import 'package:app/pages/community_forum/community_menu.dart';
 import 'package:app/pages/feeding_schedule/feeding_schedule.dart';
-import 'package:app/pages/pet_food/pet_food.dart';
 import 'package:app/pages/settings/settings.dart';
 import 'package:flutter/material.dart';
 import 'home/home_page.dart';
@@ -22,8 +21,7 @@ class _HomeState extends State<Home> {
     const HomePage(),
     const FeedingSchedulePage(),
     const ActivityLogPage(),
-    const PetFood(),
-    const ForumHomePage(),
+    const CommunityMenu(),
     const Settings(),
   ];
 
@@ -52,12 +50,8 @@ class _HomeState extends State<Home> {
             label: 'Feeding Schedule',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.insert_drive_file_outlined),
+            icon: Icon(Icons.event_note),
             label: 'Activity Log',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.food_bank_outlined),
-            label: 'Pet Food',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.people_alt_sharp),

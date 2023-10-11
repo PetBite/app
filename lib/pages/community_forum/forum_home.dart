@@ -18,8 +18,7 @@ class _ForumHomePageState extends State<ForumHomePage> {
     List<String> communityIDs = communityDB.getCommunityIDs();
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Community'),
-        automaticallyImplyLeading: false,
+        title: const Text('Forum Home'),
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.search),
