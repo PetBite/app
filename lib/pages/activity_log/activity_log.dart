@@ -1,3 +1,4 @@
+import 'package:app/pages/activity_log/detailed_activity_log.dart';
 import 'package:flutter/material.dart';
 
 class ActivityLogPage extends StatefulWidget {
@@ -15,6 +16,16 @@ class _ActivityLogPageState extends State<ActivityLogPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Activity Log'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.details),
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const DetailedActivityPage()));
+            },
+            tooltip: 'Detailed View',
+          )
+        ]
       ),
       body: ListView(
         padding: const EdgeInsets.symmetric(horizontal: 25),
