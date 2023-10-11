@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
+import 'pages/activity_log/detailed_activity_log.dart';
 import 'settings/settings_controller.dart';
 import 'settings/settings_view.dart';
 
@@ -86,7 +87,8 @@ class MyApp extends StatelessWidget {
                     return const Settings();
                   case ForumHomePage.routeName:
                     return const ForumHomePage();
-
+                  case DetailedActivityPage.routeName:
+                    return const DetailedActivityPage();
                   default:
                     return const PetFoodPage();
                 }

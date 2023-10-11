@@ -14,19 +14,15 @@ class _ActivityLogPageState extends State<ActivityLogPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Activity Log'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.details),
-            onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const DetailedActivityPage()));
-            },
-            tooltip: 'Detailed View',
-          )
-        ]
-      ),
+      appBar: AppBar(title: const Text('Activity Log'), actions: [
+        IconButton(
+          icon: const Icon(Icons.details),
+          onPressed: () {
+            Navigator.pushNamed(context, DetailedActivityPage.routeName);
+          },
+          tooltip: 'Detailed View',
+        )
+      ]),
       body: ListView(
         padding: const EdgeInsets.symmetric(horizontal: 25),
         children: const <Widget>[
