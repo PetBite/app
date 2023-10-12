@@ -64,7 +64,8 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
         const SizedBox(height: 30),
-        Image.asset(petDB.getPetById('pet-001').imagePath, width: 400, height: 210),
+        Image.asset(petDB.getPetById('pet-001').imagePath,
+            width: 400, height: 210),
         Container(
           padding:
               const EdgeInsets.only(left: 50.0, right: 50, top: 20, bottom: 20),
@@ -91,7 +92,8 @@ class _HomePageState extends State<HomePage> {
                   ),
                   if (petDB.getPetById('pet-001').gender == 'male') ...[
                     const Icon(Icons.male, color: Colors.black, size: 40),
-                  ] else if(petDB.getPetById('pet-001').gender == 'female')...[
+                  ] else if (petDB.getPetById('pet-001').gender ==
+                      'female') ...[
                     const Icon(Icons.female, color: Colors.black, size: 40),
                   ] else ...[
                     const Icon(Icons.circle, color: Colors.black, size: 40),
@@ -128,8 +130,10 @@ class _HomePageState extends State<HomePage> {
                     child: Container(
                       margin: const EdgeInsets.all(8.0),
                       alignment: Alignment.center,
-                      child: ListView(
-                          children: <Widget>[const Text('Age'), Text('${petDB.getPetById('pet-001').age}')]),
+                      child: ListView(children: <Widget>[
+                        const Text('Age'),
+                        Text('${petDB.getPetById('pet-001').age}')
+                      ]),
                     ),
                   ),
                 ),

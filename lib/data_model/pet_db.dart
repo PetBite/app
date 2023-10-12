@@ -27,16 +27,17 @@ class PetData {
 class PetDB {
   static final List<PetData> _pets = [
     PetData(
-        id: 'pet-001',
-        name: 'Kurt',
-        age: 9,
-        gender: 'male',
-        breed: 'Siberian Husky',
-        weight: 20,
-        height: 53,
-        color: 'white',
-        imagePath: 'assets/images/homepagepic.png',
-        ownerid: 'owner-001',)
+      id: 'pet-001',
+      name: 'Kurt',
+      age: 9,
+      gender: 'male',
+      breed: 'Siberian Husky',
+      weight: 20,
+      height: 53,
+      color: 'white',
+      imagePath: 'assets/images/homepagepic.png',
+      ownerid: 'owner-001',
+    )
   ];
 
   PetData getPetById(String id) {

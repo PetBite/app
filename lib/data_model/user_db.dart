@@ -2,11 +2,11 @@
 class UserData {
   UserData(
       {required this.id,
-        required this.name,
-        required this.email,
-        required this.username,
-        this.imagePath,
-        this.phone});
+      required this.name,
+      required this.email,
+      required this.username,
+      this.imagePath,
+      this.phone});
 
   String id;
   String name;
