@@ -1,4 +1,3 @@
-import 'package:app/pages/pet_food/detailed_pet_food.dart';
 import 'package:flutter/material.dart';
 
 import '../../data_model/pet_food_db.dart';
@@ -74,12 +73,18 @@ class _PetFoodState extends State<PetFood> {
               crossAxisCount: 2,
               children: petFoodIDs
                   .map((element) => Container(
-                margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-                child: Material(
-                    elevation: 10,
-                    child: _buildItem(petFoodDB.getPetFoodById(element).id, petFoodDB.getPetFoodById(element).imagePath, petFoodDB.getPetFoodById(element).name,
-                        '\$${petFoodDB.getPetFoodById(element).price}/lbs', context)),
-              )).toList(),
+                        margin: const EdgeInsets.symmetric(
+                            vertical: 5, horizontal: 5),
+                        child: Material(
+                            elevation: 10,
+                            child: _buildItem(
+                                petFoodDB.getPetFoodById(element).id,
+                                petFoodDB.getPetFoodById(element).imagePath,
+                                petFoodDB.getPetFoodById(element).name,
+                                '\$${petFoodDB.getPetFoodById(element).price}/lbs',
+                                context)),
+                      ))
+                  .toList(),
             ),
           )
         ]),
