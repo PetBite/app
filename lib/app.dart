@@ -1,8 +1,12 @@
 import 'package:app/pages/activity_log/activity_log.dart';
+import 'package:app/pages/community_forum/community_menu.dart';
 import 'package:app/pages/community_forum/forum_home.dart';
+import 'package:app/pages/direct_messages/direct_message_list.dart';
 import 'package:app/pages/login/login.dart';
 import 'package:app/pages/home.dart';
+import 'package:app/pages/pet_details/pet_details.dart';
 import 'package:app/pages/pet_food/detailed_pet_food.dart';
+import 'package:app/pages/pet_food/pet_food.dart';
 import 'package:app/pages/register/register.dart';
 import 'package:app/pages/settings/settings.dart';
 import 'package:flutter/material.dart';
@@ -87,8 +91,16 @@ class MyApp extends StatelessWidget {
                     return const Settings();
                   case ForumHomePage.routeName:
                     return const ForumHomePage();
+                  case PetDetails.routeName:
+                    return const PetDetails();
+                  case DirectMessageList.routeName:
+                    return const DirectMessageList();
                   case DetailedActivityPage.routeName:
                     return const DetailedActivityPage();
+                  case CommunityMenu.routeName:
+                    return const CommunityMenu();
+                  case PetFood.routeName:
+                    return const PetFood();
                   default:
                     return const PetFoodPage();
                 }

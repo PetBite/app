@@ -14,14 +14,13 @@ class _FeedingSchedulePageState extends State<FeedingSchedulePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text(
-          'Feeding Schedule',
-          textAlign: TextAlign.center,
+        appBar: AppBar(
+          title: const Text(
+            'Feeding Schedule',
+            textAlign: TextAlign.center,
+          ),
+          automaticallyImplyLeading: false,
         ),
-      ),
-      body: const FeedingCard()
-    );
+        body: const FeedingCard());
   }
 }

@@ -11,7 +11,6 @@ class DirectMessageList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
         title: const Text('Direct Messages'),
       ),
       body: Column(children: [

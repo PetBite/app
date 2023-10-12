@@ -20,6 +20,9 @@ class _PetFoodState extends State<PetFood> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Pet Food List'),
+      ),
       body: SafeArea(
         child: ListView(children: [
           Row(
@@ -88,8 +91,7 @@ class _PetFoodState extends State<PetFood> {
       String id, String img, String name, String price, BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const PetFoodPage()));
+        Navigator.pushNamed(context, '/detailed_pet_food');
       },
       child: Column(
         children: [
