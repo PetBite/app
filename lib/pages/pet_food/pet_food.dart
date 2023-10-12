@@ -1,6 +1,8 @@
 import 'package:app/pages/pet_food/detailed_pet_food.dart';
 import 'package:flutter/material.dart';
 
+import '../../data_model/pet_food_db.dart';
+
 /// Displays detailed information about a SampleItem.
 class PetFood extends StatefulWidget {
   const PetFood({Key? key}) : super(key: key);
@@ -13,12 +15,13 @@ class PetFood extends StatefulWidget {
 
 class _PetFoodState extends State<PetFood> {
   List<String> search = ['healthy', 'vet recommended', 'Purina'];
+  List<String> petFoodIDs = PetFoodDB.getPetFoodIDs();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: ListView(children: <Widget>[
+        child: ListView(children: [
           Row(
             children: [
               TextButton(
@@ -66,81 +69,15 @@ class _PetFoodState extends State<PetFood> {
             child: GridView.count(
               childAspectRatio: 7 / 6,
               crossAxisCount: 2,
-              children: [
-                Container(
-                  margin:
-                      const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-                  child: Material(
-                      elevation: 10,
-                      child: _buildItem('assets/images/cesar.jpg', 'cesar',
-                          '\$8.99', context)),
-                ),
-                Container(
-                  margin:
-                      const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-                  child: Material(
+              children: petFoodIDs
+                  .map((element) => Container(
+                margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+                child: Material(
                     elevation: 10,
-                    child: _buildItem(
-                        'assets/images/hills.jpg', 'hills', '\$10.79', context),
-                  ),
-                ),
-                Container(
-                  margin:
-                      const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-                  child: Material(
-                    elevation: 10,
-                    child: _buildItem('assets/images/pedigree.jpg', 'pedigree',
-                        '\$9.49', context),
-                  ),
-                ),
-                Container(
-                  margin:
-                      const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-                  child: Material(
-                    elevation: 10,
-                    child: _buildItem('assets/images/purina.png', 'purina',
-                        '\$11.15', context),
-                  ),
-                ),
-              ],
+                    child: _buildItem(petFoodDB.getPetFoodById(element).id, petFoodDB.getPetFoodById(element).imagePath, petFoodDB.getPetFoodById(element).name,
+                        '\$${petFoodDB.getPetFoodById(element).price}/lbs', context)),
+              )).toList(),
             ),
-            /*
-              child: ListView(children: <Widget>[
-                Row(children: [
-                  SizedBox(
-                      height: 140,
-                      child: ListView(children: <Widget>[
-                        Image.asset('assets/images/cesar.jpg'),
-                        const Text('cesar'),
-                        const Text('\$8.99'),
-                      ])),
-                  SizedBox(
-                      height: 140,
-                      child: ListView(children: <Widget>[
-                        Image.asset('assets/images/hills.jpg'),
-                        const Text('hills'),
-                        const Text('\$10.79'),
-                  ])),
-                ]),
-                Row(children: [
-                  SizedBox(
-                      height: 140,
-                      child: ListView(children: <Widget>[
-                        Image.asset('assets/images/pedigree.jpg'),
-                        const Text('pedigree'),
-                        const Text('\$9.49'),
-                  ])),
-                  SizedBox(
-                      height: 140,
-                      child: Column(children: <Widget>[
-                        Image.asset('assets/images/purina.png'),
-                        const Text('purina'),
-                        const Text('\$11.15'),
-                  ])),
-                ])
-              ]))
-
-               */
           )
         ]),
       ),
@@ -148,7 +85,7 @@ class _PetFoodState extends State<PetFood> {
   }
 
   Widget _buildItem(
-      String img, String name, String price, BuildContext context) {
+      String id, String img, String name, String price, BuildContext context) {
     return GestureDetector(
       onTap: () {
         Navigator.push(context,
