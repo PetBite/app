@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../data_model/direct_message_db.dart';
 
 class DirectMessage extends StatefulWidget {
   const DirectMessage({super.key});
@@ -8,51 +9,53 @@ class DirectMessage extends StatefulWidget {
 }
 
 class _DirectMessageState extends State<DirectMessage> {
+  List<String> directMessageIDs = DirectMessageDB.getDirectMessageIDs();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
           centerTitle: true,
-          title: const Row(children: [Text("@ Philip M. Johnson")])),
+          title: Row(children: [Text(directMessageDB.getDirectMessageById('direct-message-001').senderid)])),
       body: SafeArea(
           child: ListView(
-        children: const [
+        children: [
           ListTile(
             leading: CircleAvatar(
-              foregroundImage: AssetImage('assets/images/flutter_logo.png'),
+              foregroundImage: AssetImage(directMessageDB.getDirectMessageById('direct-message-001').imagePath),
             ),
             title: Row(
               children: [
-                Text("Philip M. Johnson",
+                Text(directMessageDB.getDirectMessageById('direct-message-001').senderid,
                     style:
-                        TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
-                SizedBox(width: 10),
-                Text("10:14 AM",
-                    style: TextStyle(fontSize: 12, color: Colors.grey))
+                        const TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+                const SizedBox(width: 10),
+                Text(directMessageDB.getDirectMessageById('direct-message-001').timestamp,
+                    style: const TextStyle(fontSize: 12, color: Colors.grey))
               ],
             ),
-            subtitle: Text("Your app is looking awesome! : ^)",
-                style: TextStyle(
+            subtitle: Text(directMessageDB.getDirectMessageById('direct-message-001').content,
+                style: const TextStyle(
                   fontSize: 16,
                   color: Colors.black,
                 )),
           ),
           ListTile(
             leading: CircleAvatar(
-              foregroundImage: AssetImage('assets/images/flutter_logo.png'),
+              foregroundImage: AssetImage(directMessageDB.getDirectMessageById('direct-message-002').imagePath),
             ),
             title: Row(
               children: [
-                Text("Keaton Wong",
+                Text(directMessageDB.getDirectMessageById('direct-message-002').senderid,
                     style:
-                        TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
-                SizedBox(width: 10),
-                Text("10:15 AM",
-                    style: TextStyle(fontSize: 12, color: Colors.grey))
+                        const TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+                const SizedBox(width: 10),
+                Text(directMessageDB.getDirectMessageById('direct-message-002').timestamp,
+                    style: const TextStyle(fontSize: 12, color: Colors.grey))
               ],
             ),
-            subtitle: Text("Thanks! : ^)",
-                style: TextStyle(
+            subtitle: Text(directMessageDB.getDirectMessageById('direct-message-002').content,
+                style: const TextStyle(
                   fontSize: 16,
                   color: Colors.black,
                 )),
@@ -74,7 +77,7 @@ class _DirectMessageState extends State<DirectMessage> {
             Expanded(
               child: TextField(
                 decoration: InputDecoration(
-                  hintText: "Message @Philip M. Johnson",
+                  hintText: "Message @${directMessageDB.getDirectMessageById('direct-message-001').senderid}",
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30.0),
                     borderSide: BorderSide.none,

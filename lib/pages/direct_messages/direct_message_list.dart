@@ -1,11 +1,21 @@
 import 'package:app/pages/direct_messages/direct_message.dart';
 import 'package:flutter/material.dart';
 
+import '../../data_model/direct_message_db.dart';
+
 /// Displays detailed information about a SampleItem.
-class DirectMessageList extends StatelessWidget {
-  const DirectMessageList({super.key});
+
+class DirectMessageList extends StatefulWidget {
+  const DirectMessageList({Key? key}) : super(key: key);
 
   static const routeName = '/direct_messages';
+
+  @override
+  State<DirectMessageList> createState() => _DirectMessageListState();
+}
+
+class _DirectMessageListState extends State<DirectMessageList> {
+  List<String> directMessageIDs = DirectMessageDB.getCoverMessageIDs();
 
   @override
   Widget build(BuildContext context) {
@@ -13,46 +23,22 @@ class DirectMessageList extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Direct Messages'),
       ),
-      body: Column(children: [
-        ListTile(
-          leading: const CircleAvatar(
-            foregroundImage: AssetImage('assets/images/flutter_logo.png'),
-          ),
-          title: const Text("Philip M. Johnson"),
-          subtitle: const Text("Your app is looking awesome! : ^)"),
-          trailing: const Text("10:14 AM"),
-          onTap: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const DirectMessage()));
-          },
+      body: Column(children: directMessageIDs
+          .map((element) => ListTile(
+        leading: CircleAvatar(
+          foregroundImage: AssetImage(directMessageDB.getDirectMessageById(element).imagePath),
         ),
-        ListTile(
-            leading: const CircleAvatar(
-              foregroundImage: AssetImage('assets/images/flutter_logo.png'),
-            ),
-            title: const Text("Wenhao Qiu"),
-            subtitle: const Text("nice"),
-            trailing: const Text("9:37 AM"),
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const DirectMessage()));
-            }),
-        ListTile(
-            leading: const CircleAvatar(
-              foregroundImage: AssetImage('assets/images/flutter_logo.png'),
-            ),
-            title: const Text("Braydon Nagasako"),
-            subtitle: const Text("thanks"),
-            trailing: const Text("8:42 AM"),
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const DirectMessage()));
-            })
-      ]),
+        title: Text(directMessageDB.getDirectMessageById(element).senderid),
+        subtitle: Text(directMessageDB.getDirectMessageById(element).content),
+        trailing: Text(directMessageDB.getDirectMessageById(element).timestamp),
+        onTap: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const DirectMessage()));
+        },
+      ),
+
+      ).toList(),
+      ),
     );
   }
 }
