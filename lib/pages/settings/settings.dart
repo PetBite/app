@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:app/data_model/user_db.dart';
 
 /// Displays detailed information about a SampleItem.
 class Settings extends StatelessWidget {
@@ -9,6 +10,10 @@ class Settings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text('${userDB.getUser(currentUserID).username}\'s Settings'),
+      ),
       body: SafeArea(
           child: ListView(children: const <Widget>[
         ListTile(
