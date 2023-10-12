@@ -69,7 +69,6 @@ class _ForumHomePageState extends State<ForumHomePage> {
             ],
           ),
           const ForumPostCard(),
-          const ForumPostCard(),
         ],
       )),
       floatingActionButton: FloatingActionButton(

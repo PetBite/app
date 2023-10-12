@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:app/data_model/post_db.dart';
 
 class ForumPostCard extends StatelessWidget {
   final String url;
@@ -12,15 +13,15 @@ class ForumPostCard extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            const Row(children: [
-              CircleAvatar(
+            Row(children: [
+              const CircleAvatar(
                 backgroundImage: AssetImage('assets/images/loginpic.png'),
                 radius: 16,
               ),
-              SizedBox(width: 9),
-              Text('Username'),
-              SizedBox(width: 9),
-              Text(
+              const SizedBox(width: 9),
+              Text(postDB.getPost('post-001').authorName),
+              const SizedBox(width: 9),
+              const Text(
                 '1d',
                 style: TextStyle(color: Colors.grey),
               ),
@@ -28,28 +29,29 @@ class ForumPostCard extends StatelessWidget {
             const SizedBox(height: 9),
             Container(
                 alignment: Alignment.centerLeft,
-                child: const Text(
-                  'Title',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                child: Text(
+                  postDB.getPost('post-001').title,
+                  style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 )),
             const SizedBox(height: 2),
-            const Text(
-              'Lorem ipsum dolor sit amet. Ut fugiat velit quo suscipit autem est neque quia At doloremque quis. Est consequatur dolore aut voluptatem eius ut totam dolores aut rerum beatae est labore inventore! Est voluptatem consectetur eos delectus beatae aut iure quisquam ex Quis soluta a vitae aperiam est quis voluptatem et culpa nesciunt?',
+            Text(
+              postDB.getPost('post-001').content,
               overflow: TextOverflow.ellipsis,
               maxLines: 2,
             ),
-            Image.asset('assets/images/homepagepic.png',
+            Image.asset(
+                'assets/images/homepagepic.png',
                 width: 150, height: 150),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 TextButton(
-                  child: const Row(
+                  child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(Icons.thumb_up, color: Colors.blue),
-                      SizedBox(width: 8),
-                      Text('4', style: TextStyle(color: Colors.blue)),
+                      const Icon(Icons.thumb_up, color: Colors.blue),
+                      const SizedBox(width: 8),
+                      Text(postDB.getPost('post-001').likesCount.toString(), style: const TextStyle(color: Colors.blue)),
                     ],
                   ),
                   onPressed: () {/* ... */},
