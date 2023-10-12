@@ -13,6 +13,7 @@ class Settings extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         title: Text('${userDB.getUser(currentUserID).username}\'s Settings'),
+        automaticallyImplyLeading: false,
       ),
       body: SafeArea(
           child: ListView(children: const <Widget>[
