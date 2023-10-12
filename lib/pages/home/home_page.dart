@@ -1,6 +1,8 @@
 import 'package:app/pages/pet_details/pet_details.dart';
 import 'package:flutter/material.dart';
 
+import '../../data_model/pet_db.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -29,6 +31,7 @@ List<Widget> generatePetItem(int count) {
 
 class _HomePageState extends State<HomePage> {
   bool _showPetBar = false;
+  List<String> petFoodIDs = PetDB.getPetIDs();
   final ScrollController _scrollController = ScrollController();
 
   @override
@@ -61,7 +64,8 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
         const SizedBox(height: 30),
-        Image.asset('assets/images/homepagepic.png', width: 400, height: 210),
+        Image.asset(petDB.getPetById('pet-001').imagePath,
+            width: 400, height: 210),
         Container(
           padding:
               const EdgeInsets.only(left: 50.0, right: 50, top: 20, bottom: 20),
@@ -79,14 +83,22 @@ class _HomePageState extends State<HomePage> {
                 )
               ],
             ),
-            child: const Row(
+            child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Text(
-                    'Kurt - Siberian Husky',
-                    style: TextStyle(fontSize: 25),
+                    '${petDB.getPetById('pet-001').name} - ${petDB.getPetById('pet-001').breed}',
+                    style: const TextStyle(fontSize: 25),
                   ),
-                  Icon(Icons.male, color: Colors.black, size: 40)
+                  if (petDB.getPetById('pet-001').gender == 'male') ...[
+                    const Icon(Icons.male, color: Colors.black, size: 40),
+                  ] else if (petDB.getPetById('pet-001').gender ==
+                      'female') ...[
+                    const Icon(Icons.female, color: Colors.black, size: 40),
+                  ] else ...[
+                    const Icon(Icons.circle, color: Colors.black, size: 40),
+                  ],
+                  //const Icon(Icons.male, color: Colors.black, size: 40)
                 ]),
           ),
         ),
@@ -95,7 +107,7 @@ class _HomePageState extends State<HomePage> {
           children: [
             const Icon(Icons.pets),
             const SizedBox(width: 10),
-            const Text('About Kurt'),
+            Text('About ${petDB.getPetById('pet-001').name}'),
             IconButton(
                 onPressed: () {
                   Navigator.pushNamed(context, PetDetails.routeName);
@@ -118,22 +130,9 @@ class _HomePageState extends State<HomePage> {
                     child: Container(
                       margin: const EdgeInsets.all(8.0),
                       alignment: Alignment.center,
-                      child: ListView(
-                          children: const <Widget>[Text('Age'), Text('9')]),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 60,
-                  width: 60,
-                  child: DecoratedBox(
-                    decoration: const BoxDecoration(color: Colors.greenAccent),
-                    child: Container(
-                      margin: const EdgeInsets.all(8.0),
-                      alignment: Alignment.center,
-                      child: ListView(children: const <Widget>[
-                        Text('Height'),
-                        Text('53 cm')
+                      child: ListView(children: <Widget>[
+                        const Text('Age'),
+                        Text('${petDB.getPetById('pet-001').age}')
                       ]),
                     ),
                   ),
@@ -146,9 +145,9 @@ class _HomePageState extends State<HomePage> {
                     child: Container(
                       margin: const EdgeInsets.all(8.0),
                       alignment: Alignment.center,
-                      child: ListView(children: const <Widget>[
-                        Text('Weight'),
-                        Text('20 kg')
+                      child: ListView(children: <Widget>[
+                        const Text('Height'),
+                        Text('${petDB.getPetById('pet-001').height} cm')
                       ]),
                     ),
                   ),
@@ -161,9 +160,24 @@ class _HomePageState extends State<HomePage> {
                     child: Container(
                       margin: const EdgeInsets.all(8.0),
                       alignment: Alignment.center,
-                      child: ListView(children: const <Widget>[
-                        Text('Color'),
-                        Text('White')
+                      child: ListView(children: <Widget>[
+                        const Text('Weight'),
+                        Text('${petDB.getPetById('pet-001').weight} kg')
+                      ]),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 60,
+                  width: 60,
+                  child: DecoratedBox(
+                    decoration: const BoxDecoration(color: Colors.greenAccent),
+                    child: Container(
+                      margin: const EdgeInsets.all(8.0),
+                      alignment: Alignment.center,
+                      child: ListView(children: <Widget>[
+                        const Text('Color'),
+                        Text(petDB.getPetById('pet-001').color)
                       ]),
                     ),
                   ),
