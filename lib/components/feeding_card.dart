@@ -8,20 +8,47 @@ class FeedingCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<String> feedingScheduleIDs = FeedingScheduleDB.getFeedingScheduleIDs();
+    List<String> feedingScheduleDates = FeedingScheduleDB.getFeedingScheduleDates().toSet().toList();
 
     return Card(
       child: Center(
           child: ListView(
-        children: feedingScheduleIDs
-            .map((element) =>
+        children: feedingScheduleDates
+            .map((element) => Column(mainAxisSize: MainAxisSize.min, children: [
+                      Text(
+                        feedingScheduleDB.getFeedingScheduleByDate(element).date,
+                        textAlign: TextAlign.center,
+                      ),
+                      Column(
+                        children: feedingScheduleIDs
+                            .map(
+                              (element) => Card(
+                                  child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  ListTile(
+                                    title: Text(feedingScheduleDB
+                                        .getFeedingScheduleById(element)
+                                        .name),
+                                    subtitle: Text(feedingScheduleDB
+                                        .getFeedingScheduleById(element)
+                                        .time),
+                                    trailing: Checkbox(
+                                      value: true,
+                                      onChanged: (value) {},
+                                    ),
+                                  ),
+                                ],
+                              )),
+                            )
+                            .toList(),
+                      ),
+                    ])
+                /*
             Card(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Text(
-                      "4/20/24",
-                      textAlign: TextAlign.center,
-                    ),
                     ListTile(
                       title: Text(feedingScheduleDB.getFeedingScheduleById(element).name),
                       subtitle: Text(feedingScheduleDB.getFeedingScheduleById(element).time),
@@ -32,7 +59,9 @@ class FeedingCard extends StatelessWidget {
                     ),
                   ],
                 )),
-            )
+
+           */
+                )
             .toList(),
       )),
     );
