@@ -21,6 +21,8 @@ class _FeedingSchedulePageState extends State<FeedingSchedulePage> {
           ),
           automaticallyImplyLeading: false,
         ),
-        body: const FeedingCard());
+        body: SafeArea(
+          child: ListView(children: const [FeedingCard()]),
+        ));
   }
 }
