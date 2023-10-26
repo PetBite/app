@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../data_model/feeding_schedule_db.dart';
 
-class FeedingCard extends StatelessWidget {
+class FeedingCard extends ConsumerStatefulWidget {
   final String day;
 
   const FeedingCard({Key? key, required this.day}) : super(key: key);
 
   @override
+  ConsumerState<FeedingCard> createState() => _FeedingCardState();
+}
+
+class _FeedingCardState extends ConsumerState<FeedingCard> {
+  @override
   Widget build(BuildContext context) {
+    final feedingScheduleDB = ref.watch(feedingScheduleDBProvider);
     List<DailyFeedingScheduleData> dailySchedules =
-        FeedingScheduleDB().getFeedingSchedulesByDay(day);
+        feedingScheduleDB.getFeedingSchedulesByDay(widget.day);
 
     return Card(
       child: Center(
@@ -17,7 +24,7 @@ class FeedingCard extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              day,
+              widget.day,
               textAlign: TextAlign.center,
               style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
             ),
@@ -31,11 +38,13 @@ class FeedingCard extends StatelessWidget {
                         const SizedBox(height: 6),
                         Text(schedule.time),
                         const SizedBox(height: 6),
-                        Text('${schedule.foodType}: ${schedule.quantity}'),
+                        schedule.foodType != ""
+                            ? Text('${schedule.foodType}: ${schedule.quantity}')
+                            : const Text(""),
                       ],
                     ),
                     trailing: Checkbox(
-                      value: true,
+                      value: schedule.complete,
                       onChanged: (value) {},
                     ),
                   ),
