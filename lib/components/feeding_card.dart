@@ -2,42 +2,45 @@ import 'package:flutter/material.dart';
 import '../data_model/feeding_schedule_db.dart';
 
 class FeedingCard extends StatelessWidget {
-  const FeedingCard({Key? key}) : super(key: key);
+  final String day;
+
+  const FeedingCard({Key? key, required this.day}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    List<String> feedingScheduleIDs = FeedingScheduleDB.getFeedingScheduleIDs();
-    List<String> feedingScheduleDates =
-        FeedingScheduleDB.getFeedingScheduleDates().toSet().toList();
+    List<DailyFeedingScheduleData> dailySchedules =
+        FeedingScheduleDB().getFeedingSchedulesByDay(day);
 
     return Card(
       child: Center(
         child: Column(
-          children: feedingScheduleDates
-              .map((element) =>
-                  Column(mainAxisSize: MainAxisSize.min, children: [
-                    Text(
-                      feedingScheduleDB.getFeedingScheduleByDate(element).date,
-                      textAlign: TextAlign.center,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              day,
+              textAlign: TextAlign.center,
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+            ),
+            ...dailySchedules.map((schedule) => Padding(
+                  padding: const EdgeInsets.all(6.0),
+                  child: ListTile(
+                    title: Text(schedule.name),
+                    subtitle: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SizedBox(height: 6),
+                        Text(schedule.time),
+                        const SizedBox(height: 6),
+                        Text('${schedule.foodType}: ${schedule.quantity}'),
+                      ],
                     ),
-                    Column(
-                      children: feedingScheduleIDs
-                          .map((element) => ListTile(
-                                title: Text(feedingScheduleDB
-                                    .getFeedingScheduleById(element)
-                                    .name),
-                                subtitle: Text(feedingScheduleDB
-                                    .getFeedingScheduleById(element)
-                                    .time),
-                                trailing: Checkbox(
-                                  value: true,
-                                  onChanged: (value) {},
-                                ),
-                              ))
-                          .toList(),
+                    trailing: Checkbox(
+                      value: true,
+                      onChanged: (value) {},
                     ),
-                  ]))
-              .toList(),
+                  ),
+                ))
+          ],
         ),
       ),
     );
