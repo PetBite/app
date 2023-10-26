@@ -1,16 +1,17 @@
 import 'package:app/pages/activity_log/detailed_activity_log.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class ActivityLogPage extends StatefulWidget {
+class ActivityLogPage extends ConsumerStatefulWidget {
   const ActivityLogPage({Key? key}) : super(key: key);
 
   static const routeName = '/activity_log';
 
   @override
-  State<ActivityLogPage> createState() => _ActivityLogPageState();
+  ConsumerState<ActivityLogPage> createState() => _ActivityLogPageState();
 }
 
-class _ActivityLogPageState extends State<ActivityLogPage> {
+class _ActivityLogPageState extends ConsumerState<ActivityLogPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

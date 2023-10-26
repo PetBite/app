@@ -1,26 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
-class DetailedActivityPage extends StatefulWidget {
+class DetailedActivityPage extends ConsumerStatefulWidget {
   const DetailedActivityPage({super.key});
 
   static const routeName = '/detailed_activity_log';
 
   @override
-  State<DetailedActivityPage> createState() => _DetailedActivityPageState();
+  ConsumerState<DetailedActivityPage> createState() => _DetailedActivityPageState();
 }
 
-class _DetailedActivityPageState extends State<DetailedActivityPage> {
+class _DetailedActivityPageState extends ConsumerState<DetailedActivityPage> {
   late TooltipBehavior _tooltipBehavior;
 
   @override
   void initState() {
     _tooltipBehavior = TooltipBehavior(enable: true);
     super.initState();
+    ref.read(tooltipProvider);
   }
 
   @override
   Widget build(BuildContext context) {
+    final tooltip = ref.watch(tooltipProvider);
     return Scaffold(
         appBar: AppBar(
           title: const Text("Detailed Activity Log"),
@@ -51,7 +54,7 @@ class _DetailedActivityPageState extends State<DetailedActivityPage> {
               // Enable legend
               legend: const Legend(isVisible: true),
               // Enable tooltip
-              tooltipBehavior: _tooltipBehavior,
+              tooltipBehavior: tooltip,
               series: <LineSeries<Activity, String>>[
                 LineSeries<Activity, String>(
                     dataSource: <Activity>[
@@ -75,3 +78,8 @@ class Activity {
   final String year;
   final double activities;
 }
+
+final tooltipProvider = StateProvider<TooltipBehavior> ((ref){
+  final tooltip = TooltipBehavior(enable : true);
+  return tooltip;
+});
