@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
+import '../../data_model/pet_activity_db.dart';
+
 class DetailedActivityPage extends StatefulWidget {
   const DetailedActivityPage({super.key});
 
@@ -27,10 +29,10 @@ class _DetailedActivityPageState extends State<DetailedActivityPage> {
         ),
         body: SafeArea(
             child: ListView(children: <Widget>[
-          const ListTile(
-            leading: Icon(Icons.pets),
-            title: Text('Fed 1/2 cup of food'),
-            subtitle: Text('8:00 AM'),
+          ListTile(
+            leading: const Icon(Icons.pets),
+            title: Text(activityDB.getActivityById('activity-001').title),
+            subtitle: Text(activityDB.getActivityById('activity-001').timestamp),
           ),
           const SizedBox(
             height: 10,
