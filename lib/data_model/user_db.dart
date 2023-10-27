@@ -1,12 +1,13 @@
 /// The data associated with users.
 class UserData {
-  UserData(
-      {required this.id,
-      required this.name,
-      required this.email,
-      required this.username,
-      this.imagePath,
-      this.phone});
+  UserData({
+    required this.id,
+    required this.name,
+    required this.email,
+    required this.username,
+    this.imagePath,
+    this.phone,
+  });
 
   String id;
   String name;
@@ -24,7 +25,7 @@ class UserDB {
         name: 'Wenhao Qiu',
         username: '@wenhaoq',
         email: 'wenhaoq@hawaii.edu',
-        imagePath: 'assets/images/flutter_logo.png',
+        imagePath: 'assets/images/doge.png',
         phone: '(808) 123-4567'),
     UserData(
         id: 'user-002',
@@ -36,7 +37,7 @@ class UserDB {
         id: 'user-003',
         name: 'Keaton Wong',
         username: '@keatonw',
-        email: 'keatonw@hawaii.edu')
+        email: 'keatonw@hawaii.edu'),
   ];
 
   UserData getUser(String userID) {

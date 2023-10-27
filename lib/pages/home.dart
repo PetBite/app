@@ -1,7 +1,8 @@
+import 'package:app/data_model/user_db.dart';
 import 'package:app/pages/activity_log/activity_log.dart';
 import 'package:app/pages/community_forum/community_menu.dart';
 import 'package:app/pages/feeding_schedule/feeding_schedule.dart';
-import 'package:app/pages/settings/settings.dart';
+import 'package:app/pages/profile/profile.dart';
 import 'package:flutter/material.dart';
 import 'home/home_page.dart';
 
@@ -22,7 +23,7 @@ class _HomeState extends State<Home> {
     const FeedingSchedulePage(),
     const ActivityLogPage(),
     const CommunityMenu(),
-    const Settings(),
+    const Profile(),
   ];
 
   void _onItemTapped(int index) {
@@ -40,26 +41,31 @@ class _HomeState extends State<Home> {
       bottomNavigationBar: BottomNavigationBar(
         showSelectedLabels: false,
         showUnselectedLabels: false,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
+        items: <BottomNavigationBarItem>[
+          const BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
           ),
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
             icon: Icon(Icons.calendar_month),
             label: 'Feeding Schedule',
           ),
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
             icon: Icon(Icons.event_note),
             label: 'Activity Log',
           ),
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
             icon: Icon(Icons.people_alt_sharp),
             label: 'Community',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'Settings',
+            icon: CircleAvatar(
+              backgroundImage: AssetImage(
+                  userDB.getUser(currentUserID).imagePath ??
+                      'assets/images/flutter_logo.png'),
+              radius: 24,
+            ),
+            label: 'Profile',
           ),
         ],
         currentIndex: _selectedIndex,
