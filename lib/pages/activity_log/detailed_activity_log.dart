@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
+import '../../data_model/pet_activity_db.dart';
 
 class DetailedActivityPage extends ConsumerStatefulWidget {
   const DetailedActivityPage({super.key});
@@ -12,11 +13,9 @@ class DetailedActivityPage extends ConsumerStatefulWidget {
 }
 
 class _DetailedActivityPageState extends ConsumerState<DetailedActivityPage> {
-  late TooltipBehavior _tooltipBehavior;
 
   @override
   void initState() {
-    _tooltipBehavior = TooltipBehavior(enable: true);
     super.initState();
     ref.read(tooltipProvider);
   }
@@ -30,10 +29,10 @@ class _DetailedActivityPageState extends ConsumerState<DetailedActivityPage> {
         ),
         body: SafeArea(
             child: ListView(children: <Widget>[
-          const ListTile(
-            leading: Icon(Icons.pets),
-            title: Text('Fed 1/2 cup of food'),
-            subtitle: Text('8:00 AM'),
+          ListTile(
+            leading: const Icon(Icons.pets),
+            title: Text(activityDB.getActivityById('activity-001').title),
+            subtitle: Text(activityDB.getActivityById('activity-001').timestamp),
           ),
           const SizedBox(
             height: 10,
