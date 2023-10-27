@@ -1,10 +1,15 @@
+import 'package:app/components/form-fields/food_type_field.dart';
+import 'package:app/components/form-fields/meal_name_field.dart';
+import 'package:app/components/form-fields/quantity_field.dart';
+import 'package:app/components/form-fields/time_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../data_model/feeding_schedule_db.dart';
 
 class EditFeedingSchedule extends ConsumerStatefulWidget {
-  const EditFeedingSchedule({super.key});
+  const EditFeedingSchedule({Key? key}) : super(key: key);
 
   static const routeName = '/edit_feeding_schedule';
 
@@ -43,6 +48,7 @@ class _EditFeedingScheduleState extends ConsumerState<EditFeedingSchedule> {
           padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 15.0),
           child: ListView(
             children: feedingSchedules.map((schedule) {
+              final formKey = GlobalKey<FormBuilderState>();
               return ExpansionPanelList(
                 expansionCallback: (int index, bool isExpanded) {
                   setState(() {
@@ -60,91 +66,48 @@ class _EditFeedingScheduleState extends ConsumerState<EditFeedingSchedule> {
                         ),
                       );
                     },
-                    body: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: schedule.schedules.map<Widget>((day) {
-                          return Card(
-                            elevation: 5,
-                            margin: const EdgeInsets.only(bottom: 15.0),
-                            child: Padding(
-                              padding: const EdgeInsets.all(12.0),
-                              child: Column(
-                                children: [
-                                  TextField(
-                                    decoration: InputDecoration(
-                                      labelText: 'Meal Name',
-                                      labelStyle: const TextStyle(
-                                          fontWeight: FontWeight.bold),
-                                      border: OutlineInputBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                      ),
-                                      contentPadding:
-                                          const EdgeInsets.symmetric(
-                                              horizontal: 10.0, vertical: 5.0),
-                                      filled: true,
+                    body: FormBuilder(
+                      key: formKey,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: schedule.schedules.map<Widget>((day) {
+                            final mealNameFieldKey =
+                                GlobalKey<FormBuilderFieldState>();
+                            final timeFieldKey =
+                                GlobalKey<FormBuilderFieldState>();
+                            final foodTypeFieldKey =
+                                GlobalKey<FormBuilderFieldState>();
+                            final quantityFieldKey =
+                                GlobalKey<FormBuilderFieldState>();
+                            return Card(
+                              elevation: 5,
+                              margin: const EdgeInsets.only(bottom: 15.0),
+                              child: Padding(
+                                padding: const EdgeInsets.all(12.0),
+                                child: Column(
+                                  children: [
+                                    MealNameField(
+                                      fieldKey: mealNameFieldKey,
                                     ),
-                                  ),
-                                  const SizedBox(height: 8.0),
-                                  TextField(
-                                    decoration: InputDecoration(
-                                      labelText: 'Time',
-                                      labelStyle: const TextStyle(
-                                          fontWeight: FontWeight.bold),
-                                      border: OutlineInputBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                      ),
-                                      contentPadding:
-                                          const EdgeInsets.symmetric(
-                                              horizontal: 10.0, vertical: 5.0),
-                                      filled: true,
+                                    const SizedBox(height: 8.0),
+                                    TimeField(fieldKey: timeFieldKey),
+                                    const SizedBox(height: 8.0),
+                                    FoodTypeField(fieldKey: foodTypeFieldKey),
+                                    const SizedBox(height: 8.0),
+                                    QuantityField(fieldKey: quantityFieldKey),
+                                    const Divider(
+                                      color: Colors.grey,
+                                      thickness: 1.0,
+                                      height: 16.0,
                                     ),
-                                  ),
-                                  const SizedBox(height: 8.0),
-                                  TextField(
-                                    decoration: InputDecoration(
-                                      labelText: 'Food Type',
-                                      labelStyle: const TextStyle(
-                                          fontWeight: FontWeight.bold),
-                                      border: OutlineInputBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                      ),
-                                      contentPadding:
-                                          const EdgeInsets.symmetric(
-                                              horizontal: 10.0, vertical: 5.0),
-                                      filled: true,
-                                    ),
-                                  ),
-                                  const SizedBox(height: 8.0),
-                                  TextField(
-                                    decoration: InputDecoration(
-                                      labelText: 'Quantity',
-                                      labelStyle: const TextStyle(
-                                          fontWeight: FontWeight.bold),
-                                      border: OutlineInputBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                      ),
-                                      contentPadding:
-                                          const EdgeInsets.symmetric(
-                                              horizontal: 10.0, vertical: 5.0),
-                                      filled: true,
-                                    ),
-                                  ),
-                                  const Divider(
-                                    color: Colors.grey,
-                                    thickness: 1.0,
-                                    height: 16.0,
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
-                            ),
-                          );
-                        }).toList(),
+                            );
+                          }).toList(),
+                        ),
                       ),
                     ),
                     isExpanded: schedule.isExpanded,
