@@ -5,6 +5,7 @@ import 'package:app/pages/community_forum/forum_home.dart';
 import 'package:app/pages/direct_messages/direct_message_list.dart';
 import 'package:app/pages/home.dart';
 import 'package:app/pages/login/login.dart';
+import 'package:app/pages/not_found/not_found.dart';
 import 'package:app/pages/pet_details/pet_details.dart';
 import 'package:app/pages/pet_food/detailed_pet_food.dart';
 import 'package:app/pages/pet_food/pet_food.dart';
@@ -97,8 +98,10 @@ class MyApp extends ConsumerWidget {
                 return const CommunityMenu();
               case PetFood.routeName:
                 return const PetFood();
-              default:
+              case PetFoodPage.routeName:
                 return const PetFoodPage();
+              default:
+                return const NotFoundPage();
             }
           },
         );
