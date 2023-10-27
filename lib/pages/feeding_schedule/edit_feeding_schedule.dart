@@ -47,8 +47,7 @@ class _EditFeedingScheduleState extends ConsumerState<EditFeedingSchedule> {
           padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 15.0),
           child: ListView(
             children: feedingSchedules.map((schedule) {
-              final formKey =
-                  GlobalKey<FormBuilderState>(debugLabel: schedule.id);
+              final formKey = ValueKey(schedule.id);
               return ExpansionPanelList(
                 expansionCallback: (int index, bool isExpanded) {
                   setState(() {
@@ -83,26 +82,20 @@ class _EditFeedingScheduleState extends ConsumerState<EditFeedingSchedule> {
                                     Text(meal.name),
                                     const SizedBox(height: 8.0),
                                     TimeField(
-                                      fieldKey:
-                                          GlobalKey<FormBuilderFieldState>(
-                                        debugLabel:
-                                            '${schedule.id} ${meal.name}_time',
+                                      fieldKey: ValueKey(
+                                        '${schedule.id}_${meal.name}_time',
                                       ),
                                     ),
                                     const SizedBox(height: 8.0),
                                     FoodTypeField(
-                                      fieldKey:
-                                          GlobalKey<FormBuilderFieldState>(
-                                        debugLabel:
-                                            '${schedule.id} ${meal.name}_foodType',
+                                      fieldKey: ValueKey(
+                                        '${schedule.id}_${meal.name}_foodType',
                                       ),
                                     ),
                                     const SizedBox(height: 8.0),
                                     QuantityField(
-                                      fieldKey:
-                                          GlobalKey<FormBuilderFieldState>(
-                                        debugLabel:
-                                            '${schedule.id} ${meal.name}_quantity',
+                                      fieldKey: ValueKey(
+                                        '${schedule.id}_${meal.name}_quantity',
                                       ),
                                     ),
                                     const Divider(

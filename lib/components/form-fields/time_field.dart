@@ -5,14 +5,13 @@ class TimeField extends StatelessWidget {
   const TimeField({super.key, required this.fieldKey, this.time});
 
   final String? time;
-  final GlobalKey<FormBuilderFieldState<FormBuilderField<dynamic>, dynamic>>
-      fieldKey;
+  final ValueKey<String> fieldKey;
 
   @override
   Widget build(BuildContext context) {
     String fieldName = 'Time';
     return FormBuilderTextField(
-      name: fieldName,
+      name: fieldKey.toString(),
       key: fieldKey,
       initialValue: time,
       decoration: InputDecoration(

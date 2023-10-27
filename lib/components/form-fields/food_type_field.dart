@@ -5,14 +5,13 @@ class FoodTypeField extends StatelessWidget {
   const FoodTypeField({super.key, required this.fieldKey, this.foodType});
 
   final String? foodType;
-  final GlobalKey<FormBuilderFieldState<FormBuilderField<dynamic>, dynamic>>
-      fieldKey;
+  final ValueKey<String> fieldKey;
 
   @override
   Widget build(BuildContext context) {
     String fieldName = 'Food Type';
     return FormBuilderTextField(
-      name: fieldName,
+      name: fieldKey.toString(),
       key: fieldKey,
       initialValue: foodType,
       decoration: InputDecoration(
