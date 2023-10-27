@@ -18,11 +18,20 @@ class EditFeedingSchedule extends ConsumerStatefulWidget {
 }
 
 class _EditFeedingScheduleState extends ConsumerState<EditFeedingSchedule> {
+  final List<ValueKey> formValueKeys = [];
+  final List<FormBuilderState> formStates = [];
+
   @override
   Widget build(BuildContext context) {
     final feedingScheduleDB = ref.watch(feedingScheduleDBProvider);
     final List<FeedingScheduleData> feedingSchedules =
         feedingScheduleDB.getAllFeedingSchedules();
+    for (var schedule in feedingSchedules) {
+      formValueKeys.add(ValueKey(schedule.id));
+    }
+
+    void onSubmit() {}
+
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -47,7 +56,7 @@ class _EditFeedingScheduleState extends ConsumerState<EditFeedingSchedule> {
           padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 15.0),
           child: ListView(
             children: feedingSchedules.map((schedule) {
-              final formKey = ValueKey(schedule.id);
+              int index = feedingSchedules.indexOf(schedule);
               return ExpansionPanelList(
                 expansionCallback: (int index, bool isExpanded) {
                   setState(() {
@@ -66,12 +75,18 @@ class _EditFeedingScheduleState extends ConsumerState<EditFeedingSchedule> {
                       );
                     },
                     body: FormBuilder(
-                      key: formKey,
+                      key: formValueKeys[index],
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: schedule.schedules.map<Widget>((meal) {
+                            final timeFieldKey =
+                                ValueKey('${schedule.id}_${meal.name}_time');
+                            final foodTypeFieldKey = ValueKey(
+                                '${schedule.id}_${meal.name}_foodType');
+                            final quantityTypeFieldKey = ValueKey(
+                                '${schedule.id}_${meal.name}_quantity');
                             return Card(
                               elevation: 5,
                               margin: const EdgeInsets.only(bottom: 15.0),
@@ -82,21 +97,17 @@ class _EditFeedingScheduleState extends ConsumerState<EditFeedingSchedule> {
                                     Text(meal.name),
                                     const SizedBox(height: 8.0),
                                     TimeField(
-                                      fieldKey: ValueKey(
-                                        '${schedule.id}_${meal.name}_time',
-                                      ),
+                                      fieldKey: timeFieldKey,
+                                      time: meal.time,
                                     ),
                                     const SizedBox(height: 8.0),
                                     FoodTypeField(
-                                      fieldKey: ValueKey(
-                                        '${schedule.id}_${meal.name}_foodType',
-                                      ),
+                                      fieldKey: foodTypeFieldKey,
                                     ),
                                     const SizedBox(height: 8.0),
                                     QuantityField(
-                                      fieldKey: ValueKey(
-                                        '${schedule.id}_${meal.name}_quantity',
-                                      ),
+                                      fieldKey: quantityTypeFieldKey,
+                                      quantity: meal.quantity,
                                     ),
                                     const Divider(
                                       color: Colors.grey,

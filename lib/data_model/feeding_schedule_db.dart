@@ -170,10 +170,44 @@ class FeedingScheduleDB {
     ),
   ];
 
-  void updateSchedule({
+  void updateDailySchedule({
+    required String id,
     required String day,
     required List<DailyFeedingScheduleData> schedules,
-  }) {}
+    String? bTime,
+    String? bFoodType,
+    String? bQuantity,
+    String? lTime,
+    String? lFoodType,
+    String? lQuantity,
+    String? dTime,
+    String? dFoodType,
+    String? dQuantity,
+  }) {
+    _dailySchedules.removeWhere((schedule) => schedule.id == id);
+    FeedingScheduleData data =
+        FeedingScheduleData(id: id, day: day, schedules: [
+      DailyFeedingScheduleData(
+        name: 'Breakfast',
+        time: bTime,
+        foodType: bFoodType,
+        quantity: bQuantity,
+      ),
+      DailyFeedingScheduleData(
+        name: 'Lunch',
+        time: lTime,
+        foodType: lFoodType,
+        quantity: lQuantity,
+      ),
+      DailyFeedingScheduleData(
+        name: 'Dinner',
+        time: dTime,
+        foodType: dFoodType,
+        quantity: dQuantity,
+      ),
+    ]);
+    _dailySchedules.add(data);
+  }
 
   List<DailyFeedingScheduleData> getFeedingSchedulesByDay(String day) {
     return _dailySchedules.firstWhere((daily) => daily.day == day).schedules;
