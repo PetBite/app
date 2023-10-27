@@ -21,41 +21,140 @@ class _EditFeedingScheduleState extends ConsumerState<EditFeedingSchedule> {
         feedingScheduleDB.getAllFeedingSchedules();
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Edit Feeding Schedule"),
+        title: const Text(
+          "Edit Feeding Schedule",
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
         actions: [
           IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: const Icon(Icons.save)),
-          IconButton(onPressed: () {}, icon: const Icon(Icons.clear))
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: const Icon(Icons.save, color: Colors.white),
+          ),
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.clear, color: Colors.white),
+          )
         ],
       ),
       body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 15.0),
           child: ListView(
-        children: feedingSchedules
-            .map((schedule) => ListTile(
-                  title: Text(schedule.day),
-                  subtitle: const Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      TextField(
-                        decoration: InputDecoration(labelText: 'Meal Name'),
+            children: feedingSchedules.map((schedule) {
+              return ExpansionPanelList(
+                expansionCallback: (int index, bool isExpanded) {
+                  setState(() {
+                    schedule.isExpanded = !isExpanded;
+                  });
+                },
+                children: [
+                  ExpansionPanel(
+                    headerBuilder: (BuildContext context, bool isExpanded) {
+                      return ListTile(
+                        title: Text(
+                          schedule.day,
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 16),
+                        ),
+                      );
+                    },
+                    body: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: schedule.schedules.map<Widget>((day) {
+                          return Card(
+                            elevation: 5,
+                            margin: const EdgeInsets.only(bottom: 15.0),
+                            child: Padding(
+                              padding: const EdgeInsets.all(12.0),
+                              child: Column(
+                                children: [
+                                  TextField(
+                                    decoration: InputDecoration(
+                                      labelText: 'Meal Name',
+                                      labelStyle: const TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                      border: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
+                                      ),
+                                      contentPadding:
+                                          const EdgeInsets.symmetric(
+                                              horizontal: 10.0, vertical: 5.0),
+                                      filled: true,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 8.0),
+                                  TextField(
+                                    decoration: InputDecoration(
+                                      labelText: 'Time',
+                                      labelStyle: const TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                      border: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
+                                      ),
+                                      contentPadding:
+                                          const EdgeInsets.symmetric(
+                                              horizontal: 10.0, vertical: 5.0),
+                                      filled: true,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 8.0),
+                                  TextField(
+                                    decoration: InputDecoration(
+                                      labelText: 'Food Type',
+                                      labelStyle: const TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                      border: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
+                                      ),
+                                      contentPadding:
+                                          const EdgeInsets.symmetric(
+                                              horizontal: 10.0, vertical: 5.0),
+                                      filled: true,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 8.0),
+                                  TextField(
+                                    decoration: InputDecoration(
+                                      labelText: 'Quantity',
+                                      labelStyle: const TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                      border: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
+                                      ),
+                                      contentPadding:
+                                          const EdgeInsets.symmetric(
+                                              horizontal: 10.0, vertical: 5.0),
+                                      filled: true,
+                                    ),
+                                  ),
+                                  const Divider(
+                                    color: Colors.grey,
+                                    thickness: 1.0,
+                                    height: 16.0,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        }).toList(),
                       ),
-                      TextField(
-                        decoration: InputDecoration(labelText: 'Time'),
-                      ),
-                      TextField(
-                        decoration: InputDecoration(labelText: 'Food Type'),
-                      ),
-                      TextField(
-                        decoration: InputDecoration(labelText: 'Quantity'),
-                      ),
-                    ],
+                    ),
+                    isExpanded: schedule.isExpanded,
                   ),
-                ))
-            .toList(),
-      )),
+                ],
+              );
+            }).toList(),
+          ),
+        ),
+      ),
     );
   }
 }

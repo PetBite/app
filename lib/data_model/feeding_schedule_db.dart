@@ -5,11 +5,13 @@ class FeedingScheduleData {
     required this.id,
     required this.day,
     required this.schedules,
+    this.isExpanded = false,
   });
 
   String day;
   String id;
   List<DailyFeedingScheduleData> schedules;
+  bool isExpanded;
 }
 
 class DailyFeedingScheduleData {
@@ -203,6 +205,11 @@ class FeedingScheduleDB {
       ],
     ),
   ];
+
+  void updateSchedule({
+    required String day,
+    required List<DailyFeedingScheduleData> schedules,
+  }) {}
 
   List<DailyFeedingScheduleData> getFeedingSchedulesByDay(String day) {
     return _dailySchedules.firstWhere((daily) => daily.day == day).schedules;
