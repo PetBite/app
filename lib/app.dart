@@ -1,21 +1,20 @@
 import 'package:app/pages/activity_log/activity_log.dart';
+import 'package:app/pages/activity_log/detailed_activity_log.dart';
 import 'package:app/pages/community_forum/community_menu.dart';
 import 'package:app/pages/community_forum/forum_home.dart';
 import 'package:app/pages/direct_messages/direct_message_list.dart';
-import 'package:app/pages/login/login.dart';
 import 'package:app/pages/home.dart';
+import 'package:app/pages/login/login.dart';
 import 'package:app/pages/pet_details/pet_details.dart';
 import 'package:app/pages/pet_food/detailed_pet_food.dart';
 import 'package:app/pages/pet_food/pet_food.dart';
+import 'package:app/pages/profile/profile.dart';
 import 'package:app/pages/register/register.dart';
-import 'package:app/pages/settings/settings.dart';
+import 'package:app/settings/settings_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import 'pages/activity_log/detailed_activity_log.dart';
-import 'settings/settings_view.dart';
 
 final themeStateProvider = StateProvider<ThemeMode>((ref) => ThemeMode.system);
 
@@ -84,8 +83,8 @@ class MyApp extends ConsumerWidget {
                 return const Home();
               case ActivityLogPage.routeName:
                 return const ActivityLogPage();
-              case Settings.routeName:
-                return const Settings();
+              case Profile.routeName:
+                return const Profile();
               case ForumHomePage.routeName:
                 return const ForumHomePage();
               case PetDetails.routeName:
