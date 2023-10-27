@@ -1,5 +1,4 @@
 import 'package:app/components/form-fields/food_type_field.dart';
-import 'package:app/components/form-fields/meal_name_field.dart';
 import 'package:app/components/form-fields/quantity_field.dart';
 import 'package:app/components/form-fields/time_field.dart';
 import 'package:flutter/material.dart';
@@ -48,7 +47,8 @@ class _EditFeedingScheduleState extends ConsumerState<EditFeedingSchedule> {
           padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 15.0),
           child: ListView(
             children: feedingSchedules.map((schedule) {
-              final formKey = GlobalKey<FormBuilderState>();
+              final formKey =
+                  GlobalKey<FormBuilderState>(debugLabel: schedule.id);
               return ExpansionPanelList(
                 expansionCallback: (int index, bool isExpanded) {
                   setState(() {
@@ -72,15 +72,7 @@ class _EditFeedingScheduleState extends ConsumerState<EditFeedingSchedule> {
                         padding: const EdgeInsets.all(8.0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: schedule.schedules.map<Widget>((day) {
-                            final mealNameFieldKey =
-                                GlobalKey<FormBuilderFieldState>();
-                            final timeFieldKey =
-                                GlobalKey<FormBuilderFieldState>();
-                            final foodTypeFieldKey =
-                                GlobalKey<FormBuilderFieldState>();
-                            final quantityFieldKey =
-                                GlobalKey<FormBuilderFieldState>();
+                          children: schedule.schedules.map<Widget>((meal) {
                             return Card(
                               elevation: 5,
                               margin: const EdgeInsets.only(bottom: 15.0),
@@ -88,15 +80,31 @@ class _EditFeedingScheduleState extends ConsumerState<EditFeedingSchedule> {
                                 padding: const EdgeInsets.all(12.0),
                                 child: Column(
                                   children: [
-                                    MealNameField(
-                                      fieldKey: mealNameFieldKey,
+                                    Text(meal.name),
+                                    const SizedBox(height: 8.0),
+                                    TimeField(
+                                      fieldKey:
+                                          GlobalKey<FormBuilderFieldState>(
+                                        debugLabel:
+                                            '${schedule.id} ${meal.name}_time',
+                                      ),
                                     ),
                                     const SizedBox(height: 8.0),
-                                    TimeField(fieldKey: timeFieldKey),
+                                    FoodTypeField(
+                                      fieldKey:
+                                          GlobalKey<FormBuilderFieldState>(
+                                        debugLabel:
+                                            '${schedule.id} ${meal.name}_foodType',
+                                      ),
+                                    ),
                                     const SizedBox(height: 8.0),
-                                    FoodTypeField(fieldKey: foodTypeFieldKey),
-                                    const SizedBox(height: 8.0),
-                                    QuantityField(fieldKey: quantityFieldKey),
+                                    QuantityField(
+                                      fieldKey:
+                                          GlobalKey<FormBuilderFieldState>(
+                                        debugLabel:
+                                            '${schedule.id} ${meal.name}_quantity',
+                                      ),
+                                    ),
                                     const Divider(
                                       color: Colors.grey,
                                       thickness: 1.0,

@@ -36,7 +36,7 @@ class _FeedingCardState extends ConsumerState<FeedingCard> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const SizedBox(height: 6),
-                        Text(schedule.time),
+                        Text(schedule.time ?? " "),
                         const SizedBox(height: 6),
                         schedule.foodType != ""
                             ? Text('${schedule.foodType}: ${schedule.quantity}')

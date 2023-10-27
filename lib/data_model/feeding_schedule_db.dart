@@ -17,16 +17,16 @@ class FeedingScheduleData {
 class DailyFeedingScheduleData {
   DailyFeedingScheduleData({
     required this.name,
-    required this.time,
-    required this.foodType,
-    required this.quantity,
-    required this.complete,
+    this.time,
+    this.foodType,
+    this.quantity,
+    this.complete = false,
   });
 
   String name;
-  String time;
-  String foodType;
-  String quantity;
+  String? time;
+  String? foodType;
+  String? quantity;
   bool complete;
 }
 
@@ -113,23 +113,14 @@ class FeedingScheduleDB {
       day: 'Thursday',
       schedules: [
         DailyFeedingScheduleData(
-            name: 'Breakfast',
-            time: '',
-            foodType: '',
-            quantity: '',
-            complete: false),
+          name: 'Breakfast',
+        ),
         DailyFeedingScheduleData(
-            name: 'Lunch',
-            time: '',
-            foodType: '',
-            quantity: '',
-            complete: false),
+          name: 'Lunch',
+        ),
         DailyFeedingScheduleData(
-            name: 'Dinner',
-            time: '',
-            foodType: '',
-            quantity: '',
-            complete: false),
+          name: 'Dinner',
+        ),
       ],
     ),
     FeedingScheduleData(
@@ -137,23 +128,14 @@ class FeedingScheduleDB {
       day: 'Friday',
       schedules: [
         DailyFeedingScheduleData(
-            name: 'Breakfast',
-            time: '',
-            foodType: '',
-            quantity: '',
-            complete: false),
+          name: 'Breakfast',
+        ),
         DailyFeedingScheduleData(
-            name: 'Lunch',
-            time: '',
-            foodType: '',
-            quantity: '',
-            complete: false),
+          name: 'Lunch',
+        ),
         DailyFeedingScheduleData(
-            name: 'Dinner',
-            time: '',
-            foodType: '',
-            quantity: '',
-            complete: false),
+          name: 'Dinner',
+        ),
       ],
     ),
     FeedingScheduleData(
@@ -161,23 +143,14 @@ class FeedingScheduleDB {
       day: 'Saturday',
       schedules: [
         DailyFeedingScheduleData(
-            name: 'Breakfast',
-            time: '',
-            foodType: '',
-            quantity: '',
-            complete: false),
+          name: 'Breakfast',
+        ),
         DailyFeedingScheduleData(
-            name: 'Lunch',
-            time: '',
-            foodType: '',
-            quantity: '',
-            complete: false),
+          name: 'Lunch',
+        ),
         DailyFeedingScheduleData(
-            name: 'Dinner',
-            time: '',
-            foodType: '',
-            quantity: '',
-            complete: false),
+          name: 'Dinner',
+        ),
       ],
     ),
     FeedingScheduleData(
@@ -185,23 +158,14 @@ class FeedingScheduleDB {
       day: 'Sunday',
       schedules: [
         DailyFeedingScheduleData(
-            name: 'Breakfast',
-            time: '',
-            foodType: '',
-            quantity: '',
-            complete: false),
+          name: 'Breakfast',
+        ),
         DailyFeedingScheduleData(
-            name: 'Lunch',
-            time: '',
-            foodType: '',
-            quantity: '',
-            complete: false),
+          name: 'Lunch',
+        ),
         DailyFeedingScheduleData(
-            name: 'Dinner',
-            time: '',
-            foodType: '',
-            quantity: '',
-            complete: false),
+          name: 'Dinner',
+        ),
       ],
     ),
   ];
