@@ -2,6 +2,8 @@ import 'package:app/pages/activity_log/activity_log.dart';
 import 'package:app/pages/community_forum/community_menu.dart';
 import 'package:app/pages/community_forum/forum_home.dart';
 import 'package:app/pages/direct_messages/direct_message_list.dart';
+import 'package:app/pages/form_fields/add_activity.dart';
+import 'package:app/pages/form_fields/edit_activity.dart';
 import 'package:app/pages/login/login.dart';
 import 'package:app/pages/home.dart';
 import 'package:app/pages/pet_details/pet_details.dart';
@@ -98,6 +100,10 @@ class MyApp extends ConsumerWidget {
                 return const CommunityMenu();
               case PetFood.routeName:
                 return const PetFood();
+              case AddActivity.routeName:
+                return AddActivity();
+                case EditActivity.routeName:
+                  return EditActivity();
               default:
                 return const PetFoodPage();
             }

@@ -18,11 +18,14 @@ class _DetailedActivityPageState extends ConsumerState<DetailedActivityPage> {
   void initState() {
     super.initState();
     ref.read(tooltipProvider);
+    ref.read(activityDBProvider);
   }
 
   @override
   Widget build(BuildContext context) {
     final tooltip = ref.watch(tooltipProvider);
+    final activityDB = ref.watch(activityDBProvider);
+
     return Scaffold(
         appBar: AppBar(
           title: const Text("Detailed Activity Log"),
