@@ -1,4 +1,6 @@
-class ActivityData {
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+class ActivityData  {
   ActivityData({
     required this.id,
     required this.petid,
@@ -19,6 +21,9 @@ class ActivityData {
 }
 
 class ActivityDB {
+  ActivityDB(this.ref);
+
+  final ProviderRef<ActivityDB> ref;
   final List<ActivityData> _activities = [
     ActivityData(
         id: 'activity-001',
@@ -58,20 +63,43 @@ class ActivityDB {
     ),
   ];
   ActivityData getActivityById(String id) {
-    return activityDB._activities.firstWhere((element) => element.id == id);
+    return _activities.firstWhere((element) => element.id == id);
   }
 
   List<String> getActivityIDs() {
-    return activityDB._activities.map((element) => element.id).toList();
+    return _activities.map((element) => element.id).toList();
   }
 
   ActivityData getActivityByDate(String date) {
-    return activityDB._activities.firstWhere((element) => element.date == date);
+    return _activities.firstWhere((element) => element.date == date);
   }
 
   List<String> getActivityDates() {
-    return activityDB._activities.map((element) => element.date).toList();
+    return _activities.map((element) => element.date).toList();
+  }
+
+  void updateActivities({
+    required String id,
+    required String petid,
+    required String title,
+    required String type,
+    required String content,
+    required String timestamp,
+    required String date,}) {
+    _activities.removeWhere((content) => content.id == id);
+    ActivityData data = ActivityData(
+        id: id,
+        petid: petid,
+        title: title,
+        type: type,
+        content: content,
+        timestamp: timestamp,
+        date: date,
+    );
+    _activities.add(data);
   }
 }
 
-ActivityDB activityDB = ActivityDB();
+final activityDBProvider = Provider<ActivityDB>((ref) {
+  return ActivityDB(ref);
+});
