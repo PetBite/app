@@ -1,4 +1,4 @@
-import 'package:app/data/community_db.dart';
+import 'package:app/features/community_forum/domain/community_db.dart';
 import 'package:flutter/material.dart';
 
 class CreatePost extends StatefulWidget {

@@ -1,16 +1,16 @@
+import 'package:app/features/authentication/presentation/login.dart';
+import 'package:app/features/authentication/presentation/register.dart';
+import 'package:app/features/community_forum/presentation/community_menu.dart';
+import 'package:app/features/pet_details/presentation/pet_details.dart';
+import 'package:app/features/profile/presentation/profile.dart';
 import 'package:app/pages/activity_log/activity_log.dart';
-import 'package:app/pages/community_forum/community_menu.dart';
 import 'package:app/pages/community_forum/forum_home.dart';
 import 'package:app/pages/direct_messages/direct_message_list.dart';
 import 'package:app/pages/form_fields/add_activity.dart';
 import 'package:app/pages/form_fields/edit_activity.dart';
-import 'package:app/pages/login/login.dart';
 import 'package:app/pages/home.dart';
-import 'package:app/pages/pet_details/pet_details.dart';
 import 'package:app/pages/pet_food/detailed_pet_food.dart';
 import 'package:app/pages/pet_food/pet_food.dart';
-import 'package:app/pages/register/register.dart';
-import 'package:app/pages/settings/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -86,8 +86,8 @@ class MyApp extends ConsumerWidget {
                 return const Home();
               case ActivityLogPage.routeName:
                 return const ActivityLogPage();
-              case Settings.routeName:
-                return const Settings();
+              case Profile.routeName:
+                return const Profile();
               case ForumHomePage.routeName:
                 return const ForumHomePage();
               case PetDetails.routeName:

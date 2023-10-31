@@ -1,4 +1,4 @@
-import 'package:app/pages/pet_details/pet_details.dart';
+import 'package:app/features/pet_details/presentation/pet_details.dart';
 import 'package:flutter/material.dart';
 
 import '../domain/pet_db.dart';

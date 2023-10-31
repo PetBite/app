@@ -1,5 +1,5 @@
+import 'package:app/features/profile/domain/user_db.dart';
 import 'package:flutter/material.dart';
-import 'package:app/data/user_db.dart';
 
 /// Displays detailed information about a SampleItem.
 class Profile extends StatelessWidget {
