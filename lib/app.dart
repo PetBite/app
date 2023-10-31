@@ -17,7 +17,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'pages/activity_log/detailed_activity_log.dart';
-import 'settings/settings_view.dart';
+import 'features/settings/settings_view.dart';
 
 final themeStateProvider = StateProvider<ThemeMode>((ref) => ThemeMode.system);
 
@@ -102,8 +102,8 @@ class MyApp extends ConsumerWidget {
                 return const PetFood();
               case AddActivity.routeName:
                 return AddActivity();
-                case EditActivity.routeName:
-                  return EditActivity();
+              case EditActivity.routeName:
+                return EditActivity();
               default:
                 return const PetFoodPage();
             }
