@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../data/pet_food_db.dart';
+import '../domain/pet_food_db.dart';
 
 class PetFoodPage extends StatefulWidget {
   const PetFoodPage({Key? key}) : super(key: key);

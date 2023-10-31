@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:app/features/feeding_schedule/presentation/feeding_card.dart';
-import '../domain/feeding_schedule_db.dart';
+import '../../data/feeding_schedule_db.dart';
 
 class FeedingSchedulePage extends StatefulWidget {
   const FeedingSchedulePage({Key? key}) : super(key: key);

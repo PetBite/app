@@ -5,8 +5,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:intl/intl.dart';
 
-import '../../components/pet_id_provider.dart';
-import '../../data/pet_activity_db.dart';
+import '../../../common/pet_id_provider.dart';
+import '../../domain/pet_activity_db.dart';
 
 class AddActivity extends ConsumerWidget {
   AddActivity({Key? key}) : super(key: key);

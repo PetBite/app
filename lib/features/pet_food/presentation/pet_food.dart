@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../data/pet_food_db.dart';
+import '../domain/pet_food_db.dart';
 
 /// Displays detailed information about a SampleItem.
 class PetFood extends StatefulWidget {

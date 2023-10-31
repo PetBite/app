@@ -17,7 +17,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'pages/activity_log/detailed_activity_log.dart';
-import 'features/settings/settings_view.dart';
+import 'features/settings/presentation/settings_view.dart';
 
 final themeStateProvider = StateProvider<ThemeMode>((ref) => ThemeMode.system);
 

@@ -5,7 +5,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 
-import '../../domain/pet_activity_db.dart';
+import '../../data/pet_activity_db.dart';
 
 class EditActivity extends ConsumerWidget {
   EditActivity({Key? key}) : super(key: key);

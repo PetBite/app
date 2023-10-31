@@ -3,10 +3,10 @@ import 'package:app/pages/activity_log/detailed_activity_log.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-import '../domain/pet_activity_db.dart';
+import '../../data/pet_activity_db.dart';
 
-import 'form_fields/add_activity.dart';
-import 'form_fields/edit_activity.dart';
+import '../form_fields/add_activity.dart';
+import '../form_fields/edit_activity.dart';
 
 class ActivityLogPage extends ConsumerStatefulWidget {
   const ActivityLogPage({Key? key}) : super(key: key);

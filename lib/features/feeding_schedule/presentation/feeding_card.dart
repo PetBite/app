@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../data/feeding_schedule_db.dart';
+import '../../../data/feeding_schedule_db.dart';
 
 class FeedingCard extends StatelessWidget {
   final String day;

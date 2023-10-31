@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../data/direct_message_db.dart';
+import '../domain/direct_message_db.dart';
 
 class DirectMessage extends StatefulWidget {
   const DirectMessage({super.key});

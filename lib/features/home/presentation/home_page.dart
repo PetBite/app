@@ -1,7 +1,7 @@
 import 'package:app/pages/pet_details/pet_details.dart';
 import 'package:flutter/material.dart';
 
-import '../../data/pet_db.dart';
+import '../domain/pet_db.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);

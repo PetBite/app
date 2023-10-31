@@ -4,7 +4,7 @@ import 'package:app/pages/community_forum/community_menu.dart';
 import 'package:app/pages/feeding_schedule/feeding_schedule.dart';
 import 'package:app/pages/profile/profile.dart';
 import 'package:flutter/material.dart';
-import 'home/home_page.dart';
+import 'home_page.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);

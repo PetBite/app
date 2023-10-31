@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../app.dart';
+import '../../../app.dart';
 
 /// Displays the various settings that can be customized by the user.
 ///

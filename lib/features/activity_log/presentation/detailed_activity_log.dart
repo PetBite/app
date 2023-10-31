@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
-import '../../data/pet_activity_db.dart';
+import '../domain/pet_activity_db.dart';
 
 class DetailedActivityPage extends ConsumerStatefulWidget {
   const DetailedActivityPage({super.key});

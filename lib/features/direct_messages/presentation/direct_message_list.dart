@@ -1,7 +1,7 @@
 import 'package:app/pages/direct_messages/direct_message.dart';
 import 'package:flutter/material.dart';
 
-import '../../data/direct_message_db.dart';
+import '../domain/direct_message_db.dart';
 
 /// Displays detailed information about a SampleItem.
 
