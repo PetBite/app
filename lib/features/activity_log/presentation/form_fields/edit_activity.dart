@@ -1,5 +1,6 @@
 import 'package:app/features/activity_log/data/activity_id_provider.dart';
-import 'package:app/pages/activity_log/activity_log.dart';
+import 'package:app/features/activity_log/presentation/activity_log.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

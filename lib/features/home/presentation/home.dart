@@ -1,8 +1,8 @@
+import 'package:app/features/activity_log/presentation/activity_log.dart';
 import 'package:app/features/community_forum/presentation/community_menu.dart';
+import 'package:app/features/feeding_schedule/presentation/feeding_schedule.dart';
 import 'package:app/features/profile/domain/user_db.dart';
-import 'package:app/pages/activity_log/activity_log.dart';
-import 'package:app/pages/feeding_schedule/feeding_schedule.dart';
-import 'package:app/pages/profile/profile.dart';
+import 'package:app/features/profile/presentation/profile.dart';
 import 'package:flutter/material.dart';
 import 'home_page.dart';
 

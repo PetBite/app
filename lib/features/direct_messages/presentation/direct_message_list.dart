@@ -1,4 +1,4 @@
-import 'package:app/pages/direct_messages/direct_message.dart';
+import 'package:app/features/direct_messages/presentation/direct_message.dart';
 import 'package:flutter/material.dart';
 
 import '../domain/direct_message_db.dart';

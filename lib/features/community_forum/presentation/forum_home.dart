@@ -1,5 +1,5 @@
 import 'package:app/features/community_forum/domain/community_db.dart';
-import 'package:app/pages/community_forum/create_post.dart';
+import 'package:app/features/community_forum/presentation/create_post.dart';
 import 'package:flutter/material.dart';
 import 'package:app/features/community_forum/presentation/forum_post.dart';
 

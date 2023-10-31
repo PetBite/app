@@ -1,5 +1,5 @@
+import 'package:app/features/community_forum/domain/post_db.dart';
 import 'package:flutter/material.dart';
-import 'package:app/data/post_db.dart';
 
 class ForumPostCard extends StatelessWidget {
   final String url;

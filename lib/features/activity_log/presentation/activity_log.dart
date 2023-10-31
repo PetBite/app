@@ -1,5 +1,5 @@
 import 'package:app/features/activity_log/data/activity_id_provider.dart';
-import 'package:app/pages/activity_log/detailed_activity_log.dart';
+import 'package:app/features/activity_log/presentation/detailed_activity_log.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
