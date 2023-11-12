@@ -17,7 +17,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
+import 'package:app/features/feeding_schedule/presentation/edit_feeding_schedule.dart';
 import 'features/settings/presentation/settings_view.dart';
 
 final themeStateProvider = StateProvider<ThemeMode>((ref) => ThemeMode.system);
@@ -103,6 +103,8 @@ class MyApp extends ConsumerWidget {
                 return const CommunityMenu();
               case PetFood.routeName:
                 return const PetFood();
+              case EditFeedingSchedule.routeName:
+                return const EditFeedingSchedule();
               case AddActivity.routeName:
                 return AddActivity();
               case EditActivity.routeName:
