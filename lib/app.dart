@@ -1,21 +1,24 @@
-import 'package:app/pages/activity_log/activity_log.dart';
-import 'package:app/pages/activity_log/detailed_activity_log.dart';
-import 'package:app/pages/community_forum/community_menu.dart';
-import 'package:app/pages/community_forum/forum_home.dart';
-import 'package:app/pages/direct_messages/direct_message_list.dart';
-import 'package:app/pages/feeding_schedule/edit_feeding_schedule.dart';
-import 'package:app/pages/login/login.dart';
-import 'package:app/pages/home.dart';
-import 'package:app/pages/pet_details/pet_details.dart';
-import 'package:app/pages/pet_food/detailed_pet_food.dart';
-import 'package:app/pages/pet_food/pet_food.dart';
-import 'package:app/pages/profile/profile.dart';
-import 'package:app/pages/register/register.dart';
-import 'package:app/settings/settings_view.dart';
+import 'package:app/features/activity_log/presentation/activity_log.dart';
+import 'package:app/features/activity_log/presentation/detailed_activity_log.dart';
+import 'package:app/features/activity_log/presentation/form_fields/add_activity.dart';
+import 'package:app/features/activity_log/presentation/form_fields/edit_activity.dart';
+import 'package:app/features/authentication/presentation/login.dart';
+import 'package:app/features/authentication/presentation/register.dart';
+import 'package:app/features/community_forum/presentation/community_menu.dart';
+import 'package:app/features/community_forum/presentation/forum_home.dart';
+import 'package:app/features/direct_messages/presentation/direct_message_list.dart';
+import 'package:app/features/home/presentation/home.dart';
+import 'package:app/features/not_found/presentation/not_found.dart';
+import 'package:app/features/pet_details/presentation/pet_details.dart';
+import 'package:app/features/pet_food/presentation/detailed_pet_food.dart';
+import 'package:app/features/pet_food/presentation/pet_food.dart';
+import 'package:app/features/profile/presentation/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'features/settings/presentation/settings_view.dart';
 
 final themeStateProvider = StateProvider<ThemeMode>((ref) => ThemeMode.system);
 
@@ -92,16 +95,20 @@ class MyApp extends ConsumerWidget {
                 return const PetDetails();
               case DirectMessageList.routeName:
                 return const DirectMessageList();
+              case PetFoodPage.routeName:
+                return const PetFoodPage();
               case DetailedActivityPage.routeName:
                 return const DetailedActivityPage();
               case CommunityMenu.routeName:
                 return const CommunityMenu();
               case PetFood.routeName:
                 return const PetFood();
-              case EditFeedingSchedule.routeName:
-                return const EditFeedingSchedule();
+              case AddActivity.routeName:
+                return AddActivity();
+              case EditActivity.routeName:
+                return EditActivity();
               default:
-                return const PetFoodPage();
+                return const NotFoundPage();
             }
           },
         );

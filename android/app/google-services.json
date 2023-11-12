@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "736983815184",
+    "project_id": "petbite-d975e",
+    "storage_bucket": "petbite-d975e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:736983815184:android:3d4d00d54c40edbf416695",
+        "android_client_info": {
+          "package_name": "com.example.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCySroX5v6wnVVCLxXLQM_taTHqvofxnsU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
