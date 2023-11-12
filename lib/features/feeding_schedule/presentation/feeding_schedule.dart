@@ -1,27 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:app/features/feeding_schedule/presentation/feeding_card.dart';
 import '../domain/feeding_schedule_db.dart';
 
-class FeedingSchedulePage extends StatefulWidget {
+class FeedingSchedulePage extends ConsumerWidget {
   const FeedingSchedulePage({Key? key}) : super(key: key);
 
   static const routeName = '/feeding_schedule';
 
   @override
-  State<FeedingSchedulePage> createState() => _FeedingSchedulePageState();
-}
-
-class _FeedingSchedulePageState extends State<FeedingSchedulePage> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final feedingScheduleDB = ref.watch(feedingScheduleDBProvider);
     List<FeedingScheduleData> weekSchedule =
-        FeedingScheduleDB().getAllFeedingSchedules();
+        feedingScheduleDB.getAllFeedingSchedules();
     return Scaffold(
         appBar: AppBar(
           title: const Text(
             'Feeding Schedule',
             textAlign: TextAlign.center,
           ),
+          actions: <Widget>[
+            IconButton(
+              icon: const Icon(
+                Icons.edit_calendar,
+              ),
+              onPressed: () {
+                Navigator.pushNamed(context, '/edit_feeding_schedule');
+              },
+            )
+          ],
           automaticallyImplyLeading: false,
         ),
         body: SafeArea(

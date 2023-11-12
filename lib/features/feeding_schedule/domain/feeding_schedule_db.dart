@@ -1,30 +1,40 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 class FeedingScheduleData {
   FeedingScheduleData({
     required this.id,
     required this.day,
     required this.schedules,
+    this.isExpanded = false,
   });
 
   String day;
   String id;
   List<DailyFeedingScheduleData> schedules;
+  bool isExpanded;
 }
 
 class DailyFeedingScheduleData {
   DailyFeedingScheduleData({
     required this.name,
-    required this.time,
-    required this.foodType,
-    required this.quantity,
+    this.time,
+    this.foodType,
+    this.quantity,
+    this.complete = false,
   });
 
   String name;
-  String time;
-  String foodType;
-  String quantity;
+  String? time;
+  String? foodType;
+  String? quantity;
+  bool complete;
 }
 
 class FeedingScheduleDB {
+  FeedingScheduleDB(this.ref);
+
+  final ProviderRef<FeedingScheduleDB> ref;
+
   final List<FeedingScheduleData> _dailySchedules = [
     FeedingScheduleData(
       id: "day-1",
@@ -34,17 +44,20 @@ class FeedingScheduleDB {
             name: 'Breakfast',
             time: '8:00 AM',
             foodType: 'Pedigree Adult',
-            quantity: '1 cup'),
+            quantity: '1 cup',
+            complete: true),
         DailyFeedingScheduleData(
             name: 'Lunch',
             time: '2:00 PM',
             foodType: 'Pedigree Adult',
-            quantity: '1 cup'),
+            quantity: '1 cup',
+            complete: true),
         DailyFeedingScheduleData(
             name: 'Dinner',
             time: '8:00 PM',
             foodType: 'Pedigree Adult',
-            quantity: '1 cup'),
+            quantity: '1 cup',
+            complete: false),
       ],
     ),
     FeedingScheduleData(
@@ -55,17 +68,20 @@ class FeedingScheduleDB {
             name: 'Breakfast',
             time: '8:00 AM',
             foodType: 'Pedigree Adult',
-            quantity: '1 cup'),
+            quantity: '1 cup',
+            complete: true),
         DailyFeedingScheduleData(
             name: 'Lunch',
             time: '2:00 PM',
             foodType: 'Pedigree Adult',
-            quantity: '1 cup'),
+            quantity: '1 cup',
+            complete: true),
         DailyFeedingScheduleData(
             name: 'Dinner',
             time: '8:00 PM',
             foodType: 'Pedigree Adult',
-            quantity: '1 cup'),
+            quantity: '1 cup',
+            complete: false),
       ],
     ),
     FeedingScheduleData(
@@ -76,20 +92,122 @@ class FeedingScheduleDB {
             name: 'Breakfast',
             time: '8:00 AM',
             foodType: 'Pedigree Adult',
-            quantity: '1 cup'),
+            quantity: '1 cup',
+            complete: true),
         DailyFeedingScheduleData(
             name: 'Lunch',
             time: '2:00 PM',
             foodType: 'Pedigree Adult',
-            quantity: '1 cup'),
+            quantity: '1 cup',
+            complete: true),
         DailyFeedingScheduleData(
             name: 'Dinner',
             time: '8:00 PM',
             foodType: 'Pedigree Adult',
-            quantity: '1 cup'),
+            quantity: '1 cup',
+            complete: false),
+      ],
+    ),
+    FeedingScheduleData(
+      id: "day-4",
+      day: 'Thursday',
+      schedules: [
+        DailyFeedingScheduleData(
+          name: 'Breakfast',
+        ),
+        DailyFeedingScheduleData(
+          name: 'Lunch',
+        ),
+        DailyFeedingScheduleData(
+          name: 'Dinner',
+        ),
+      ],
+    ),
+    FeedingScheduleData(
+      id: "day-5",
+      day: 'Friday',
+      schedules: [
+        DailyFeedingScheduleData(
+          name: 'Breakfast',
+        ),
+        DailyFeedingScheduleData(
+          name: 'Lunch',
+        ),
+        DailyFeedingScheduleData(
+          name: 'Dinner',
+        ),
+      ],
+    ),
+    FeedingScheduleData(
+      id: "day-6",
+      day: 'Saturday',
+      schedules: [
+        DailyFeedingScheduleData(
+          name: 'Breakfast',
+        ),
+        DailyFeedingScheduleData(
+          name: 'Lunch',
+        ),
+        DailyFeedingScheduleData(
+          name: 'Dinner',
+        ),
+      ],
+    ),
+    FeedingScheduleData(
+      id: "day-7",
+      day: 'Sunday',
+      schedules: [
+        DailyFeedingScheduleData(
+          name: 'Breakfast',
+        ),
+        DailyFeedingScheduleData(
+          name: 'Lunch',
+        ),
+        DailyFeedingScheduleData(
+          name: 'Dinner',
+        ),
       ],
     ),
   ];
+
+  void updateDailySchedule({
+    required String id,
+    required String day,
+    required List<DailyFeedingScheduleData> schedules,
+    String? bTime,
+    String? bFoodType,
+    String? bQuantity,
+    String? lTime,
+    String? lFoodType,
+    String? lQuantity,
+    String? dTime,
+    String? dFoodType,
+    String? dQuantity,
+  }) {
+    _dailySchedules.removeWhere((schedule) => schedule.id == id);
+    FeedingScheduleData data =
+        FeedingScheduleData(id: id, day: day, schedules: [
+      DailyFeedingScheduleData(
+        name: 'Breakfast',
+        time: bTime,
+        foodType: bFoodType,
+        quantity: bQuantity,
+      ),
+      DailyFeedingScheduleData(
+        name: 'Lunch',
+        time: lTime,
+        foodType: lFoodType,
+        quantity: lQuantity,
+      ),
+      DailyFeedingScheduleData(
+        name: 'Dinner',
+        time: dTime,
+        foodType: dFoodType,
+        quantity: dQuantity,
+      ),
+    ]);
+    _dailySchedules.add(data);
+  }
 
   List<DailyFeedingScheduleData> getFeedingSchedulesByDay(String day) {
     return _dailySchedules.firstWhere((daily) => daily.day == day).schedules;
@@ -112,4 +230,6 @@ class FeedingScheduleDB {
   }
 }
 
-FeedingScheduleDB feedingScheduleDB = FeedingScheduleDB();
+final feedingScheduleDBProvider = Provider<FeedingScheduleDB>((ref) {
+  return FeedingScheduleDB(ref);
+});
