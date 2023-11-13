@@ -12,7 +12,7 @@ class FoodTypeField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     int keyOffset = DateTime.now().millisecondsSinceEpoch;
-    String fieldName = 'Food Type';
+    String fieldName = 'FoodType';
     return FormBuilderTextField(
       name: name + fieldName,
       key: GlobalObjectKey(keyOffset + index),

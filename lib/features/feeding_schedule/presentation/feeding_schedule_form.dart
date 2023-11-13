@@ -33,10 +33,7 @@ class _FeedingScheduleFormState extends State<FeedingScheduleForm> {
             ExpansionPanelList(
               expansionCallback: (int index, bool isExpanded) {
                 setState(() {
-                  print('Panel $index is currently expanded: $isExpanded');
                   widget.schedules[index].isExpanded = isExpanded;
-                  print(
-                      'Panel $index set to: ${widget.schedules[index].isExpanded}');
                 });
               },
               children: widget.schedules.asMap().entries.map((entry) {
@@ -48,11 +45,32 @@ class _FeedingScheduleFormState extends State<FeedingScheduleForm> {
                       title: Text(schedule.day),
                     );
                   },
-                  body: const Padding(
-                    padding: EdgeInsets.all(16.0),
-                    child: Column(
-                      children: [Text('test')],
-                    ),
+                  body: Column(
+                    children: schedule.schedules.map((s) {
+                      return Card(
+                          child: Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: Column(children: [
+                          TimeField(
+                            name: schedule.day + s.name,
+                            index: index,
+                            time: s.time,
+                          ),
+                          FoodTypeField(
+                            name: schedule.day + s.name,
+                            index: index,
+                            foodType: s.foodType,
+                          ),
+                          QuantityField(
+                            name: schedule.day + s.name,
+                            index: index,
+                            quantity: s.quantity,
+                          ),
+                          ElevatedButton(
+                              onPressed: onPressed, child: const Text('Save'))
+                        ]),
+                      ));
+                    }).toList(),
                   ),
                   isExpanded: widget.schedules[index].isExpanded,
                   canTapOnHeader: true,
