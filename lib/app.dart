@@ -2,6 +2,7 @@ import 'package:app/features/activity_log/presentation/activity_log.dart';
 import 'package:app/features/activity_log/presentation/detailed_activity_log.dart';
 import 'package:app/features/activity_log/presentation/form_fields/add_activity.dart';
 import 'package:app/features/activity_log/presentation/form_fields/edit_activity.dart';
+import 'package:app/features/activity_log/presentation/individual_activity.dart';
 import 'package:app/features/authentication/presentation/login.dart';
 import 'package:app/features/authentication/presentation/register.dart';
 import 'package:app/features/community_forum/presentation/community_menu.dart';
@@ -82,6 +83,8 @@ class MyApp extends ConsumerWidget {
                 return AddActivity();
               case EditActivity.routeName:
                 return EditActivity();
+              case IndividualActivity.routeName:
+                return const IndividualActivity();
               default:
                 return const NotFoundPage();
             }
