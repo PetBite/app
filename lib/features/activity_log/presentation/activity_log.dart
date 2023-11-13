@@ -7,6 +7,7 @@ import '../domain/pet_activity_db.dart';
 
 import 'form_fields/add_activity.dart';
 import 'form_fields/edit_activity.dart';
+import 'individual_activity.dart';
 
 class ActivityLogPage extends ConsumerStatefulWidget {
   const ActivityLogPage({Key? key}) : super(key: key);
@@ -58,7 +59,18 @@ class _ActivityLogPageState extends ConsumerState<ActivityLogPage> {
                         .where((element) =>
                             activityDB.getActivityById(element).date == date)
                         .map((element) => ListTile(
-                              leading: const Icon(Icons.pets),
+                              leading: IconButton(
+                                icon: const Icon(
+                                  Icons.pets,
+                                ),
+                                onPressed: () {
+                                  ref
+                                      .read(activityIdProvider.notifier)
+                                      .state = element;
+                                  Navigator.restorablePushNamed(
+                                      context, IndividualActivity.routeName);
+                                },
+                              ),
                               title: Text(
                                   activityDB.getActivityById(element).title),
                               subtitle: Text(activityDB
@@ -76,8 +88,9 @@ class _ActivityLogPageState extends ConsumerState<ActivityLogPage> {
                                     ref
                                         .read(activityIdProvider.notifier)
                                         .state = element;
-                                    Navigator.restorablePushNamed(
-                                        context, EditActivity.routeName);
+                                    Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {return EditActivity();})).then((value) {
+                                      setState(() {});
+                                    });
                                   },
                                 ),
                               ),
@@ -89,104 +102,10 @@ class _ActivityLogPageState extends ConsumerState<ActivityLogPage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.restorablePushNamed(context, AddActivity.routeName);
+          Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {return AddActivity();})).then((value) {
+            setState(() {});
+          });
         },
-        /*
-        async {
-          await showDialog<void>(
-              context: context,
-              builder: (context) => AlertDialog(
-                    content: Stack(
-                      clipBehavior: Clip.none,
-                      children: <Widget>[
-                        FormBuilder(
-                          key: _formKey,
-                          child: Column(
-                            children: [
-                              FormBuilderTextField(
-                                name: 'Activity',
-                                key: _titleFieldKey,
-                                decoration: const InputDecoration(
-                                  labelText: 'Activity',
-                                  hintText: 'Enter activity title',
-                                ),
-                                validator: FormBuilderValidators.compose([
-                                  FormBuilderValidators.required(),
-                                ]),
-                              ),
-                              FormBuilderTextField(
-                                name: 'Type',
-                                key: _typeFieldKey,
-                                decoration: const InputDecoration(
-                                  labelText: 'Type',
-                                  hintText: 'Enter activity type',
-                                ),
-                                validator: FormBuilderValidators.compose([
-                                  FormBuilderValidators.required(),
-                                ]),
-                              ),FormBuilderTextField(
-                                name: 'Content',
-                                key: _contentFieldKey,
-                                decoration: const InputDecoration(
-                                  labelText: 'Content',
-                                  hintText: 'Enter activity description',
-                                ),
-                                validator: FormBuilderValidators.compose([
-                                  FormBuilderValidators.required(),
-                                ]),
-                              ),FormBuilderTextField(
-                                name: 'Timestamp',
-                                key: _timestampFieldKey,
-                                decoration: const InputDecoration(
-                                  labelText: 'Timestamp',
-                                  hintText: 'Enter time of activity',
-                                ),
-                                validator: FormBuilderValidators.compose([
-                                  FormBuilderValidators.required(),
-                                ]),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Align(
-                          alignment: Alignment.topRight,
-                          child: CircleAvatar(
-                            backgroundColor: Colors.red,
-                            child: IconButton(
-                              icon: const Icon(Icons.close),
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                            ),
-                          ),
-                        ),
-                        Align(
-                          alignment: Alignment.bottomRight,
-                          child: Row(
-                            children: [
-                              ElevatedButton(
-                                onPressed: onSubmit,
-                                child: const Text(
-                                  'Submit',
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                              ),
-                              ElevatedButton(
-                                onPressed: onReset,
-                                child: const Text(
-                                  'Reset',
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ));
-        },
-
-         */
         child: const Icon(Icons.add),
       ),
     );

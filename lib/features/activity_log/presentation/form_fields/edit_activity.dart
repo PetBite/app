@@ -1,5 +1,4 @@
 import 'package:app/features/activity_log/data/activity_id_provider.dart';
-import 'package:app/features/activity_log/presentation/activity_log.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -39,7 +38,7 @@ class EditActivity extends ConsumerWidget {
         timestamp: timestamp,
         date: activityDB.getActivityById(ref.watch(activityIdProvider)).date,
       );
-      Navigator.pushReplacementNamed(context, ActivityLogPage.routeName);
+      Navigator.pop(context);
     }
 
     void onReset() {
@@ -48,7 +47,7 @@ class EditActivity extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Detailed Activity Log"),
+        title: const Text("Edit Activity"),
       ),
       body: Container(
         padding: const EdgeInsets.all(20.0),
