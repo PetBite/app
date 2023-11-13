@@ -45,7 +45,12 @@ class _FeedingCardState extends ConsumerState<FeedingCard> {
                     ),
                     trailing: Checkbox(
                       value: schedule.complete,
-                      onChanged: (value) {},
+                      onChanged: (value) {
+                        print(value);
+                        setState(() {
+                          schedule.complete = value!;
+                        });
+                      },
                     ),
                   ),
                 ))
