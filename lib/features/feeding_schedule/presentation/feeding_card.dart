@@ -1,6 +1,8 @@
-import 'package:app/features/feeding_schedule/domain/feeding_schedule_db.dart';
+import 'package:app/features/feeding_schedule/domain/feeding_schedule.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../all_data_provider.dart';
+import '../domain/feeding_schedule_collection.dart';
 
 class FeedingCard extends ConsumerStatefulWidget {
   final String day;
@@ -13,9 +15,24 @@ class FeedingCard extends ConsumerStatefulWidget {
 
 class _FeedingCardState extends ConsumerState<FeedingCard> {
   @override
+  @override
   Widget build(BuildContext context) {
-    final feedingScheduleDB = ref.watch(feedingScheduleDBProvider);
-    List<DailyFeedingScheduleData> dailySchedules =
+    final AsyncValue<AllData> asyncAllData = ref.watch(allDataProvider);
+    return asyncAllData.when(
+      data: (allData) {
+        return _build(context: context, schedules: allData.feedingSchedules);
+      },
+      loading: () => const Center(child: CircularProgressIndicator()),
+      error: (error, stackTrace) => Text('Error: $error'),
+    );
+  }
+
+  Widget _build(
+      {required BuildContext context,
+      required List<FeedingScheduleData> schedules}) {
+    FeedingScheduleCollection feedingScheduleDB =
+        FeedingScheduleCollection(schedules);
+    final List<DailyFeedingScheduleData> dailySchedules =
         feedingScheduleDB.getFeedingSchedulesByDay(widget.day);
 
     return Card(
@@ -46,9 +63,8 @@ class _FeedingCardState extends ConsumerState<FeedingCard> {
                     trailing: Checkbox(
                       value: schedule.complete,
                       onChanged: (value) {
-                        print(value);
                         setState(() {
-                          schedule.complete = value!;
+                          schedule = schedule.copyWith(complete: value!);
                         });
                       },
                     ),

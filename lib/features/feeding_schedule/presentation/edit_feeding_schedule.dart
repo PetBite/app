@@ -1,6 +1,6 @@
 import 'package:app/features/feeding_schedule/presentation/feeding_schedule_form.dart';
 import 'package:flutter/material.dart';
-import '../domain/feeding_schedule_db.dart';
+import '../domain/feeding_schedule.dart';
 
 class EditFeedingSchedule extends StatelessWidget {
   const EditFeedingSchedule({Key? key}) : super(key: key);

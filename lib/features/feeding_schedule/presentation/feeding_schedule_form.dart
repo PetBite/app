@@ -1,10 +1,12 @@
+import 'package:app/features/feeding_schedule/domain/feeding_schedule_collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:app/features/feeding_schedule/domain/feeding_schedule_db.dart';
+import 'package:app/features/feeding_schedule/domain/feeding_schedule.dart';
 import 'package:app/components/form-fields/food_type_field.dart';
 import 'package:app/components/form-fields/quantity_field.dart';
 import 'package:app/components/form-fields/time_field.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../all_data_provider.dart';
 
 class FeedingScheduleForm extends ConsumerStatefulWidget {
   const FeedingScheduleForm({Key? key}) : super(key: key);
@@ -18,7 +20,21 @@ class FeedingScheduleForm extends ConsumerStatefulWidget {
 class _FeedingScheduleFormState extends ConsumerState<FeedingScheduleForm> {
   @override
   Widget build(BuildContext context) {
-    final feedingScheduleDB = ref.watch(feedingScheduleDBProvider);
+    final AsyncValue<AllData> asyncAllData = ref.watch(allDataProvider);
+    return asyncAllData.when(
+      data: (allData) {
+        return _build(context: context, schedules: allData.feedingSchedules);
+      },
+      loading: () => const Center(child: CircularProgressIndicator()),
+      error: (error, stackTrace) => Text('Error: $error'),
+    );
+  }
+
+  Widget _build(
+      {required BuildContext context,
+      required List<FeedingScheduleData> schedules}) {
+    FeedingScheduleCollection feedingScheduleDB =
+        FeedingScheduleCollection(schedules);
     final List<FeedingScheduleData> feedingSchedules =
         feedingScheduleDB.getAllFeedingSchedules();
 
@@ -78,7 +94,8 @@ class _FeedingScheduleFormState extends ConsumerState<FeedingScheduleForm> {
         ExpansionPanelList(
           expansionCallback: (int index, bool isExpanded) {
             setState(() {
-              feedingSchedules[index].isExpanded = isExpanded;
+              feedingSchedules[index] =
+                  feedingSchedules[index].copyWith(isExpanded: isExpanded);
             });
           },
           children: feedingSchedules.asMap().entries.map((entry) {

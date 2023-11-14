@@ -1,7 +1,7 @@
-import 'package:app/features/feeding_schedule/domain/feeding_schedule_db.dart';
+import 'package:app/features/feeding_schedule/domain/feeding_schedule.dart';
 
-class FeedingScheduleCollectin {
-  FeedingScheduleCollectin(schedules) : _schedules = schedules;
+class FeedingScheduleCollection {
+  FeedingScheduleCollection(schedules) : _schedules = schedules;
 
   final List<FeedingScheduleData> _schedules;
 

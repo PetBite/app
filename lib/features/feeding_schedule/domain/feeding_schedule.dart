@@ -5,7 +5,6 @@ part 'feeding_schedule.freezed.dart';
 part 'feeding_schedule.g.dart';
 
 @freezed
-@freezed
 class FeedingScheduleData with _$FeedingScheduleData {
   factory FeedingScheduleData({
     required String id,
