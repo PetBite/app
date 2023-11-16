@@ -1,5 +1,5 @@
 class FirestorePath {
   static String feedingSchedule(String scheduleId) =>
-      'feeding_schedule/$scheduleId';
-  static String feedingSchedules() => 'feeding_schedule';
+      'feeding_schedules/$scheduleId';
+  static String feedingSchedules() => 'feeding_schedules';
 }
