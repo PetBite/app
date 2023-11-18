@@ -1,26 +1,31 @@
+import 'package:app/features/all_data_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class PetDetails extends StatefulWidget {
+import '../domain/pet_details.dart';
+import '../domain/pet_details_collection.dart';
+
+class PetDetails extends ConsumerWidget {
   const PetDetails({Key? key}) : super(key: key);
 
   static const routeName = '/pet_details';
 
   @override
-  State<PetDetails> createState() => _PetDetailsState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final AsyncValue<AllData> asyncAllData = ref.watch(allDataProvider);
+    return asyncAllData.when(
+      data: (allData) =>
+          _build(context: context, petDetails: allData.petDetails),
+      error: (Object error, StackTrace stackTrace) =>
+          Text('error: $error Stack trace: $stackTrace'),
+      loading: () => const CircularProgressIndicator(),
+    );
+  }
 
-class _PetDetailsState extends State<PetDetails> {
-  final _nameController = TextEditingController();
-  final _breedController = TextEditingController();
-  final _birthdayController = TextEditingController();
-  final _ageController = TextEditingController();
-  final _weightController = TextEditingController();
-  final _chipController = TextEditingController();
-  final _registrationController = TextEditingController();
-  final _residenceController = TextEditingController();
-
-  @override
-  Widget build(BuildContext context) {
+  Widget _build(
+      {required BuildContext context,
+      required List<PetDetailsData> petDetails}) {
+    PetDetailsCollection detailsCollection = PetDetailsCollection(petDetails);
     return Scaffold(
       body: SafeArea(
         child: Container(
@@ -40,58 +45,51 @@ class _PetDetailsState extends State<PetDetails> {
                         fontSize: 30,
                       ),
                     )),
-                TextField(
-                  controller: _nameController,
+                TextFormField(
+                  initialValue: 'a',
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Name',
                   ),
                 ),
-                TextField(
-                  controller: _breedController,
-                  decoration: const InputDecoration(
+                const TextField(
+                  decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Breed',
                   ),
                 ),
-                TextField(
-                  controller: _birthdayController,
-                  decoration: const InputDecoration(
+                const TextField(
+                  decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Birthday',
                   ),
                 ),
-                TextField(
-                  controller: _ageController,
-                  decoration: const InputDecoration(
+                const TextField(
+                  decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Age',
                   ),
                 ),
-                TextField(
-                  controller: _weightController,
-                  decoration: const InputDecoration(
+                const TextField(
+                  decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Weight',
                   ),
                 ),
-                TextField(
-                  controller: _chipController,
-                  decoration: const InputDecoration(
+                const TextField(
+                  decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Chip #',
                   ),
                 ),
-                TextField(
-                  controller: _registrationController,
-                  decoration: const InputDecoration(
+                const TextField(
+                  decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Registration #',
                   ),
                 ),
-                TextField(
-                  controller: _residenceController,
-                  decoration: const InputDecoration(
+                const TextField(
+                  decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Country of Residence',
                   ),

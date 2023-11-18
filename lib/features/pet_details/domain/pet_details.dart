@@ -15,6 +15,7 @@ class PetDetailsData with _$PetDetailsData {
     required int chip,
     required int registration,
     required String residence,
+    @Default(false) bool isExpanded
   }) = _PetDetailsData;
 
   factory PetDetailsData.fromJson(Map<String, dynamic> json) =>

@@ -17,6 +17,7 @@ _$PetDetailsDataImpl _$$PetDetailsDataImplFromJson(Map<String, dynamic> json) =>
       chip: json['chip'] as int,
       registration: json['registration'] as int,
       residence: json['residence'] as String,
+      isExpanded: json['isExpanded'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$PetDetailsDataImplToJson(
@@ -31,4 +32,5 @@ Map<String, dynamic> _$$PetDetailsDataImplToJson(
       'chip': instance.chip,
       'registration': instance.registration,
       'residence': instance.residence,
+      'isExpanded': instance.isExpanded,
     };

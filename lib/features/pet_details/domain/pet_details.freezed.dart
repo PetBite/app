@@ -29,6 +29,7 @@ mixin _$PetDetailsData {
   int get chip => throw _privateConstructorUsedError;
   int get registration => throw _privateConstructorUsedError;
   String get residence => throw _privateConstructorUsedError;
+  bool get isExpanded => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -51,7 +52,8 @@ abstract class $PetDetailsDataCopyWith<$Res> {
       String weight,
       int chip,
       int registration,
-      String residence});
+      String residence,
+      bool isExpanded});
 }
 
 /// @nodoc
@@ -76,6 +78,7 @@ class _$PetDetailsDataCopyWithImpl<$Res, $Val extends PetDetailsData>
     Object? chip = null,
     Object? registration = null,
     Object? residence = null,
+    Object? isExpanded = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -114,6 +117,10 @@ class _$PetDetailsDataCopyWithImpl<$Res, $Val extends PetDetailsData>
           ? _value.residence
           : residence // ignore: cast_nullable_to_non_nullable
               as String,
+      isExpanded: null == isExpanded
+          ? _value.isExpanded
+          : isExpanded // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -135,7 +142,8 @@ abstract class _$$PetDetailsDataImplCopyWith<$Res>
       String weight,
       int chip,
       int registration,
-      String residence});
+      String residence,
+      bool isExpanded});
 }
 
 /// @nodoc
@@ -158,6 +166,7 @@ class __$$PetDetailsDataImplCopyWithImpl<$Res>
     Object? chip = null,
     Object? registration = null,
     Object? residence = null,
+    Object? isExpanded = null,
   }) {
     return _then(_$PetDetailsDataImpl(
       id: null == id
@@ -196,6 +205,10 @@ class __$$PetDetailsDataImplCopyWithImpl<$Res>
           ? _value.residence
           : residence // ignore: cast_nullable_to_non_nullable
               as String,
+      isExpanded: null == isExpanded
+          ? _value.isExpanded
+          : isExpanded // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -212,7 +225,8 @@ class _$PetDetailsDataImpl implements _PetDetailsData {
       required this.weight,
       required this.chip,
       required this.registration,
-      required this.residence});
+      required this.residence,
+      this.isExpanded = false});
 
   factory _$PetDetailsDataImpl.fromJson(Map<String, dynamic> json) =>
       _$$PetDetailsDataImplFromJson(json);
@@ -235,10 +249,13 @@ class _$PetDetailsDataImpl implements _PetDetailsData {
   final int registration;
   @override
   final String residence;
+  @override
+  @JsonKey()
+  final bool isExpanded;
 
   @override
   String toString() {
-    return 'PetDetailsData(id: $id, name: $name, breed: $breed, birthday: $birthday, age: $age, weight: $weight, chip: $chip, registration: $registration, residence: $residence)';
+    return 'PetDetailsData(id: $id, name: $name, breed: $breed, birthday: $birthday, age: $age, weight: $weight, chip: $chip, registration: $registration, residence: $residence, isExpanded: $isExpanded)';
   }
 
   @override
@@ -257,13 +274,15 @@ class _$PetDetailsDataImpl implements _PetDetailsData {
             (identical(other.registration, registration) ||
                 other.registration == registration) &&
             (identical(other.residence, residence) ||
-                other.residence == residence));
+                other.residence == residence) &&
+            (identical(other.isExpanded, isExpanded) ||
+                other.isExpanded == isExpanded));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, name, breed, birthday, age,
-      weight, chip, registration, residence);
+      weight, chip, registration, residence, isExpanded);
 
   @JsonKey(ignore: true)
   @override
@@ -290,7 +309,8 @@ abstract class _PetDetailsData implements PetDetailsData {
       required final String weight,
       required final int chip,
       required final int registration,
-      required final String residence}) = _$PetDetailsDataImpl;
+      required final String residence,
+      final bool isExpanded}) = _$PetDetailsDataImpl;
 
   factory _PetDetailsData.fromJson(Map<String, dynamic> json) =
       _$PetDetailsDataImpl.fromJson;
@@ -313,6 +333,8 @@ abstract class _PetDetailsData implements PetDetailsData {
   int get registration;
   @override
   String get residence;
+  @override
+  bool get isExpanded;
   @override
   @JsonKey(ignore: true)
   _$$PetDetailsDataImplCopyWith<_$PetDetailsDataImpl> get copyWith =>
