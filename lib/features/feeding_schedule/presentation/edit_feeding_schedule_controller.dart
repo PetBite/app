@@ -33,4 +33,21 @@ class EditFeedingScheduleController extends _$EditFeedingScheduleController {
       onSuccess();
     }
   }
+
+  Future<void> deleteFeedingSchedule({
+    required FeedingScheduleData schedule,
+    required VoidCallback onSuccess,
+  }) async {
+    state = const AsyncLoading();
+    FeedingScheduleDatabase database =
+        ref.watch(feedingScheduleDatabaseProvider);
+    final newState =
+        await AsyncValue.guard(() => database.deleteFeedingSchedule(schedule));
+    if (mounted) {
+      state = newState;
+    }
+    if (!state.hasError) {
+      onSuccess();
+    }
+  }
 }

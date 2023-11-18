@@ -1,4 +1,5 @@
 import 'package:app/features/feeding_schedule/domain/feeding_schedule_collection.dart';
+import 'package:app/features/feeding_schedule/presentation/edit_feeding_schedule_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:app/features/feeding_schedule/domain/feeding_schedule.dart';
@@ -85,8 +86,15 @@ class _FeedingScheduleFormState extends ConsumerState<FeedingScheduleForm> {
             quantity: dinnerQuantity),
       ];
 
-      feedingScheduleDB.updateDailySchedule(
-          id: id, day: day, schedules: schedules);
+      FeedingScheduleData newSchedule = FeedingScheduleData(
+          id: id, day: day, schedules: schedules, isExpanded: false);
+      ref
+          .read(editFeedingScheduleControllerProvider.notifier)
+          .updateFeedingSchedule(
+              schedule: newSchedule,
+              onSuccess: () {
+                print("sucesss");
+              });
     }
 
     return ListView(

@@ -138,13 +138,14 @@ class __$$FeedingScheduleDataImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$FeedingScheduleDataImpl implements _FeedingScheduleData {
+class _$FeedingScheduleDataImpl extends _FeedingScheduleData {
   _$FeedingScheduleDataImpl(
       {required this.id,
       required this.day,
       required final List<DailyFeedingScheduleData> schedules,
       this.isExpanded = false})
-      : _schedules = schedules;
+      : _schedules = schedules,
+        super._();
 
   factory _$FeedingScheduleDataImpl.fromJson(Map<String, dynamic> json) =>
       _$$FeedingScheduleDataImplFromJson(json);
@@ -203,12 +204,13 @@ class _$FeedingScheduleDataImpl implements _FeedingScheduleData {
   }
 }
 
-abstract class _FeedingScheduleData implements FeedingScheduleData {
+abstract class _FeedingScheduleData extends FeedingScheduleData {
   factory _FeedingScheduleData(
       {required final String id,
       required final String day,
       required final List<DailyFeedingScheduleData> schedules,
       final bool isExpanded}) = _$FeedingScheduleDataImpl;
+  _FeedingScheduleData._() : super._();
 
   factory _FeedingScheduleData.fromJson(Map<String, dynamic> json) =
       _$FeedingScheduleDataImpl.fromJson;

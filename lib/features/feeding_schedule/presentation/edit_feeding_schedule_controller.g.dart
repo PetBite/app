@@ -7,7 +7,7 @@ part of 'edit_feeding_schedule_controller.dart';
 // **************************************************************************
 
 String _$editFeedingScheduleControllerHash() =>
-    r'71038a3db03407b6529c6a6334935bb95fb6deea';
+    r'00721aacf6ab8bb2610196fee58e5b1ac84aae4c';
 
 /// See also [EditFeedingScheduleController].
 @ProviderFor(EditFeedingScheduleController)
