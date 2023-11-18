@@ -2,17 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 class FoodTypeField extends StatelessWidget {
-  const FoodTypeField({super.key, required this.fieldKey, this.foodType});
+  const FoodTypeField(
+      {super.key, required this.name, required this.index, this.foodType});
 
   final String? foodType;
-  final ValueKey<String> fieldKey;
+  final int index;
+  final String name;
 
   @override
   Widget build(BuildContext context) {
-    String fieldName = 'Food Type';
+    int keyOffset = DateTime.now().millisecondsSinceEpoch;
+    String fieldName = 'FoodType';
     return FormBuilderTextField(
-      name: fieldKey.toString(),
-      key: fieldKey,
+      name: name + fieldName,
+      key: GlobalObjectKey(keyOffset + index),
       initialValue: foodType,
       decoration: InputDecoration(
         labelText: fieldName,

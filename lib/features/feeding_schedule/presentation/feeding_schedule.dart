@@ -1,7 +1,10 @@
+import 'package:app/features/feeding_schedule/data/feeding_schedule_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:app/features/feeding_schedule/presentation/feeding_card.dart';
-import '../domain/feeding_schedule_db.dart';
+import '../domain/feeding_schedule.dart';
+import '../../all_data_provider.dart';
+import '../domain/feeding_schedule_collection.dart';
 
 class FeedingSchedulePage extends ConsumerWidget {
   const FeedingSchedulePage({Key? key}) : super(key: key);
@@ -10,9 +13,26 @@ class FeedingSchedulePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final feedingScheduleDB = ref.watch(feedingScheduleDBProvider);
-    List<FeedingScheduleData> weekSchedule =
+    final AsyncValue<AllData> asyncAllData = ref.watch(allDataProvider);
+    return asyncAllData.when(
+      data: (allData) {
+        return _build(context: context, schedules: allData.feedingSchedules);
+      },
+      loading: () => const Center(child: CircularProgressIndicator()),
+      error: (error, stackTrace) => Text('Error: $error'),
+    );
+  }
+
+  Widget _build(
+      {required BuildContext context,
+      required List<FeedingScheduleData> schedules}) {
+    FeedingScheduleCollection feedingScheduleDB =
+        FeedingScheduleCollection(schedules);
+    final List<FeedingScheduleData> weekSchedule =
         feedingScheduleDB.getAllFeedingSchedules();
+
+    weekSchedule.sort((a, b) => a.id.compareTo(b.id));
+
     return Scaffold(
         appBar: AppBar(
           title: const Text(
