@@ -30,6 +30,9 @@ class FeedingSchedulePage extends ConsumerWidget {
         FeedingScheduleCollection(schedules);
     final List<FeedingScheduleData> weekSchedule =
         feedingScheduleDB.getAllFeedingSchedules();
+
+    weekSchedule.sort((a, b) => a.id.compareTo(b.id));
+
     return Scaffold(
         appBar: AppBar(
           title: const Text(

@@ -3,8 +3,9 @@ import 'package:app/features/activity_log/presentation/detailed_activity_log.dar
 import 'package:app/features/activity_log/presentation/form_fields/add_activity.dart';
 import 'package:app/features/activity_log/presentation/form_fields/edit_activity.dart';
 import 'package:app/features/activity_log/presentation/individual_activity.dart';
-import 'package:app/features/authentication/presentation/login.dart';
-import 'package:app/features/authentication/presentation/register.dart';
+import 'package:app/features/authentication/presentation/forgot_password_view.dart';
+import 'package:app/features/authentication/presentation/signin_view.dart';
+import 'package:app/features/authentication/presentation/verify_email_view.dart';
 import 'package:app/features/community_forum/presentation/community_menu.dart';
 import 'package:app/features/community_forum/presentation/forum_home.dart';
 import 'package:app/features/direct_messages/presentation/direct_message_list.dart';
@@ -51,18 +52,20 @@ class MyApp extends ConsumerWidget {
           settings: routeSettings,
           builder: (BuildContext context) {
             switch (routeSettings.name) {
-              case SettingsView.routeName:
-                return const SettingsView();
-              case LoginPage.routeName:
-                return const LoginPage();
-              case RegisterPage.routeName:
-                return const RegisterPage();
+              case SignInView.routeName:
+                return const SignInView();
+              case VerifyEmailView.routeName:
+                return const VerifyEmailView();
+              case ForgotPasswordView.routeName:
+                return const ForgotPasswordView();
               case Home.routeName:
                 return const Home();
               case ActivityLogPage.routeName:
                 return const ActivityLogPage();
               case Profile.routeName:
                 return const Profile();
+              case SettingsView.routeName:
+                return const SettingsView();
               case ForumHomePage.routeName:
                 return const ForumHomePage();
               case PetDetails.routeName:

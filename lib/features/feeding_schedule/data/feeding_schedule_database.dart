@@ -32,8 +32,13 @@ class FeedingScheduleDatabase {
           path: FirestorePath.feedingSchedule(scheduleId),
           builder: (data, documentId) => FeedingScheduleData.fromJson(data!));
 
-  Future<void> setFeedingSchedule(FeedingScheduleData schedule) =>
-      _service.setData(
-          path: FirestorePath.feedingSchedule(schedule.id),
-          data: schedule.toJson());
+  Future<void> setFeedingSchedule(FeedingScheduleData schedule) {
+    print('Serialized schedule data: ${schedule.toMap()}');
+    return _service.setData(
+        path: FirestorePath.feedingSchedule(schedule.id),
+        data: schedule.toMap());
+  }
+
+  Future<void> deleteFeedingSchedule(FeedingScheduleData schedule) =>
+      _service.deleteData(path: FirestorePath.feedingSchedule(schedule.id));
 }
