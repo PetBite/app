@@ -1,3 +1,4 @@
+import 'package:app/features/home/presentation/info_box.dart';
 import 'package:app/features/pet_details/presentation/pet_details.dart';
 import 'package:flutter/material.dart';
 
@@ -22,39 +23,52 @@ List<Widget> generatePetItem(int count) {
         ),
         child: IconButton(
           iconSize: 48.0,
-          icon: Image.asset('assets/images/navbar_filler1.jpg'),
+          icon: const CircleAvatar(
+              backgroundImage: AssetImage('assets/images/navbar_filler1.jpg')),
           color: Colors.white,
           onPressed: () {},
         )),
   );
 }
 
+Container _buildGenderIcon(String gender) {
+  switch (gender) {
+    case 'male':
+      return Container(
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+          color: Colors.blue,
+        ),
+        child: const Icon(Icons.male, color: Colors.white, size: 40),
+      );
+    case 'female':
+      return Container(
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+          color: Colors.blue,
+        ),
+        child: const Icon(Icons.female, color: Colors.white, size: 40),
+      );
+    default:
+      return Container(
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+          color: Colors.blue,
+        ),
+        child: const Icon(Icons.circle, color: Colors.white, size: 40),
+      );
+  }
+}
+
 class _HomePageState extends State<HomePage> {
   bool _showPetBar = false;
   List<String> petFoodIDs = PetDB.getPetIDs();
-  final ScrollController _scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: GestureDetector(
-      onVerticalDragEnd: (details) {
-        // Only react to gestures when at the top of the ListView
-        if (_scrollController.position.atEdge &&
-            _scrollController.position.pixels == 0) {
-          if (details.primaryVelocity! > 0) {
-            setState(() {
-              _showPetBar = true;
-            });
-          } else if (details.primaryVelocity! < 0) {
-            setState(() {
-              _showPetBar = false;
-            });
-          }
-        }
-      },
-      child: SafeArea(
-          child: ListView(controller: _scrollController, children: <Widget>[
+      body: SafeArea(
+          child: ListView(children: <Widget>[
         if (_showPetBar)
           Container(
             color: Colors.blue,
@@ -63,43 +77,67 @@ class _HomePageState extends State<HomePage> {
               children: generatePetItem(6),
             ),
           ),
-        const SizedBox(height: 30),
-        Image.asset(petDB.getPetById('pet-001').imagePath,
-            width: 400, height: 210),
+        ClipRRect(
+          borderRadius: const BorderRadius.only(
+            bottomLeft: Radius.circular(60),
+            bottomRight: Radius.circular(60),
+          ),
+          child: GestureDetector(
+            onVerticalDragUpdate: (details) {
+              int sensitivity = 4;
+              if (details.delta.dy < sensitivity) {
+                setState(() {
+                  _showPetBar = false;
+                });
+              } else if (details.delta.dy > sensitivity) {
+                setState(() {
+                  _showPetBar = true;
+                });
+              }
+            },
+            child: Image.asset(petDB.getPetById('pet-001').imagePath,
+                width: 300, height: 309),
+          ),
+        ),
         Container(
+          margin: const EdgeInsets.only(top: 20.0, left: 30.0, right: 30.0),
           padding:
-              const EdgeInsets.only(left: 50.0, right: 50, top: 20, bottom: 20),
+              const EdgeInsets.only(left: 25, right: 25, top: 15, bottom: 15),
           alignment: Alignment.center,
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8.0),
-              color: Colors.white,
-              boxShadow: const [
-                BoxShadow(
-                  color: Colors.black,
-                  blurRadius: 2.0,
-                  spreadRadius: 0.0,
-                  offset: Offset(2.0, 2.0), // shadow direction: bottom right
-                )
-              ],
-            ),
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8.0),
+            color: Colors.white,
+            boxShadow: const [
+              BoxShadow(
+                color: Colors.black,
+                blurRadius: 2.0,
+                spreadRadius: 0.0,
+                offset: Offset(2.0, 2.0), // Shadow direction: bottom right
+              ),
+            ],
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
                   Text(
-                    '${petDB.getPetById('pet-001').name} - ${petDB.getPetById('pet-001').breed}',
-                    style: const TextStyle(fontSize: 25),
+                    petDB.getPetById('pet-001').name,
+                    style: const TextStyle(
+                        fontSize: 25, fontWeight: FontWeight.bold),
                   ),
-                  if (petDB.getPetById('pet-001').gender == 'male') ...[
-                    const Icon(Icons.male, color: Colors.black, size: 40),
-                  ] else if (petDB.getPetById('pet-001').gender ==
-                      'female') ...[
-                    const Icon(Icons.female, color: Colors.black, size: 40),
-                  ] else ...[
-                    const Icon(Icons.circle, color: Colors.black, size: 40),
-                  ],
-                  //const Icon(Icons.male, color: Colors.black, size: 40)
-                ]),
+                  Text(
+                    petDB.getPetById('pet-001').breed,
+                    style: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF006A60)),
+                  )
+                ],
+              ),
+              _buildGenderIcon(petDB.getPetById('pet-001').gender),
+            ],
           ),
         ),
         Row(
@@ -107,7 +145,9 @@ class _HomePageState extends State<HomePage> {
           children: [
             const Icon(Icons.pets),
             const SizedBox(width: 10),
-            Text('About ${petDB.getPetById('pet-001').name}'),
+            Text('About ${petDB.getPetById('pet-001').name}',
+                style:
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
             IconButton(
                 onPressed: () {
                   Navigator.pushNamed(context, PetDetails.routeName);
@@ -120,91 +160,74 @@ class _HomePageState extends State<HomePage> {
               top: 10.0, left: 30.0, right: 30.0, bottom: 20.0),
           alignment: Alignment.center,
           child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                SizedBox(
-                  height: 60,
-                  width: 60,
-                  child: DecoratedBox(
-                    decoration: const BoxDecoration(color: Colors.greenAccent),
-                    child: Container(
-                      margin: const EdgeInsets.all(8.0),
-                      alignment: Alignment.center,
-                      child: ListView(children: <Widget>[
-                        const Text('Age'),
-                        Text('${petDB.getPetById('pet-001').age}')
-                      ]),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 60,
-                  width: 60,
-                  child: DecoratedBox(
-                    decoration: const BoxDecoration(color: Colors.greenAccent),
-                    child: Container(
-                      margin: const EdgeInsets.all(8.0),
-                      alignment: Alignment.center,
-                      child: ListView(children: <Widget>[
-                        const Text('Height'),
-                        Text('${petDB.getPetById('pet-001').height} cm')
-                      ]),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 60,
-                  width: 60,
-                  child: DecoratedBox(
-                    decoration: const BoxDecoration(color: Colors.greenAccent),
-                    child: Container(
-                      margin: const EdgeInsets.all(8.0),
-                      alignment: Alignment.center,
-                      child: ListView(children: <Widget>[
-                        const Text('Weight'),
-                        Text('${petDB.getPetById('pet-001').weight} kg')
-                      ]),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 60,
-                  width: 60,
-                  child: DecoratedBox(
-                    decoration: const BoxDecoration(color: Colors.greenAccent),
-                    child: Container(
-                      margin: const EdgeInsets.all(8.0),
-                      alignment: Alignment.center,
-                      child: ListView(children: <Widget>[
-                        const Text('Color'),
-                        Text(petDB.getPetById('pet-001').color)
-                      ]),
-                    ),
-                  ),
-                ),
-              ]),
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              InfoBox(
+                  title: 'Age',
+                  value: '${petDB.getPetById('pet-001').age}',
+                  bgColor: const Color(0xFF006A60)),
+              InfoBox(
+                  title: 'Height',
+                  value: '${petDB.getPetById('pet-001').height} cm',
+                  bgColor: const Color(0xFF006A60)),
+              InfoBox(
+                  title: 'Weight',
+                  value: '${petDB.getPetById('pet-001').weight} kg',
+                  bgColor: const Color(0xFF006A60)),
+              InfoBox(
+                  title: 'Color',
+                  value: petDB.getPetById('pet-001').color,
+                  bgColor: const Color(0xFF006A60)),
+            ],
+          ),
         ),
         Container(
           margin: const EdgeInsets.only(left: 50, right: 50),
           child: SizedBox(
-            width: 300,
-            height: 200,
+            width: 500,
+            height: 210,
             child: DecoratedBox(
-                decoration: const BoxDecoration(color: Colors.lightBlueAccent),
-                child: Container(
-                  margin: const EdgeInsets.all(8.0),
-                  alignment: Alignment.center,
-                  child: ListView(children: const <Widget>[
-                    Text('Sample Meal Plan'),
+              decoration: BoxDecoration(
+                color: const Color(0xFF74F8E5),
+                borderRadius: BorderRadius.circular(10),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 5,
+                    blurRadius: 7,
+                    offset: const Offset(0, 3),
+                  ),
+                ],
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ListView(
+                  children: const <Widget>[
                     Text(
-                        'Morning: 150g (approx.) high-quality commercial dog food (kibble or wet) balanced for adult or senior dogs Water available at all times.'),
+                      'Sample Meal Plan',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                        color: Colors.black,
+                      ),
+                    ),
+                    SizedBox(height: 10), // Spacing between text widgets
                     Text(
-                        'Evening: 150g (approx.) high-quality commercial dog food (kibble or wet) balanced for adult or senior dogs Water available at all times.')
-                  ]),
-                )),
+                      'Morning: 150g (approx.) high-quality commercial dog food (kibble or wet) balanced for adult or senior dogs. Water available at all times.',
+                      style: TextStyle(fontSize: 14),
+                    ),
+                    SizedBox(height: 5),
+                    Text(
+                      'Evening: 150g (approx.) high-quality commercial dog food (kibble or wet) balanced for adult or senior dogs. Water available at all times.',
+                      style: TextStyle(fontSize: 14),
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ),
         ),
       ])),
-    ));
+    );
   }
 }
