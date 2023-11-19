@@ -64,9 +64,8 @@ class _ActivityLogPageState extends ConsumerState<ActivityLogPage> {
                                   Icons.pets,
                                 ),
                                 onPressed: () {
-                                  ref
-                                      .read(activityIdProvider.notifier)
-                                      .state = element;
+                                  ref.read(activityIdProvider.notifier).state =
+                                      element;
                                   Navigator.restorablePushNamed(
                                       context, IndividualActivity.routeName);
                                 },
@@ -82,13 +81,16 @@ class _ActivityLogPageState extends ConsumerState<ActivityLogPage> {
                                 child: IconButton(
                                   icon: const Icon(
                                     Icons.edit,
-                                    color: Colors.black,
+                                    color: Colors.white,
                                   ),
                                   onPressed: () {
                                     ref
                                         .read(activityIdProvider.notifier)
                                         .state = element;
-                                    Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {return EditActivity();})).then((value) {
+                                    Navigator.push(context, MaterialPageRoute(
+                                        builder: (BuildContext context) {
+                                      return EditActivity();
+                                    })).then((value) {
                                       setState(() {});
                                     });
                                   },
@@ -102,7 +104,10 @@ class _ActivityLogPageState extends ConsumerState<ActivityLogPage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {return AddActivity();})).then((value) {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (BuildContext context) {
+            return AddActivity();
+          })).then((value) {
             setState(() {});
           });
         },

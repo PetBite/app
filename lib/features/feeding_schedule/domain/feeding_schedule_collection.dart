@@ -5,23 +5,12 @@ class FeedingScheduleCollection {
 
   final List<FeedingScheduleData> _schedules;
 
-  void updateDailySchedule({
-    required String id,
-    required String day,
-    required List<DailyFeedingScheduleData> schedules,
-  }) {
-    int index = _schedules.indexWhere((schedule) => schedule.id == id);
-    if (index != -1) {
-      _schedules[index] =
-          FeedingScheduleData(id: id, day: day, schedules: schedules);
-    } else {
-      _schedules
-          .add(FeedingScheduleData(id: id, day: day, schedules: schedules));
-    }
-  }
-
   List<DailyFeedingScheduleData> getFeedingSchedulesByDay(String day) {
     return _schedules.firstWhere((daily) => daily.day == day).schedules;
+  }
+
+  String getFeedingSchedulesIDByDay(String day) {
+    return _schedules.firstWhere((schedule) => schedule.day == day).id;
   }
 
   List<FeedingScheduleData> getAllFeedingSchedules() {

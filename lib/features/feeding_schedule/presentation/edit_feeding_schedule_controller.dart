@@ -50,4 +50,22 @@ class EditFeedingScheduleController extends _$EditFeedingScheduleController {
       onSuccess();
     }
   }
+
+  Future<void> updateScheduleCompleted({
+    required String scheduleID,
+    required DailyFeedingScheduleData dailySchedule,
+    required VoidCallback onSuccess,
+  }) async {
+    state = const AsyncLoading();
+    FeedingScheduleDatabase database =
+        ref.watch(feedingScheduleDatabaseProvider);
+    final newState = await AsyncValue.guard(
+        () => database.updateDailySchedules(scheduleID, dailySchedule));
+    if (mounted) {
+      state = newState;
+    }
+    if (!state.hasError) {
+      onSuccess();
+    }
+  }
 }

@@ -1,3 +1,4 @@
+import 'package:app/features/feeding_schedule/domain/feeding_schedule.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 /// Generic interface for accessing Firestore.
@@ -14,6 +15,15 @@ class FirestoreService {
   }) async {
     final reference = FirebaseFirestore.instance.doc(path);
     await reference.set(data, SetOptions(merge: merge));
+  }
+
+  Future<void> updateDaily({
+    required String path,
+    required Map<String, dynamic> dailySchedule,
+    bool merge = false,
+  }) async {
+    final reference = FirebaseFirestore.instance.doc(path);
+    await reference.update({'schedules': dailySchedule});
   }
 
   Future<void> addData({

@@ -1,4 +1,5 @@
 import 'package:app/features/feeding_schedule/domain/feeding_schedule.dart';
+import 'package:app/features/feeding_schedule/presentation/edit_feeding_schedule_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../all_data_provider.dart';
@@ -34,6 +35,8 @@ class _FeedingCardState extends ConsumerState<FeedingCard> {
         FeedingScheduleCollection(schedules);
     final List<DailyFeedingScheduleData> dailySchedules =
         feedingScheduleDB.getFeedingSchedulesByDay(widget.day);
+    final String scheduleId =
+        feedingScheduleDB.getFeedingSchedulesIDByDay(widget.day);
 
     return Card(
       child: Center(
@@ -65,6 +68,13 @@ class _FeedingCardState extends ConsumerState<FeedingCard> {
                       onChanged: (value) {
                         setState(() {
                           schedule = schedule.copyWith(complete: value!);
+                          ref
+                              .read(editFeedingScheduleControllerProvider
+                                  .notifier)
+                              .updateScheduleCompleted(
+                                  scheduleID: scheduleId,
+                                  dailySchedule: schedule,
+                                  onSuccess: () => print("success"));
                         });
                       },
                     ),
