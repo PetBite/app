@@ -1,4 +1,3 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'feeding_schedule.freezed.dart';
@@ -13,8 +12,17 @@ class FeedingScheduleData with _$FeedingScheduleData {
     @Default(false) bool isExpanded,
   }) = _FeedingScheduleData;
 
+  const FeedingScheduleData._();
+
   factory FeedingScheduleData.fromJson(Map<String, dynamic> json) =>
       _$FeedingScheduleDataFromJson(json);
+
+  Map<String, dynamic> toMap() => {
+        'id': id,
+        'day': day,
+        'schedules': schedules.map((e) => e.toJson()).toList(),
+        'isExpanded': isExpanded,
+      };
 }
 
 @freezed
