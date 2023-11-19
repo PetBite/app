@@ -24,10 +24,10 @@ mixin _$PetDetailsData {
   String get name => throw _privateConstructorUsedError;
   String get breed => throw _privateConstructorUsedError;
   String get birthday => throw _privateConstructorUsedError;
-  int get age => throw _privateConstructorUsedError;
+  String get age => throw _privateConstructorUsedError;
   String get weight => throw _privateConstructorUsedError;
-  int get chip => throw _privateConstructorUsedError;
-  int get registration => throw _privateConstructorUsedError;
+  String get chip => throw _privateConstructorUsedError;
+  String get registration => throw _privateConstructorUsedError;
   String get residence => throw _privateConstructorUsedError;
   bool get isExpanded => throw _privateConstructorUsedError;
 
@@ -48,10 +48,10 @@ abstract class $PetDetailsDataCopyWith<$Res> {
       String name,
       String breed,
       String birthday,
-      int age,
+      String age,
       String weight,
-      int chip,
-      int registration,
+      String chip,
+      String registration,
       String residence,
       bool isExpanded});
 }
@@ -100,7 +100,7 @@ class _$PetDetailsDataCopyWithImpl<$Res, $Val extends PetDetailsData>
       age: null == age
           ? _value.age
           : age // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       weight: null == weight
           ? _value.weight
           : weight // ignore: cast_nullable_to_non_nullable
@@ -108,11 +108,11 @@ class _$PetDetailsDataCopyWithImpl<$Res, $Val extends PetDetailsData>
       chip: null == chip
           ? _value.chip
           : chip // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       registration: null == registration
           ? _value.registration
           : registration // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       residence: null == residence
           ? _value.residence
           : residence // ignore: cast_nullable_to_non_nullable
@@ -138,10 +138,10 @@ abstract class _$$PetDetailsDataImplCopyWith<$Res>
       String name,
       String breed,
       String birthday,
-      int age,
+      String age,
       String weight,
-      int chip,
-      int registration,
+      String chip,
+      String registration,
       String residence,
       bool isExpanded});
 }
@@ -188,7 +188,7 @@ class __$$PetDetailsDataImplCopyWithImpl<$Res>
       age: null == age
           ? _value.age
           : age // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       weight: null == weight
           ? _value.weight
           : weight // ignore: cast_nullable_to_non_nullable
@@ -196,11 +196,11 @@ class __$$PetDetailsDataImplCopyWithImpl<$Res>
       chip: null == chip
           ? _value.chip
           : chip // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       registration: null == registration
           ? _value.registration
           : registration // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       residence: null == residence
           ? _value.residence
           : residence // ignore: cast_nullable_to_non_nullable
@@ -240,13 +240,13 @@ class _$PetDetailsDataImpl implements _PetDetailsData {
   @override
   final String birthday;
   @override
-  final int age;
+  final String age;
   @override
   final String weight;
   @override
-  final int chip;
+  final String chip;
   @override
-  final int registration;
+  final String registration;
   @override
   final String residence;
   @override
@@ -305,10 +305,10 @@ abstract class _PetDetailsData implements PetDetailsData {
       required final String name,
       required final String breed,
       required final String birthday,
-      required final int age,
+      required final String age,
       required final String weight,
-      required final int chip,
-      required final int registration,
+      required final String chip,
+      required final String registration,
       required final String residence,
       final bool isExpanded}) = _$PetDetailsDataImpl;
 
@@ -324,13 +324,13 @@ abstract class _PetDetailsData implements PetDetailsData {
   @override
   String get birthday;
   @override
-  int get age;
+  String get age;
   @override
   String get weight;
   @override
-  int get chip;
+  String get chip;
   @override
-  int get registration;
+  String get registration;
   @override
   String get residence;
   @override

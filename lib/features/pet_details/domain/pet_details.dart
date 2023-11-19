@@ -10,10 +10,10 @@ class PetDetailsData with _$PetDetailsData {
     required String name,
     required String breed,
     required String birthday,
-    required int age,
+    required String age,
     required String weight,
-    required int chip,
-    required int registration,
+    required String chip,
+    required String registration,
     required String residence,
     @Default(false) bool isExpanded
   }) = _PetDetailsData;

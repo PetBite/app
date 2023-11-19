@@ -12,10 +12,10 @@ _$PetDetailsDataImpl _$$PetDetailsDataImplFromJson(Map<String, dynamic> json) =>
       name: json['name'] as String,
       breed: json['breed'] as String,
       birthday: json['birthday'] as String,
-      age: json['age'] as int,
+      age: json['age'] as String,
       weight: json['weight'] as String,
-      chip: json['chip'] as int,
-      registration: json['registration'] as int,
+      chip: json['chip'] as String,
+      registration: json['registration'] as String,
       residence: json['residence'] as String,
       isExpanded: json['isExpanded'] as bool? ?? false,
     );

@@ -13,8 +13,7 @@ class PetDetailsCollection {
     return _petDetails.firstWhere((element) => element.id == id);
   }
 
-  List<String> getFeedingScheduleIDs() {
+  List<String> getPetDetailsIDs() {
     return _petDetails.map((element) => element.id).toList();
   }
-
 }

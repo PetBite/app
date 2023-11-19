@@ -66,7 +66,7 @@ class MyApp extends ConsumerWidget {
               case ForumHomePage.routeName:
                 return const ForumHomePage();
               case PetDetails.routeName:
-                return const PetDetails();
+                return PetDetails();
               case DirectMessageList.routeName:
                 return const DirectMessageList();
               case PetFoodPage.routeName:
