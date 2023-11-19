@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
-
-import '../../home/presentation/home_page.dart';
 import '../domain/pet_details.dart';
 import '../domain/pet_details_collection.dart';
 
@@ -70,8 +68,7 @@ class PetDetails extends ConsumerWidget {
       ref.read(petDetailsControllerProvider.notifier).updatePetDetails(
             details: details,
             onSuccess: () {
-              Navigator.pop(context);
-              GlobalSnackBar.show('pet details updated.');
+              print("sucesss");
             },
           );
     }
@@ -264,16 +261,5 @@ class PetDetails extends ConsumerWidget {
             error: (Object error, StackTrace stackTrace) =>
                 Text('error: $error Stack trace: $stackTrace'),
             loading: () => const CircularProgressIndicator()));
-  }
-}
-
-class GlobalSnackBar {
-  static GlobalKey<ScaffoldMessengerState> key =
-      GlobalKey<ScaffoldMessengerState>();
-
-  static void show(String message) {
-    key.currentState!
-      ..hideCurrentSnackBar()
-      ..showSnackBar(SnackBar(content: Text(message)));
   }
 }
