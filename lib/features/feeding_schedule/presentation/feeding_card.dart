@@ -16,7 +16,6 @@ class FeedingCard extends ConsumerStatefulWidget {
 
 class _FeedingCardState extends ConsumerState<FeedingCard> {
   @override
-  @override
   Widget build(BuildContext context) {
     final AsyncValue<AllData> asyncAllData = ref.watch(allDataProvider);
     return asyncAllData.when(
