@@ -1,4 +1,3 @@
-import 'package:app/features/feeding_schedule/data/feeding_schedule_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:app/features/feeding_schedule/presentation/feeding_card.dart';

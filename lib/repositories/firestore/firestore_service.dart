@@ -1,4 +1,3 @@
-import 'package:app/features/feeding_schedule/domain/feeding_schedule.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 /// Generic interface for accessing Firestore.

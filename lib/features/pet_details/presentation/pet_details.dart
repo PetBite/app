@@ -67,9 +67,7 @@ class PetDetails extends ConsumerWidget {
       );
       ref.read(petDetailsControllerProvider.notifier).updatePetDetails(
             details: details,
-            onSuccess: () {
-              print("sucesss");
-            },
+            onSuccess: () {},
           );
     }
 
