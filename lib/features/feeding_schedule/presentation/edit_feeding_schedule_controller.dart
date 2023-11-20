@@ -53,7 +53,7 @@ class EditFeedingScheduleController extends _$EditFeedingScheduleController {
 
   Future<void> updateScheduleCompleted({
     required String scheduleID,
-    required DailyFeedingScheduleData dailySchedule,
+    required List<DailyFeedingScheduleData> dailySchedule,
     required VoidCallback onSuccess,
   }) async {
     state = const AsyncLoading();

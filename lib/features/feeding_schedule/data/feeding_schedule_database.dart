@@ -42,8 +42,8 @@ class FeedingScheduleDatabase {
       _service.deleteData(path: FirestorePath.feedingSchedule(schedule.id));
 
   Future<void> updateDailySchedules(
-          String scheduleId, DailyFeedingScheduleData dailySchedule) =>
+          String scheduleId, List<DailyFeedingScheduleData> dailySchedule) =>
       _service.updateDaily(
           path: FirestorePath.feedingSchedule(scheduleId),
-          dailySchedule: dailySchedule.toJson());
+          dailySchedule: dailySchedule);
 }

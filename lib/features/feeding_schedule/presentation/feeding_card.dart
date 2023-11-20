@@ -33,7 +33,7 @@ class _FeedingCardState extends ConsumerState<FeedingCard> {
       required List<FeedingScheduleData> schedules}) {
     FeedingScheduleCollection feedingScheduleDB =
         FeedingScheduleCollection(schedules);
-    final List<DailyFeedingScheduleData> dailySchedules =
+    List<DailyFeedingScheduleData> dailySchedules =
         feedingScheduleDB.getFeedingSchedulesByDay(widget.day);
     final String scheduleId =
         feedingScheduleDB.getFeedingSchedulesIDByDay(widget.day);
@@ -67,14 +67,18 @@ class _FeedingCardState extends ConsumerState<FeedingCard> {
                       value: schedule.complete,
                       onChanged: (value) {
                         setState(() {
-                          schedule = schedule.copyWith(complete: value!);
+                          List<DailyFeedingScheduleData> updatedSchedules =
+                              List.from(dailySchedules);
+                          int index = updatedSchedules.indexOf(schedule);
+                          updatedSchedules[index] = updatedSchedules[index]
+                              .copyWith(complete: value!);
                           ref
                               .read(editFeedingScheduleControllerProvider
                                   .notifier)
                               .updateScheduleCompleted(
                                   scheduleID: scheduleId,
-                                  dailySchedule: schedule,
-                                  onSuccess: () => print("success"));
+                                  dailySchedule: updatedSchedules,
+                                  onSuccess: () {});
                         });
                       },
                     ),

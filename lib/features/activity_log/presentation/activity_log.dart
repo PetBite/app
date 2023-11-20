@@ -77,7 +77,7 @@ class _ActivityLogPageState extends ConsumerState<ActivityLogPage> {
                                   .timestamp),
                               trailing: CircleAvatar(
                                 radius: 20,
-                                backgroundColor: Colors.red,
+                                backgroundColor: const Color(0xFF006A60),
                                 child: IconButton(
                                   icon: const Icon(
                                     Icons.edit,
