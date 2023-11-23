@@ -90,11 +90,7 @@ class _FeedingScheduleFormState extends ConsumerState<FeedingScheduleForm> {
           id: id, day: day, schedules: schedules, isExpanded: false);
       ref
           .read(editFeedingScheduleControllerProvider.notifier)
-          .updateFeedingSchedule(
-              schedule: newSchedule,
-              onSuccess: () {
-                print("sucesss");
-              });
+          .updateFeedingSchedule(schedule: newSchedule, onSuccess: () {});
     }
 
     return ListView(

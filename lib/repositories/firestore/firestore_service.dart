@@ -16,6 +16,24 @@ class FirestoreService {
     await reference.set(data, SetOptions(merge: merge));
   }
 
+  Future<void> updateDaily({
+    required String path,
+    required List<dynamic> dailySchedule,
+    bool merge = false,
+  }) async {
+    List<Map<String, dynamic>> scheduleMaps = dailySchedule.map((schedule) {
+      return {
+        'name': schedule.name,
+        'time': schedule.time,
+        'foodType': schedule.foodType,
+        'quantity': schedule.quantity,
+        'complete': schedule.complete,
+      };
+    }).toList();
+    final reference = FirebaseFirestore.instance.doc(path);
+    await reference.update({'schedules': scheduleMaps});
+  }
+
   Future<void> addData({
     required String collection,
     required Map<String, dynamic> data,

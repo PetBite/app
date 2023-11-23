@@ -1,4 +1,5 @@
 import 'package:app/features/feeding_schedule/domain/feeding_schedule.dart';
+import 'package:app/features/feeding_schedule/presentation/edit_feeding_schedule_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../all_data_provider.dart';
@@ -14,7 +15,6 @@ class FeedingCard extends ConsumerStatefulWidget {
 }
 
 class _FeedingCardState extends ConsumerState<FeedingCard> {
-  @override
   @override
   Widget build(BuildContext context) {
     final AsyncValue<AllData> asyncAllData = ref.watch(allDataProvider);
@@ -32,8 +32,10 @@ class _FeedingCardState extends ConsumerState<FeedingCard> {
       required List<FeedingScheduleData> schedules}) {
     FeedingScheduleCollection feedingScheduleDB =
         FeedingScheduleCollection(schedules);
-    final List<DailyFeedingScheduleData> dailySchedules =
+    List<DailyFeedingScheduleData> dailySchedules =
         feedingScheduleDB.getFeedingSchedulesByDay(widget.day);
+    final String scheduleId =
+        feedingScheduleDB.getFeedingSchedulesIDByDay(widget.day);
 
     return Card(
       child: Center(
@@ -64,7 +66,18 @@ class _FeedingCardState extends ConsumerState<FeedingCard> {
                       value: schedule.complete,
                       onChanged: (value) {
                         setState(() {
-                          schedule = schedule.copyWith(complete: value!);
+                          List<DailyFeedingScheduleData> updatedSchedules =
+                              List.from(dailySchedules);
+                          int index = updatedSchedules.indexOf(schedule);
+                          updatedSchedules[index] = updatedSchedules[index]
+                              .copyWith(complete: value!);
+                          ref
+                              .read(editFeedingScheduleControllerProvider
+                                  .notifier)
+                              .updateScheduleCompleted(
+                                  scheduleID: scheduleId,
+                                  dailySchedule: updatedSchedules,
+                                  onSuccess: () {});
                         });
                       },
                     ),
