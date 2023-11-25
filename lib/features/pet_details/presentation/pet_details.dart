@@ -20,6 +20,9 @@ class PetDetails extends ConsumerWidget {
   final _chipFieldKey = GlobalKey<FormBuilderFieldState>();
   final _registrationFieldKey = GlobalKey<FormBuilderFieldState>();
   final _residenceFieldKey = GlobalKey<FormBuilderFieldState>();
+  final _genderFieldKey = GlobalKey<FormBuilderFieldState>();
+  final _heightFieldKey = GlobalKey<FormBuilderFieldState>();
+  final _colorFieldKey = GlobalKey<FormBuilderFieldState>();
 
   static const routeName = '/pet_details';
 
@@ -53,6 +56,9 @@ class PetDetails extends ConsumerWidget {
       String chip = _chipFieldKey.currentState?.value;
       String registration = _registrationFieldKey.currentState?.value;
       String residence = _residenceFieldKey.currentState?.value;
+      String gender = _genderFieldKey.currentState?.value;
+      String height = _heightFieldKey.currentState?.value;
+      String color = _colorFieldKey.currentState?.value;
       PetDetailsData details = PetDetailsData(
         id: ref.read(petIdProvider.notifier).state,
         name: name,
@@ -63,6 +69,9 @@ class PetDetails extends ConsumerWidget {
         chip: chip,
         registration: registration,
         residence: residence,
+        gender: gender,
+        height: height,
+        color: color,
         isExpanded: false,
       );
       ref.read(petDetailsControllerProvider.notifier).updatePetDetails(
@@ -203,6 +212,48 @@ class PetDetails extends ConsumerWidget {
                     decoration: const InputDecoration(
                       labelText: 'Residence',
                       hintText: 'Enter pet residence info',
+                    ),
+                    validator: FormBuilderValidators.compose([
+                      FormBuilderValidators.required(),
+                    ]),
+                  ),
+                  FormBuilderTextField(
+                    name: 'Gender',
+                    initialValue: detailsCollection
+                        .getPetDetailsById(ref.watch(petIdProvider))
+                        .gender,
+                    key: _genderFieldKey,
+                    decoration: const InputDecoration(
+                      labelText: 'Gender',
+                      hintText: 'Enter pet gender',
+                    ),
+                    validator: FormBuilderValidators.compose([
+                      FormBuilderValidators.required(),
+                    ]),
+                  ),
+                  FormBuilderTextField(
+                    name: 'Height',
+                    initialValue: detailsCollection
+                        .getPetDetailsById(ref.watch(petIdProvider))
+                        .height,
+                    key: _heightFieldKey,
+                    decoration: const InputDecoration(
+                      labelText: 'Height',
+                      hintText: 'Enter pet height info',
+                    ),
+                    validator: FormBuilderValidators.compose([
+                      FormBuilderValidators.required(),
+                    ]),
+                  ),
+                  FormBuilderTextField(
+                    name: 'Color',
+                    initialValue: detailsCollection
+                        .getPetDetailsById(ref.watch(petIdProvider))
+                        .color,
+                    key: _colorFieldKey,
+                    decoration: const InputDecoration(
+                      labelText: 'Color',
+                      hintText: 'Enter pet color',
                     ),
                     validator: FormBuilderValidators.compose([
                       FormBuilderValidators.required(),

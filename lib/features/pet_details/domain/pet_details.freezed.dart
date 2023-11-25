@@ -22,13 +22,18 @@ PetDetailsData _$PetDetailsDataFromJson(Map<String, dynamic> json) {
 mixin _$PetDetailsData {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
+  String get gender => throw _privateConstructorUsedError;
   String get breed => throw _privateConstructorUsedError;
   String get birthday => throw _privateConstructorUsedError;
   String get age => throw _privateConstructorUsedError;
   String get weight => throw _privateConstructorUsedError;
+  String get height => throw _privateConstructorUsedError;
   String get chip => throw _privateConstructorUsedError;
   String get registration => throw _privateConstructorUsedError;
+  String get image => throw _privateConstructorUsedError;
+  String get ownerId => throw _privateConstructorUsedError;
   String get residence => throw _privateConstructorUsedError;
+  String get color => throw _privateConstructorUsedError;
   bool get isExpanded => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -46,13 +51,18 @@ abstract class $PetDetailsDataCopyWith<$Res> {
   $Res call(
       {String id,
       String name,
+      String gender,
       String breed,
       String birthday,
       String age,
       String weight,
+      String height,
       String chip,
       String registration,
+      String image,
+      String ownerId,
       String residence,
+      String color,
       bool isExpanded});
 }
 
@@ -71,13 +81,18 @@ class _$PetDetailsDataCopyWithImpl<$Res, $Val extends PetDetailsData>
   $Res call({
     Object? id = null,
     Object? name = null,
+    Object? gender = null,
     Object? breed = null,
     Object? birthday = null,
     Object? age = null,
     Object? weight = null,
+    Object? height = null,
     Object? chip = null,
     Object? registration = null,
+    Object? image = null,
+    Object? ownerId = null,
     Object? residence = null,
+    Object? color = null,
     Object? isExpanded = null,
   }) {
     return _then(_value.copyWith(
@@ -88,6 +103,10 @@ class _$PetDetailsDataCopyWithImpl<$Res, $Val extends PetDetailsData>
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      gender: null == gender
+          ? _value.gender
+          : gender // ignore: cast_nullable_to_non_nullable
               as String,
       breed: null == breed
           ? _value.breed
@@ -105,6 +124,10 @@ class _$PetDetailsDataCopyWithImpl<$Res, $Val extends PetDetailsData>
           ? _value.weight
           : weight // ignore: cast_nullable_to_non_nullable
               as String,
+      height: null == height
+          ? _value.height
+          : height // ignore: cast_nullable_to_non_nullable
+              as String,
       chip: null == chip
           ? _value.chip
           : chip // ignore: cast_nullable_to_non_nullable
@@ -113,9 +136,21 @@ class _$PetDetailsDataCopyWithImpl<$Res, $Val extends PetDetailsData>
           ? _value.registration
           : registration // ignore: cast_nullable_to_non_nullable
               as String,
+      image: null == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as String,
+      ownerId: null == ownerId
+          ? _value.ownerId
+          : ownerId // ignore: cast_nullable_to_non_nullable
+              as String,
       residence: null == residence
           ? _value.residence
           : residence // ignore: cast_nullable_to_non_nullable
+              as String,
+      color: null == color
+          ? _value.color
+          : color // ignore: cast_nullable_to_non_nullable
               as String,
       isExpanded: null == isExpanded
           ? _value.isExpanded
@@ -136,13 +171,18 @@ abstract class _$$PetDetailsDataImplCopyWith<$Res>
   $Res call(
       {String id,
       String name,
+      String gender,
       String breed,
       String birthday,
       String age,
       String weight,
+      String height,
       String chip,
       String registration,
+      String image,
+      String ownerId,
       String residence,
+      String color,
       bool isExpanded});
 }
 
@@ -159,13 +199,18 @@ class __$$PetDetailsDataImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? name = null,
+    Object? gender = null,
     Object? breed = null,
     Object? birthday = null,
     Object? age = null,
     Object? weight = null,
+    Object? height = null,
     Object? chip = null,
     Object? registration = null,
+    Object? image = null,
+    Object? ownerId = null,
     Object? residence = null,
+    Object? color = null,
     Object? isExpanded = null,
   }) {
     return _then(_$PetDetailsDataImpl(
@@ -176,6 +221,10 @@ class __$$PetDetailsDataImplCopyWithImpl<$Res>
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      gender: null == gender
+          ? _value.gender
+          : gender // ignore: cast_nullable_to_non_nullable
               as String,
       breed: null == breed
           ? _value.breed
@@ -193,6 +242,10 @@ class __$$PetDetailsDataImplCopyWithImpl<$Res>
           ? _value.weight
           : weight // ignore: cast_nullable_to_non_nullable
               as String,
+      height: null == height
+          ? _value.height
+          : height // ignore: cast_nullable_to_non_nullable
+              as String,
       chip: null == chip
           ? _value.chip
           : chip // ignore: cast_nullable_to_non_nullable
@@ -201,9 +254,21 @@ class __$$PetDetailsDataImplCopyWithImpl<$Res>
           ? _value.registration
           : registration // ignore: cast_nullable_to_non_nullable
               as String,
+      image: null == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as String,
+      ownerId: null == ownerId
+          ? _value.ownerId
+          : ownerId // ignore: cast_nullable_to_non_nullable
+              as String,
       residence: null == residence
           ? _value.residence
           : residence // ignore: cast_nullable_to_non_nullable
+              as String,
+      color: null == color
+          ? _value.color
+          : color // ignore: cast_nullable_to_non_nullable
               as String,
       isExpanded: null == isExpanded
           ? _value.isExpanded
@@ -219,13 +284,18 @@ class _$PetDetailsDataImpl implements _PetDetailsData {
   _$PetDetailsDataImpl(
       {required this.id,
       required this.name,
+      required this.gender,
       required this.breed,
       required this.birthday,
       required this.age,
       required this.weight,
+      required this.height,
       required this.chip,
       required this.registration,
+      this.image = 'assets/images/homepagepic.png',
+      this.ownerId = 'user-001',
       required this.residence,
+      required this.color,
       this.isExpanded = false});
 
   factory _$PetDetailsDataImpl.fromJson(Map<String, dynamic> json) =>
@@ -236,6 +306,8 @@ class _$PetDetailsDataImpl implements _PetDetailsData {
   @override
   final String name;
   @override
+  final String gender;
+  @override
   final String breed;
   @override
   final String birthday;
@@ -244,18 +316,28 @@ class _$PetDetailsDataImpl implements _PetDetailsData {
   @override
   final String weight;
   @override
+  final String height;
+  @override
   final String chip;
   @override
   final String registration;
   @override
+  @JsonKey()
+  final String image;
+  @override
+  @JsonKey()
+  final String ownerId;
+  @override
   final String residence;
+  @override
+  final String color;
   @override
   @JsonKey()
   final bool isExpanded;
 
   @override
   String toString() {
-    return 'PetDetailsData(id: $id, name: $name, breed: $breed, birthday: $birthday, age: $age, weight: $weight, chip: $chip, registration: $registration, residence: $residence, isExpanded: $isExpanded)';
+    return 'PetDetailsData(id: $id, name: $name, gender: $gender, breed: $breed, birthday: $birthday, age: $age, weight: $weight, height: $height, chip: $chip, registration: $registration, image: $image, ownerId: $ownerId, residence: $residence, color: $color, isExpanded: $isExpanded)';
   }
 
   @override
@@ -265,24 +347,44 @@ class _$PetDetailsDataImpl implements _PetDetailsData {
             other is _$PetDetailsDataImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
+            (identical(other.gender, gender) || other.gender == gender) &&
             (identical(other.breed, breed) || other.breed == breed) &&
             (identical(other.birthday, birthday) ||
                 other.birthday == birthday) &&
             (identical(other.age, age) || other.age == age) &&
             (identical(other.weight, weight) || other.weight == weight) &&
+            (identical(other.height, height) || other.height == height) &&
             (identical(other.chip, chip) || other.chip == chip) &&
             (identical(other.registration, registration) ||
                 other.registration == registration) &&
+            (identical(other.image, image) || other.image == image) &&
+            (identical(other.ownerId, ownerId) || other.ownerId == ownerId) &&
             (identical(other.residence, residence) ||
                 other.residence == residence) &&
+            (identical(other.color, color) || other.color == color) &&
             (identical(other.isExpanded, isExpanded) ||
                 other.isExpanded == isExpanded));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, breed, birthday, age,
-      weight, chip, registration, residence, isExpanded);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      name,
+      gender,
+      breed,
+      birthday,
+      age,
+      weight,
+      height,
+      chip,
+      registration,
+      image,
+      ownerId,
+      residence,
+      color,
+      isExpanded);
 
   @JsonKey(ignore: true)
   @override
@@ -303,13 +405,18 @@ abstract class _PetDetailsData implements PetDetailsData {
   factory _PetDetailsData(
       {required final String id,
       required final String name,
+      required final String gender,
       required final String breed,
       required final String birthday,
       required final String age,
       required final String weight,
+      required final String height,
       required final String chip,
       required final String registration,
+      final String image,
+      final String ownerId,
       required final String residence,
+      required final String color,
       final bool isExpanded}) = _$PetDetailsDataImpl;
 
   factory _PetDetailsData.fromJson(Map<String, dynamic> json) =
@@ -320,6 +427,8 @@ abstract class _PetDetailsData implements PetDetailsData {
   @override
   String get name;
   @override
+  String get gender;
+  @override
   String get breed;
   @override
   String get birthday;
@@ -328,11 +437,19 @@ abstract class _PetDetailsData implements PetDetailsData {
   @override
   String get weight;
   @override
+  String get height;
+  @override
   String get chip;
   @override
   String get registration;
   @override
+  String get image;
+  @override
+  String get ownerId;
+  @override
   String get residence;
+  @override
+  String get color;
   @override
   bool get isExpanded;
   @override

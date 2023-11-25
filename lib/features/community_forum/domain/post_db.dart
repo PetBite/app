@@ -1,4 +1,4 @@
-import 'package:app/features/profile/domain/user_db.dart';
+import 'package:app/features/user/domain/user_db.dart';
 
 class PostData {
   PostData({
