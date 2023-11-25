@@ -33,41 +33,41 @@ class FeedingSchedulePage extends ConsumerWidget {
     weekSchedule.sort((a, b) => a.id.compareTo(b.id));
 
     return Scaffold(
-        appBar: AppBar(
-          title: const Text(
-            'Feeding Schedule',
-            textAlign: TextAlign.center,
-          ),
-          actions: <Widget>[
-            IconButton(
-              icon: const Icon(
-                Icons.edit_calendar,
-              ),
-              onPressed: () {
-                Navigator.pushNamed(context, '/edit_feeding_schedule');
-              },
-            )
-          ],
-          automaticallyImplyLeading: false,
+      appBar: AppBar(
+        title: const Text(
+          'Feeding Schedule',
+          textAlign: TextAlign.center,
         ),
-        body: SafeArea(
-            child: Center(
-          child: SizedBox(
-            height: 400,
-            child: ListView(
-              physics: const PageScrollPhysics(),
-              scrollDirection: Axis.horizontal,
-              children: weekSchedule
-                  .map((e) => Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: SizedBox(
-                          width: 360,
-                          child: FeedingCard(day: e.day),
-                        ),
-                      ))
-                  .toList(),
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(
+              Icons.edit_calendar,
             ),
+            onPressed: () {
+              Navigator.pushNamed(context, '/edit_feeding_schedule');
+            },
+          )
+        ],
+        automaticallyImplyLeading: false,
+      ),
+      body: SafeArea(
+          child: Center(
+        child: SizedBox(
+          height: 400,
+          child: PageView(
+            physics: const PageScrollPhysics(),
+            children: weekSchedule
+                .map((e) => Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: SizedBox(
+                        width: 360,
+                        child: FeedingCard(day: e.day),
+                      ),
+                    ))
+                .toList(),
           ),
-        )));
+        ),
+      )),
+    );
   }
 }
