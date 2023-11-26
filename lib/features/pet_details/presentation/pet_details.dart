@@ -162,7 +162,7 @@ class PetDetails extends ConsumerWidget {
                     ]),
                   ),
                   FormBuilderTextField(
-                    name: '',
+                    name: 'Weight',
                     initialValue: detailsCollection
                         .getPetDetailsById(ref.watch(petIdProvider))
                         .weight,
