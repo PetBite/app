@@ -1,5 +1,6 @@
 import 'package:app/features/all_data_provider.dart';
 import 'package:app/features/common/pet_id_provider.dart';
+import 'package:app/features/pet_details/domain/pet_details_collection.dart';
 import 'package:app/features/pet_details/presentation/pet_details_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -56,8 +57,10 @@ class AddPetForm extends ConsumerWidget {
       String gender = _genderFieldKey.currentState?.value;
       String height = _heightFieldKey.currentState?.value;
       String color = _colorFieldKey.currentState?.value;
+      int numPets = petDetails.length;
+      String id = 'pet-${(numPets + 1).toString().padLeft(3, '0')}';
       PetDetailsData details = PetDetailsData(
-        id: ref.read(petIdProvider.notifier).state,
+        id: id,
         name: name,
         breed: breed,
         birthday: birthday,
