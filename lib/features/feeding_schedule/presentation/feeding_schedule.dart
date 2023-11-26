@@ -12,7 +12,7 @@ class FeedingSchedulePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final AsyncValue<AllData> asyncAllData = ref.watch(allDataProvider);
+    final AsyncValue<AllData> asyncAllData = ref.read(allDataProvider);
     return asyncAllData.when(
       data: (allData) {
         return _build(context: context, schedules: allData.feedingSchedules);
