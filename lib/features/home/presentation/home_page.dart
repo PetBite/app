@@ -15,7 +15,7 @@ class HomePage extends ConsumerStatefulWidget {
   ConsumerState<HomePage> createState() => _HomePageState();
 }
 
-List<Widget> generatePetItem(int count) {
+List<Widget> generatePetItem(int count, BuildContext context) {
   return List.generate(
     count,
     (index) => Ink(
@@ -88,9 +88,42 @@ class _HomePageState extends ConsumerState<HomePage> {
           Container(
             color: Colors.blue,
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: generatePetItem(6),
-            ),
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  ...generatePetItem(4, context),
+                  Ink(
+                      decoration: const ShapeDecoration(
+                        color: Colors.lightBlue,
+                        shape: CircleBorder(),
+                      ),
+                      child: IconButton(
+                        iconSize: 48.0,
+                        icon: const Icon(
+                          Icons.add,
+                          color: Colors.white,
+                        ),
+                        color: Colors.white,
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/add_pet_form');
+                        },
+                      )),
+                  Ink(
+                      decoration: const ShapeDecoration(
+                        color: Colors.lightBlue,
+                        shape: CircleBorder(),
+                      ),
+                      child: IconButton(
+                        iconSize: 48.0,
+                        icon: const Icon(
+                          Icons.list,
+                          color: Colors.white,
+                        ),
+                        color: Colors.white,
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/add_pet');
+                        },
+                      )),
+                ]),
           ),
         ClipRRect(
           borderRadius: const BorderRadius.only(

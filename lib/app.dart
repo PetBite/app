@@ -3,6 +3,8 @@ import 'package:app/features/activity_log/presentation/detailed_activity_log.dar
 import 'package:app/features/activity_log/presentation/form_fields/add_activity.dart';
 import 'package:app/features/activity_log/presentation/form_fields/edit_activity.dart';
 import 'package:app/features/activity_log/presentation/individual_activity.dart';
+import 'package:app/features/add_pet/presentatoin/add_pet.dart';
+import 'package:app/features/add_pet/presentatoin/add_pet_form.dart';
 import 'package:app/features/authentication/presentation/forgot_password_view.dart';
 import 'package:app/features/authentication/presentation/signin_view.dart';
 import 'package:app/features/authentication/presentation/verify_email_view.dart';
@@ -88,6 +90,10 @@ class MyApp extends ConsumerWidget {
                 return EditActivity();
               case IndividualActivity.routeName:
                 return const IndividualActivity();
+              case AddPetPage.routeName:
+                return const AddPetPage();
+              case AddPetForm.routeName:
+                return AddPetForm();
               default:
                 return const NotFoundPage();
             }
