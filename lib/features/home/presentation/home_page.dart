@@ -1,4 +1,5 @@
 import 'package:app/features/all_data_provider.dart';
+import 'package:app/features/home/presentation/home.dart';
 import 'package:app/features/home/presentation/info_box.dart';
 import 'package:app/features/pet_details/domain/pet_details.dart';
 import 'package:app/features/pet_details/domain/pet_details_collection.dart';
@@ -68,9 +69,12 @@ class _HomePageState extends ConsumerState<HomePage> {
   @override
   Widget build(BuildContext context) {
     final AsyncValue<AllData> asyncAllData = ref.watch(allDataProvider);
+    final String petId =
+        ModalRoute.of(context)?.settings.arguments as String? ?? 'pet-001';
     return asyncAllData.when(
       data: (allData) {
-        return _build(context: context, petDetails: allData.petDetails);
+        return _build(
+            context: context, petDetails: allData.petDetails, petId: petId);
       },
       loading: () => const Center(child: CircularProgressIndicator()),
       error: (error, stackTrace) => Text('Error: $error'),
@@ -79,8 +83,10 @@ class _HomePageState extends ConsumerState<HomePage> {
 
   Widget _build(
       {required BuildContext context,
-      required List<PetDetailsData> petDetails}) {
+      required List<PetDetailsData> petDetails,
+      required String? petId}) {
     PetDetailsCollection petDB = PetDetailsCollection(petDetails);
+    final List<PetDetailsData> petList = petDB.getAllPetDetails();
     return Scaffold(
       body: SafeArea(
           child: ListView(children: <Widget>[
@@ -90,7 +96,23 @@ class _HomePageState extends ConsumerState<HomePage> {
             child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  ...generatePetItem(4, context),
+                  for (var pet in petList)
+                    Ink(
+                        decoration: const ShapeDecoration(
+                          color: Colors.lightBlue,
+                          shape: CircleBorder(),
+                        ),
+                        child: IconButton(
+                          iconSize: 48.0,
+                          icon: CircleAvatar(
+                              backgroundImage: AssetImage(pet.image)),
+                          color: Colors.white,
+                          onPressed: () {
+                            Navigator.pushReplacementNamed(
+                                context, Home.routeName,
+                                arguments: pet.id);
+                          },
+                        )),
                   Ink(
                       decoration: const ShapeDecoration(
                         color: Colors.lightBlue,
@@ -120,7 +142,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                         ),
                         color: Colors.white,
                         onPressed: () {
-                          Navigator.pushNamed(context, '/add_pet');
+                          Navigator.pushNamed(context, '/pet_list');
                         },
                       )),
                 ]),
@@ -171,12 +193,12 @@ class _HomePageState extends ConsumerState<HomePage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    petDB.getPetDetailsById('pet-001').name,
+                    petDB.getPetDetailsById(petId!).name,
                     style: const TextStyle(
                         fontSize: 25, fontWeight: FontWeight.bold),
                   ),
                   Text(
-                    petDB.getPetDetailsById('pet-001').breed,
+                    petDB.getPetDetailsById(petId).breed,
                     style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -212,19 +234,19 @@ class _HomePageState extends ConsumerState<HomePage> {
             children: <Widget>[
               InfoBox(
                   title: 'Age',
-                  value: petDB.getPetDetailsById('pet-001').age,
+                  value: petDB.getPetDetailsById(petId).age,
                   bgColor: const Color(0xFF006A60)),
               InfoBox(
                   title: 'Height',
-                  value: '${petDB.getPetDetailsById('pet-001').height} cm',
+                  value: '${petDB.getPetDetailsById(petId).height} cm',
                   bgColor: const Color(0xFF006A60)),
               InfoBox(
                   title: 'Weight',
-                  value: '${petDB.getPetDetailsById('pet-001').weight} kg',
+                  value: '${petDB.getPetDetailsById(petId).weight} kg',
                   bgColor: const Color(0xFF006A60)),
               InfoBox(
                   title: 'Color',
-                  value: petDB.getPetDetailsById('pet-001').color,
+                  value: petDB.getPetDetailsById(petId).color,
                   bgColor: const Color(0xFF006A60)),
             ],
           ),

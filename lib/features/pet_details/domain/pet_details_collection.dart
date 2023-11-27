@@ -16,4 +16,8 @@ class PetDetailsCollection {
   List<String> getPetDetailsIDs() {
     return _petDetails.map((element) => element.id).toList();
   }
+
+  List<String> getPetImages() {
+    return _petDetails.map((element) => element.image).toList();
+  }
 }

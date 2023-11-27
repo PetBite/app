@@ -1,6 +1,4 @@
 import 'package:app/features/all_data_provider.dart';
-import 'package:app/features/common/pet_id_provider.dart';
-import 'package:app/features/pet_details/domain/pet_details_collection.dart';
 import 'package:app/features/pet_details/presentation/pet_details_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
