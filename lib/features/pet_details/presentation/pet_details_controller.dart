@@ -24,7 +24,24 @@ class PetDetailsController extends _$PetDetailsController {
     state = const AsyncLoading();
     PetDetailsDatabase detailsDatabase = ref.watch(petDetailsDatabaseProvider);
     final newState =
-    await AsyncValue.guard(() => detailsDatabase.setPetDetails(details));
+        await AsyncValue.guard(() => detailsDatabase.setPetDetails(details));
+    if (mounted) {
+      state = newState;
+    }
+    // Weird. Can't use "if (state.hasValue)" below.
+    if (!state.hasError) {
+      onSuccess();
+    }
+  }
+
+  Future<void> addNewPet({
+    required PetDetailsData details,
+    required VoidCallback onSuccess,
+  }) async {
+    state = const AsyncLoading();
+    PetDetailsDatabase detailsDatabase = ref.watch(petDetailsDatabaseProvider);
+    final newState =
+        await AsyncValue.guard(() => detailsDatabase.setPetDetails(details));
     if (mounted) {
       state = newState;
     }
@@ -41,7 +58,7 @@ class PetDetailsController extends _$PetDetailsController {
     state = const AsyncLoading();
     PetDetailsDatabase detailsDatabase = ref.watch(petDetailsDatabaseProvider);
     final newState =
-    await AsyncValue.guard(() => detailsDatabase.deleteGarden(details));
+        await AsyncValue.guard(() => detailsDatabase.deleteGarden(details));
     if (mounted) {
       state = newState;
     }

@@ -3,6 +3,8 @@ import 'package:app/features/activity_log/presentation/detailed_activity_log.dar
 import 'package:app/features/activity_log/presentation/form_fields/add_activity.dart';
 import 'package:app/features/activity_log/presentation/form_fields/edit_activity.dart';
 import 'package:app/features/activity_log/presentation/individual_activity.dart';
+import 'package:app/features/add_pet/presentatoin/pet_list.dart';
+import 'package:app/features/add_pet/presentatoin/add_pet_form.dart';
 import 'package:app/features/authentication/presentation/forgot_password_view.dart';
 import 'package:app/features/authentication/presentation/signin_view.dart';
 import 'package:app/features/authentication/presentation/verify_email_view.dart';
@@ -14,7 +16,7 @@ import 'package:app/features/not_found/presentation/not_found.dart';
 import 'package:app/features/pet_details/presentation/pet_details.dart';
 import 'package:app/features/pet_food/presentation/detailed_pet_food.dart';
 import 'package:app/features/pet_food/presentation/pet_food.dart';
-import 'package:app/features/profile/presentation/profile.dart';
+import 'package:app/features/user/presentation/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:app/features/feeding_schedule/presentation/edit_feeding_schedule.dart';
@@ -88,6 +90,10 @@ class MyApp extends ConsumerWidget {
                 return EditActivity();
               case IndividualActivity.routeName:
                 return const IndividualActivity();
+              case PetListPage.routeName:
+                return const PetListPage();
+              case AddPetForm.routeName:
+                return AddPetForm();
               default:
                 return const NotFoundPage();
             }

@@ -1,15 +1,13 @@
 import 'package:app/features/all_data_provider.dart';
-import 'package:app/features/common/pet_id_provider.dart';
 import 'package:app/features/pet_details/presentation/pet_details_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
-import '../domain/pet_details.dart';
-import '../domain/pet_details_collection.dart';
+import '../../pet_details/domain/pet_details.dart';
 
-class PetDetails extends ConsumerWidget {
-  PetDetails({Key? key}) : super(key: key);
+class AddPetForm extends ConsumerWidget {
+  AddPetForm({Key? key}) : super(key: key);
 
   final _formKey = GlobalKey<FormBuilderState>();
   final _nameFieldKey = GlobalKey<FormBuilderFieldState>();
@@ -24,7 +22,7 @@ class PetDetails extends ConsumerWidget {
   final _heightFieldKey = GlobalKey<FormBuilderFieldState>();
   final _colorFieldKey = GlobalKey<FormBuilderFieldState>();
 
-  static const routeName = '/pet_details';
+  static const routeName = '/add_pet_form';
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -43,8 +41,6 @@ class PetDetails extends ConsumerWidget {
     required List<PetDetailsData> petDetails,
     required WidgetRef ref,
   }) {
-    PetDetailsCollection detailsCollection = PetDetailsCollection(petDetails);
-
     void onSubmit() {
       bool isValid = _formKey.currentState?.saveAndValidate() ?? false;
       if (!isValid) return;
@@ -59,8 +55,10 @@ class PetDetails extends ConsumerWidget {
       String gender = _genderFieldKey.currentState?.value;
       String height = _heightFieldKey.currentState?.value;
       String color = _colorFieldKey.currentState?.value;
+      int numPets = petDetails.length;
+      String id = 'pet-${(numPets + 1).toString().padLeft(3, '0')}';
       PetDetailsData details = PetDetailsData(
-        id: ref.read(petIdProvider.notifier).state,
+        id: id,
         name: name,
         breed: breed,
         birthday: birthday,
@@ -107,9 +105,6 @@ class PetDetails extends ConsumerWidget {
                 children: [
                   FormBuilderTextField(
                     name: 'Name',
-                    initialValue: detailsCollection
-                        .getPetDetailsById(ref.watch(petIdProvider))
-                        .name,
                     key: _nameFieldKey,
                     decoration: const InputDecoration(
                       labelText: 'Name',
@@ -121,9 +116,6 @@ class PetDetails extends ConsumerWidget {
                   ),
                   FormBuilderTextField(
                     name: 'Breed',
-                    initialValue: detailsCollection
-                        .getPetDetailsById(ref.watch(petIdProvider))
-                        .breed,
                     key: _breedFieldKey,
                     decoration: const InputDecoration(
                       labelText: 'Breed',
@@ -135,9 +127,6 @@ class PetDetails extends ConsumerWidget {
                   ),
                   FormBuilderTextField(
                     name: 'Birthday',
-                    initialValue: detailsCollection
-                        .getPetDetailsById(ref.watch(petIdProvider))
-                        .birthday,
                     key: _birthdayFieldKey,
                     decoration: const InputDecoration(
                       labelText: 'Birthday',
@@ -149,9 +138,6 @@ class PetDetails extends ConsumerWidget {
                   ),
                   FormBuilderTextField(
                     name: 'Age',
-                    initialValue: detailsCollection
-                        .getPetDetailsById(ref.watch(petIdProvider))
-                        .age,
                     key: _ageFieldKey,
                     decoration: const InputDecoration(
                       labelText: 'Age',
@@ -163,9 +149,6 @@ class PetDetails extends ConsumerWidget {
                   ),
                   FormBuilderTextField(
                     name: 'Weight',
-                    initialValue: detailsCollection
-                        .getPetDetailsById(ref.watch(petIdProvider))
-                        .weight,
                     key: _weightFieldKey,
                     decoration: const InputDecoration(
                       labelText: 'Weight',
@@ -177,9 +160,6 @@ class PetDetails extends ConsumerWidget {
                   ),
                   FormBuilderTextField(
                     name: 'Chip',
-                    initialValue: detailsCollection
-                        .getPetDetailsById(ref.watch(petIdProvider))
-                        .chip,
                     key: _chipFieldKey,
                     decoration: const InputDecoration(
                       labelText: 'Chip',
@@ -191,9 +171,6 @@ class PetDetails extends ConsumerWidget {
                   ),
                   FormBuilderTextField(
                     name: 'Registration',
-                    initialValue: detailsCollection
-                        .getPetDetailsById(ref.watch(petIdProvider))
-                        .registration,
                     key: _registrationFieldKey,
                     decoration: const InputDecoration(
                       labelText: 'Registration',
@@ -205,9 +182,6 @@ class PetDetails extends ConsumerWidget {
                   ),
                   FormBuilderTextField(
                     name: 'Residence',
-                    initialValue: detailsCollection
-                        .getPetDetailsById(ref.watch(petIdProvider))
-                        .residence,
                     key: _residenceFieldKey,
                     decoration: const InputDecoration(
                       labelText: 'Residence',
@@ -219,9 +193,6 @@ class PetDetails extends ConsumerWidget {
                   ),
                   FormBuilderTextField(
                     name: 'Gender',
-                    initialValue: detailsCollection
-                        .getPetDetailsById(ref.watch(petIdProvider))
-                        .gender,
                     key: _genderFieldKey,
                     decoration: const InputDecoration(
                       labelText: 'Gender',
@@ -233,9 +204,6 @@ class PetDetails extends ConsumerWidget {
                   ),
                   FormBuilderTextField(
                     name: 'Height',
-                    initialValue: detailsCollection
-                        .getPetDetailsById(ref.watch(petIdProvider))
-                        .height,
                     key: _heightFieldKey,
                     decoration: const InputDecoration(
                       labelText: 'Height',
@@ -247,9 +215,6 @@ class PetDetails extends ConsumerWidget {
                   ),
                   FormBuilderTextField(
                     name: 'Color',
-                    initialValue: detailsCollection
-                        .getPetDetailsById(ref.watch(petIdProvider))
-                        .color,
                     key: _colorFieldKey,
                     decoration: const InputDecoration(
                       labelText: 'Color',

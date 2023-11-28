@@ -1,4 +1,4 @@
-import 'package:app/features/profile/domain/user_db.dart';
+import 'package:app/features/user/domain/user_db.dart';
 import 'package:flutter/material.dart';
 
 /// Displays detailed information about a SampleItem.

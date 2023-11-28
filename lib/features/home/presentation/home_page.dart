@@ -1,19 +1,22 @@
+import 'package:app/features/all_data_provider.dart';
+import 'package:app/features/home/presentation/home.dart';
 import 'package:app/features/home/presentation/info_box.dart';
+import 'package:app/features/pet_details/domain/pet_details.dart';
+import 'package:app/features/pet_details/domain/pet_details_collection.dart';
 import 'package:app/features/pet_details/presentation/pet_details.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../domain/pet_db.dart';
-
-class HomePage extends StatefulWidget {
+class HomePage extends ConsumerStatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
   static const routeName = '/homePage';
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  ConsumerState<HomePage> createState() => _HomePageState();
 }
 
-List<Widget> generatePetItem(int count) {
+List<Widget> generatePetItem(int count, BuildContext context) {
   return List.generate(
     count,
     (index) => Ink(
@@ -60,12 +63,30 @@ Container _buildGenderIcon(String gender) {
   }
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends ConsumerState<HomePage> {
   bool _showPetBar = false;
-  List<String> petFoodIDs = PetDB.getPetIDs();
 
   @override
   Widget build(BuildContext context) {
+    final AsyncValue<AllData> asyncAllData = ref.watch(allDataProvider);
+    final String petId =
+        ModalRoute.of(context)?.settings.arguments as String? ?? 'pet-001';
+    return asyncAllData.when(
+      data: (allData) {
+        return _build(
+            context: context, petDetails: allData.petDetails, petId: petId);
+      },
+      loading: () => const Center(child: CircularProgressIndicator()),
+      error: (error, stackTrace) => Text('Error: $error'),
+    );
+  }
+
+  Widget _build(
+      {required BuildContext context,
+      required List<PetDetailsData> petDetails,
+      required String? petId}) {
+    PetDetailsCollection petDB = PetDetailsCollection(petDetails);
+    final List<PetDetailsData> petList = petDB.getAllPetDetails();
     return Scaffold(
       body: SafeArea(
           child: ListView(children: <Widget>[
@@ -73,9 +94,58 @@ class _HomePageState extends State<HomePage> {
           Container(
             color: Colors.blue,
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: generatePetItem(6),
-            ),
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  for (var pet in petList)
+                    Ink(
+                        decoration: const ShapeDecoration(
+                          color: Colors.lightBlue,
+                          shape: CircleBorder(),
+                        ),
+                        child: IconButton(
+                          iconSize: 48.0,
+                          icon: CircleAvatar(
+                              backgroundImage: AssetImage(pet.image)),
+                          color: Colors.white,
+                          onPressed: () {
+                            Navigator.pushReplacementNamed(
+                                context, Home.routeName,
+                                arguments: pet.id);
+                          },
+                        )),
+                  Ink(
+                      decoration: const ShapeDecoration(
+                        color: Colors.lightBlue,
+                        shape: CircleBorder(),
+                      ),
+                      child: IconButton(
+                        iconSize: 48.0,
+                        icon: const Icon(
+                          Icons.add,
+                          color: Colors.white,
+                        ),
+                        color: Colors.white,
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/add_pet_form');
+                        },
+                      )),
+                  Ink(
+                      decoration: const ShapeDecoration(
+                        color: Colors.lightBlue,
+                        shape: CircleBorder(),
+                      ),
+                      child: IconButton(
+                        iconSize: 48.0,
+                        icon: const Icon(
+                          Icons.list,
+                          color: Colors.white,
+                        ),
+                        color: Colors.white,
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/pet_list');
+                        },
+                      )),
+                ]),
           ),
         ClipRRect(
           borderRadius: const BorderRadius.only(
@@ -95,7 +165,7 @@ class _HomePageState extends State<HomePage> {
                 });
               }
             },
-            child: Image.asset(petDB.getPetById('pet-001').imagePath,
+            child: Image.asset(petDB.getPetDetailsById('pet-001').image,
                 width: 300, height: 309),
           ),
         ),
@@ -123,12 +193,12 @@ class _HomePageState extends State<HomePage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    petDB.getPetById('pet-001').name,
+                    petDB.getPetDetailsById(petId!).name,
                     style: const TextStyle(
                         fontSize: 25, fontWeight: FontWeight.bold),
                   ),
                   Text(
-                    petDB.getPetById('pet-001').breed,
+                    petDB.getPetDetailsById(petId).breed,
                     style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -136,7 +206,7 @@ class _HomePageState extends State<HomePage> {
                   )
                 ],
               ),
-              _buildGenderIcon(petDB.getPetById('pet-001').gender),
+              _buildGenderIcon(petDB.getPetDetailsById('pet-001').gender),
             ],
           ),
         ),
@@ -145,7 +215,7 @@ class _HomePageState extends State<HomePage> {
           children: [
             const Icon(Icons.pets),
             const SizedBox(width: 10),
-            Text('About ${petDB.getPetById('pet-001').name}',
+            Text('About ${petDB.getPetDetailsById('pet-001').name}',
                 style:
                     const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
             IconButton(
@@ -164,19 +234,19 @@ class _HomePageState extends State<HomePage> {
             children: <Widget>[
               InfoBox(
                   title: 'Age',
-                  value: '${petDB.getPetById('pet-001').age}',
+                  value: petDB.getPetDetailsById(petId).age,
                   bgColor: const Color(0xFF006A60)),
               InfoBox(
                   title: 'Height',
-                  value: '${petDB.getPetById('pet-001').height} cm',
+                  value: '${petDB.getPetDetailsById(petId).height} cm',
                   bgColor: const Color(0xFF006A60)),
               InfoBox(
                   title: 'Weight',
-                  value: '${petDB.getPetById('pet-001').weight} kg',
+                  value: '${petDB.getPetDetailsById(petId).weight} kg',
                   bgColor: const Color(0xFF006A60)),
               InfoBox(
                   title: 'Color',
-                  value: petDB.getPetById('pet-001').color,
+                  value: petDB.getPetDetailsById(petId).color,
                   bgColor: const Color(0xFF006A60)),
             ],
           ),
