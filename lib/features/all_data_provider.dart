@@ -5,6 +5,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'feeding_schedule/data/feeding_schedule_provider.dart';
 import 'feeding_schedule/domain/feeding_schedule.dart';
+import 'user/data/user_providers.dart';
 
 part 'all_data_provider.g.dart';
 
