@@ -1,5 +1,3 @@
-import 'package:app/features/user/domain/user_db.dart';
-
 class PostData {
   PostData({
     required this.id,
@@ -54,7 +52,7 @@ class PostDB {
     return _posts.firstWhere((postData) => postData.id == postID);
   }
 
-  List<String> getYourPostIDs() {
+  List<String> getYourPostIDs(currentUserID) {
     return _posts
         .map((postData) => postData.authorID)
         .where((authorID) => authorID == currentUserID)
