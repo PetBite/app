@@ -25,9 +25,9 @@ class AllData {
 
 @riverpod
 Future<AllData> allData(AllDataRef ref) async {
+  final users = ref.watch(usersProvider.future);
   final feedingSchedules = ref.watch(feedingschedulesProvider.future);
   final petDetails = ref.watch(petdetailsProvider.future);
-  final users = ref.watch(usersProvider.future);
   final currentUserID = ref.watch(currentUserIDProvider);
   return AllData(
       feedingSchedules: await feedingSchedules,

@@ -24,7 +24,10 @@ class _FeedingScheduleFormState extends ConsumerState<FeedingScheduleForm> {
     final AsyncValue<AllData> asyncAllData = ref.watch(allDataProvider);
     return asyncAllData.when(
       data: (allData) {
-        return _build(context: context, schedules: allData.feedingSchedules);
+        return _build(
+            context: context,
+            schedules: allData.feedingSchedules,
+            currentUserID: allData.currentUserID);
       },
       loading: () => const Center(child: CircularProgressIndicator()),
       error: (error, stackTrace) => Text('Error: $error'),
@@ -33,6 +36,7 @@ class _FeedingScheduleFormState extends ConsumerState<FeedingScheduleForm> {
 
   Widget _build(
       {required BuildContext context,
+      required String currentUserID,
       required List<FeedingScheduleData> schedules}) {
     FeedingScheduleCollection feedingScheduleDB =
         FeedingScheduleCollection(schedules);
@@ -90,7 +94,8 @@ class _FeedingScheduleFormState extends ConsumerState<FeedingScheduleForm> {
           id: id, day: day, schedules: schedules, isExpanded: false);
       ref
           .read(editFeedingScheduleControllerProvider.notifier)
-          .updateFeedingSchedule(schedule: newSchedule, onSuccess: () {});
+          .updateFeedingSchedule(
+              schedule: newSchedule, userId: currentUserID, onSuccess: () {});
     }
 
     return ListView(

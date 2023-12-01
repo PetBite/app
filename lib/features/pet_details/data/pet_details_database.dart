@@ -12,27 +12,31 @@ class PetDetailsDatabase {
 
   final _service = FirestoreService.instance;
 
-  Stream<List<PetDetailsData>> watchPetDetails() => _service.watchCollection(
-      path: FirestorePath.petDetails(),
-      builder: (data, documentId) => PetDetailsData.fromJson(data!));
+  Stream<List<PetDetailsData>> watchPetDetails(String userId) =>
+      _service.watchCollection(
+          path: FirestorePath.petDetails(userId),
+          builder: (data, documentId) => PetDetailsData.fromJson(data!));
 
-  Stream<PetDetailsData> watchPetDetail(String petDetailsId) =>
+  Stream<PetDetailsData> watchPetDetail(String petDetailsId, String userId) =>
       _service.watchDocument(
-          path: FirestorePath.petDetail(petDetailsId),
+          path: FirestorePath.petDetail(petDetailsId, userId),
           builder: (data, documentId) => PetDetailsData.fromJson(data!));
 
-  Future<List<PetDetailsData>> fetchPetDetails() => _service.fetchCollection(
-      path: FirestorePath.petDetails(),
-      builder: (data, documentId) => PetDetailsData.fromJson(data!));
+  Future<List<PetDetailsData>> fetchPetDetails(String userId) =>
+      _service.fetchCollection(
+          path: FirestorePath.petDetails(userId),
+          builder: (data, documentId) => PetDetailsData.fromJson(data!));
 
-  Future<PetDetailsData> fetchPetDetail(String petDetailsId) =>
+  Future<PetDetailsData> fetchPetDetail(String petDetailsId, String userId) =>
       _service.fetchDocument(
-          path: FirestorePath.petDetail(petDetailsId),
+          path: FirestorePath.petDetail(petDetailsId, userId),
           builder: (data, documentId) => PetDetailsData.fromJson(data!));
 
-  Future<void> setPetDetails(PetDetailsData petDetail) => _service.setData(
-      path: FirestorePath.petDetail(petDetail.id), data: petDetail.toJson());
+  Future<void> setPetDetails(PetDetailsData petDetail, String userId) =>
+      _service.setData(
+          path: FirestorePath.petDetail(petDetail.id, userId),
+          data: petDetail.toJson());
 
-  Future<void> deleteGarden(PetDetailsData petDetail) =>
-      _service.deleteData(path: FirestorePath.petDetail(petDetail.id));
+  Future<void> deleteGarden(PetDetailsData petDetail, String userId) =>
+      _service.deleteData(path: FirestorePath.petDetail(petDetail.id, userId));
 }

@@ -35,7 +35,7 @@ class SignInView extends StatelessWidget {
           final user = state.credential.user!;
           await FirebaseFirestore.instance
               .collection('users')
-              .doc(user.uid)
+              .doc(user.email)
               .set({
             'email': user.email,
             'name': 'test',

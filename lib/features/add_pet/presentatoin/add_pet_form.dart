@@ -28,8 +28,11 @@ class AddPetForm extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final AsyncValue<AllData> asyncAllData = ref.watch(allDataProvider);
     return asyncAllData.when(
-      data: (allData) =>
-          _build(context: context, petDetails: allData.petDetails, ref: ref),
+      data: (allData) => _build(
+          context: context,
+          petDetails: allData.petDetails,
+          currentUserID: allData.currentUserID,
+          ref: ref),
       error: (Object error, StackTrace stackTrace) =>
           Text('error: $error Stack trace: $stackTrace'),
       loading: () => const CircularProgressIndicator(),
@@ -39,6 +42,7 @@ class AddPetForm extends ConsumerWidget {
   Widget _build({
     required BuildContext context,
     required List<PetDetailsData> petDetails,
+    required String currentUserID,
     required WidgetRef ref,
   }) {
     void onSubmit() {
@@ -74,6 +78,7 @@ class AddPetForm extends ConsumerWidget {
       );
       ref.read(petDetailsControllerProvider.notifier).updatePetDetails(
             details: details,
+            userId: currentUserID,
             onSuccess: () {},
           );
     }

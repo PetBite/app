@@ -23,7 +23,7 @@ final petDetailsDatabaseProvider =
 );
 
 typedef PetDetailsDatabaseRef = AutoDisposeProviderRef<PetDetailsDatabase>;
-String _$petdetailsHash() => r'2c9e934f5d568f60fa5038277bbc33e7f9cab0cf';
+String _$petdetailsHash() => r'd2aa40db0b82d07471110e26530e6c6dc877a3d2';
 
 /// See also [petdetails].
 @ProviderFor(petdetails)

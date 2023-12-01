@@ -1,3 +1,4 @@
+import 'package:app/features/user/data/user_providers.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../domain/feeding_schedule.dart';
@@ -14,5 +15,6 @@ FeedingScheduleDatabase feedingScheduleDatabase(
 @riverpod
 Stream<List<FeedingScheduleData>> feedingschedules(FeedingschedulesRef ref) {
   final database = ref.watch(feedingScheduleDatabaseProvider);
-  return database.watchFeedingSchedules();
+  final userId = ref.read(currentUserIDProvider);
+  return database.watchFeedingSchedules(userId);
 }
