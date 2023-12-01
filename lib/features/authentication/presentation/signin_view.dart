@@ -42,10 +42,12 @@ class SignInView extends StatelessWidget {
             'username': 'test',
           });
 
-          if (!state.credential.user!.emailVerified) {
-            Navigator.pushNamed(context, VerifyEmailView.routeName);
-          } else {
-            Navigator.pushReplacementNamed(context, Home.routeName);
+          if (context.mounted) {
+            if (!state.credential.user!.emailVerified) {
+              Navigator.pushNamed(context, VerifyEmailView.routeName);
+            } else {
+              Navigator.pushReplacementNamed(context, Home.routeName);
+            }
           }
         }),
         AuthStateChangeAction<CredentialLinked>((context, state) {
