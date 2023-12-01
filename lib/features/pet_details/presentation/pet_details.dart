@@ -81,7 +81,9 @@ class PetDetails extends ConsumerWidget {
       ref.read(petDetailsControllerProvider.notifier).updatePetDetails(
             details: details,
             userId: currentUserID,
-            onSuccess: () {},
+            onSuccess: () {
+              Navigator.of(context).pop();
+            },
           );
     }
 

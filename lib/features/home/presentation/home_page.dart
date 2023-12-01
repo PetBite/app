@@ -48,7 +48,7 @@ Container _buildGenderIcon(String gender) {
       return Container(
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(10)),
-          color: Colors.blue,
+          color: Colors.pink,
         ),
         child: const Icon(Icons.female, color: Colors.white, size: 40),
       );
@@ -56,7 +56,7 @@ Container _buildGenderIcon(String gender) {
       return Container(
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(10)),
-          color: Colors.blue,
+          color: Colors.green,
         ),
         child: const Icon(Icons.circle, color: Colors.white, size: 40),
       );
@@ -85,6 +85,11 @@ class _HomePageState extends ConsumerState<HomePage> {
       {required BuildContext context,
       required List<PetDetailsData> petDetails,
       required String? petId}) {
+    if (petDetails.isEmpty) {
+      Future.microtask(
+          () => Navigator.pushReplacementNamed(context, '/pet_list'));
+      return const Center(child: CircularProgressIndicator());
+    }
     PetDetailsCollection petDB = PetDetailsCollection(petDetails);
     final List<PetDetailsData> petList = petDB.getAllPetDetails();
     return Scaffold(
