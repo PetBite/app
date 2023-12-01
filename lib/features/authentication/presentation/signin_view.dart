@@ -1,5 +1,6 @@
 import 'package:firebase_ui_auth/firebase_ui_auth.dart' hide ForgotPasswordView;
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../home/presentation/home.dart';
 import 'decorations.dart';
@@ -30,7 +31,17 @@ class SignInView extends StatelessWidget {
             Navigator.pushReplacementNamed(context, Home.routeName);
           }
         }),
-        AuthStateChangeAction<UserCreated>((context, state) {
+        AuthStateChangeAction<UserCreated>((context, state) async {
+          final user = state.credential.user!;
+          await FirebaseFirestore.instance
+              .collection('users')
+              .doc(user.uid)
+              .set({
+            'email': user.email,
+            'name': 'test',
+            'username': 'test',
+          });
+
           if (!state.credential.user!.emailVerified) {
             Navigator.pushNamed(context, VerifyEmailView.routeName);
           } else {
