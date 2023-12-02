@@ -76,7 +76,7 @@ class AddPetForm extends ConsumerWidget {
         color: color,
         isExpanded: false,
       );
-      ref.read(petDetailsControllerProvider.notifier).updatePetDetails(
+      ref.read(petDetailsControllerProvider.notifier).addNewPet(
             details: details,
             userId: currentUserID,
             onSuccess: () {

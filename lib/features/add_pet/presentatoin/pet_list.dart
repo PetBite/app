@@ -1,4 +1,5 @@
 import 'package:app/features/all_data_provider.dart';
+import 'package:app/features/common/pet_id_provider.dart';
 import 'package:app/features/home/presentation/home.dart';
 import 'package:app/features/pet_details/domain/pet_details.dart';
 import 'package:app/features/pet_details/domain/pet_details_collection.dart';
@@ -54,8 +55,9 @@ class PetListPage extends ConsumerWidget {
                 ),
                 child: InkWell(
                   onTap: () {
-                    Navigator.pushReplacementNamed(context, Home.routeName,
-                        arguments: pet.id);
+                    Navigator.pushReplacementNamed(context, Home.routeName);
+                    print(pet.id);
+                    ref.read(petIdProvider.notifier).state = pet.id;
                   },
                   child: Container(
                     width: 150,

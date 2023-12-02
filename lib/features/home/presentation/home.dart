@@ -84,7 +84,7 @@ class _HomeState extends ConsumerState<Home> {
               backgroundImage: AssetImage(
                   userCollection.getUser(currentUserID).imagePath ??
                       'assets/images/flutter_logo.png'),
-              radius: 24,
+              radius: 18,
             ),
             label: 'Profile',
           ),
