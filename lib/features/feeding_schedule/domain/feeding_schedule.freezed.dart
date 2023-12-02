@@ -373,9 +373,9 @@ class __$$DailyFeedingScheduleDataImplCopyWithImpl<$Res>
 class _$DailyFeedingScheduleDataImpl implements _DailyFeedingScheduleData {
   _$DailyFeedingScheduleDataImpl(
       {required this.name,
-      this.time,
-      this.foodType,
-      this.quantity,
+      this.time = "",
+      this.foodType = "",
+      this.quantity = "",
       this.complete = false});
 
   factory _$DailyFeedingScheduleDataImpl.fromJson(Map<String, dynamic> json) =>
@@ -384,10 +384,13 @@ class _$DailyFeedingScheduleDataImpl implements _DailyFeedingScheduleData {
   @override
   final String name;
   @override
+  @JsonKey()
   final String? time;
   @override
+  @JsonKey()
   final String? foodType;
   @override
+  @JsonKey()
   final String? quantity;
   @override
   @JsonKey()

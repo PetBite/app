@@ -7,7 +7,7 @@ part of 'pet_details_controller.dart';
 // **************************************************************************
 
 String _$petDetailsControllerHash() =>
-    r'bf6a2e1e547de8bf21879635f0ad54ab298a9b48';
+    r'ca6287149ba610fb7022bad5033bfad17246457d';
 
 /// See also [PetDetailsController].
 @ProviderFor(PetDetailsController)

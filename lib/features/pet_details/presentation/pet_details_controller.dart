@@ -63,6 +63,9 @@ class PetDetailsController extends _$PetDetailsController {
     required String userId,
     required String petId,
   }) async {
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
+    WriteBatch batch = firestore.batch();
+
     List<String> weekdays = [
       'Monday',
       'Tuesday',
@@ -74,46 +77,47 @@ class PetDetailsController extends _$PetDetailsController {
     ];
 
     List<DailyFeedingScheduleData> schedules = [
-      DailyFeedingScheduleData(
-        name: 'Breakfast',
-      ),
-      DailyFeedingScheduleData(
-        name: 'Lunch',
-      ),
-      DailyFeedingScheduleData(
-        name: 'Dinner',
-      ),
+      DailyFeedingScheduleData(name: 'Breakfast'),
+      DailyFeedingScheduleData(name: 'Lunch'),
+      DailyFeedingScheduleData(name: 'Dinner'),
     ];
 
-    for (var i = 1; i < 8; i++) {
+    for (var i = 1; i <= 7; i++) {
       String dayId = 'day-$i';
       FeedingScheduleData data = FeedingScheduleData(
-          id: dayId, day: weekdays[i - 0], schedules: schedules);
-      await FirebaseFirestore.instance
+          id: dayId, day: weekdays[i - 1], schedules: schedules);
+      DocumentReference docRef = firestore
           .collection('users')
           .doc(userId)
           .collection('pet_details')
           .doc(petId)
-          .collection('feeding_schedule')
-          .doc(dayId)
-          .set(data.toJson());
+          .collection('feeding_schedules')
+          .doc(dayId);
+      batch.set(docRef, data.toMap());
     }
-  }
 
-  Future<void> deletePetDetails({
-    required PetDetailsData details,
-    required VoidCallback onSuccess,
-    required String userId,
-  }) async {
-    state = const AsyncLoading();
-    PetDetailsDatabase detailsDatabase = ref.watch(petDetailsDatabaseProvider);
-    final newState = await AsyncValue.guard(
-        () => detailsDatabase.deleteGarden(details, userId));
-    if (mounted) {
-      state = newState;
+    try {
+      await batch.commit();
+    } catch (e) {
+      print('Error initializing feeding schedule: $e');
     }
-    if (!state.hasError) {
-      onSuccess();
+
+    Future<void> deletePetDetails({
+      required PetDetailsData details,
+      required VoidCallback onSuccess,
+      required String userId,
+    }) async {
+      state = const AsyncLoading();
+      PetDetailsDatabase detailsDatabase =
+          ref.watch(petDetailsDatabaseProvider);
+      final newState = await AsyncValue.guard(
+          () => detailsDatabase.deleteGarden(details, userId));
+      if (mounted) {
+        state = newState;
+      }
+      if (!state.hasError) {
+        onSuccess();
+      }
     }
   }
 }

@@ -29,9 +29,9 @@ class FeedingScheduleData with _$FeedingScheduleData {
 class DailyFeedingScheduleData with _$DailyFeedingScheduleData {
   factory DailyFeedingScheduleData({
     required String name,
-    String? time,
-    String? foodType,
-    String? quantity,
+    @Default("") String? time,
+    @Default("") String? foodType,
+    @Default("") String? quantity,
     @Default(false) bool complete,
   }) = _DailyFeedingScheduleData;
 
