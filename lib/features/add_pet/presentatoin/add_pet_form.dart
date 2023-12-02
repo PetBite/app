@@ -32,6 +32,7 @@ class AddPetForm extends ConsumerWidget {
           context: context,
           petDetails: allData.petDetails,
           currentUserID: allData.currentUserID,
+          currentPetID: allData.currentPetID,
           ref: ref),
       error: (Object error, StackTrace stackTrace) =>
           Text('error: $error Stack trace: $stackTrace'),
@@ -44,6 +45,7 @@ class AddPetForm extends ConsumerWidget {
     required List<PetDetailsData> petDetails,
     required String currentUserID,
     required WidgetRef ref,
+    required String currentPetID,
   }) {
     void onSubmit() {
       bool isValid = _formKey.currentState?.saveAndValidate() ?? false;
@@ -79,6 +81,7 @@ class AddPetForm extends ConsumerWidget {
       ref.read(petDetailsControllerProvider.notifier).addNewPet(
             details: details,
             userId: currentUserID,
+            petId: currentPetID,
             onSuccess: () {
               Navigator.of(context).pop();
             },

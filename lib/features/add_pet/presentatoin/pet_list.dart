@@ -56,7 +56,6 @@ class PetListPage extends ConsumerWidget {
                 child: InkWell(
                   onTap: () {
                     Navigator.pushReplacementNamed(context, Home.routeName);
-                    print(pet.id);
                     ref.read(petIdProvider.notifier).state = pet.id;
                   },
                   child: Container(

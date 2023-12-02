@@ -1,3 +1,4 @@
+import 'package:app/features/common/pet_id_provider.dart';
 import 'package:app/features/user/data/user_providers.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -16,5 +17,6 @@ FeedingScheduleDatabase feedingScheduleDatabase(
 Stream<List<FeedingScheduleData>> feedingschedules(FeedingschedulesRef ref) {
   final database = ref.watch(feedingScheduleDatabaseProvider);
   final userId = ref.read(currentUserIDProvider);
-  return database.watchFeedingSchedules(userId);
+  final petId = ref.read(petIdProvider);
+  return database.watchFeedingSchedules(userId, petId);
 }
