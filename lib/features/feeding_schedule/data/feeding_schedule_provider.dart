@@ -16,7 +16,7 @@ FeedingScheduleDatabase feedingScheduleDatabase(
 @riverpod
 Stream<List<FeedingScheduleData>> feedingschedules(FeedingschedulesRef ref) {
   final database = ref.watch(feedingScheduleDatabaseProvider);
-  final userId = ref.read(currentUserIDProvider);
-  final petId = ref.read(petIdProvider);
+  final userId = ref.watch(currentUserIDProvider);
+  final petId = ref.watch(petIdProvider);
   return database.watchFeedingSchedules(userId, petId);
 }

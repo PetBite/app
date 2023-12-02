@@ -24,7 +24,7 @@ final feedingScheduleDatabaseProvider =
 
 typedef FeedingScheduleDatabaseRef
     = AutoDisposeProviderRef<FeedingScheduleDatabase>;
-String _$feedingschedulesHash() => r'cbb5b2d59f078324e66871f9a677aa5ed94531da';
+String _$feedingschedulesHash() => r'578cc99cc43ba40c81499e8f5443bad9d812bcb5';
 
 /// See also [feedingschedules].
 @ProviderFor(feedingschedules)
