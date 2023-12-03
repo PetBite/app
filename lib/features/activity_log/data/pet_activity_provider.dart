@@ -14,7 +14,7 @@ PetActivityDatabase petActivityDatabase(PetActivityDatabaseRef ref) {
 @riverpod
 Stream<List<PetActivity>> petActivity(PetActivityRef ref) {
   final database = ref.watch(petActivityDatabaseProvider);
-  final userId = ref.read(currentUserIDProvider);
-  final petId = ref.read(petIdProvider);
+  final userId = ref.watch(currentUserIDProvider);
+  final petId = ref.watch(petIdProvider);
   return database.watchPetDetails(userId, petId);
 }
