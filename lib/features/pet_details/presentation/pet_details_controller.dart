@@ -111,7 +111,7 @@ class PetDetailsController extends _$PetDetailsController {
       PetDetailsDatabase detailsDatabase =
           ref.watch(petDetailsDatabaseProvider);
       final newState = await AsyncValue.guard(
-          () => detailsDatabase.deleteGarden(details, userId));
+          () => detailsDatabase.deletePetDetails(details, userId));
       if (mounted) {
         state = newState;
       }

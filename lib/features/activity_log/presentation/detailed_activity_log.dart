@@ -1,7 +1,9 @@
+import 'package:app/features/activity_log/domain/pet_activity.dart';
+import 'package:app/features/activity_log/domain/pet_activity_collection.dart';
+import 'package:app/features/all_data_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
-import '../domain/pet_activity_db.dart';
 
 class DetailedActivityPage extends ConsumerStatefulWidget {
   const DetailedActivityPage({super.key});
@@ -18,13 +20,25 @@ class _DetailedActivityPageState extends ConsumerState<DetailedActivityPage> {
   void initState() {
     super.initState();
     ref.read(tooltipProvider);
-    ref.read(activityDBProvider);
   }
 
   @override
   Widget build(BuildContext context) {
+    final AsyncValue<AllData> asyncAllData = ref.watch(allDataProvider);
+    return asyncAllData.when(
+      data: (allData) {
+        return _build(context: context, petActivities: allData.petActivities);
+      },
+      loading: () => const Center(child: CircularProgressIndicator()),
+      error: (error, stackTrace) => Text('Error: $error'),
+    );
+  }
+
+  Widget _build(
+      {required BuildContext context,
+      required List<PetActivity> petActivities}) {
     final tooltip = ref.watch(tooltipProvider);
-    final activityDB = ref.watch(activityDBProvider);
+    PetActivityCollection activityDB = PetActivityCollection(petActivities);
 
     return Scaffold(
         appBar: AppBar(

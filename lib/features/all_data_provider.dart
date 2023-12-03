@@ -1,3 +1,5 @@
+import 'package:app/features/activity_log/data/pet_activity_provider.dart';
+import 'package:app/features/activity_log/domain/pet_activity.dart';
 import 'package:app/features/common/pet_id_provider.dart';
 import 'package:app/features/pet_details/data/pet_details_provider.dart';
 import 'package:app/features/pet_details/domain/pet_details.dart';
@@ -16,13 +18,15 @@ class AllData {
       required this.petDetails,
       required this.users,
       required this.currentUserID,
-      required this.currentPetID});
+      required this.currentPetID,
+      required this.petActivities});
 
   final List<FeedingScheduleData> feedingSchedules;
   final List<PetDetailsData> petDetails;
   final List<User> users;
   final String currentUserID;
   final String currentPetID;
+  final List<PetActivity> petActivities;
 }
 
 @riverpod
@@ -32,10 +36,12 @@ Future<AllData> allData(AllDataRef ref) async {
   final currentPetID = ref.watch(petIdProvider);
   final feedingSchedules = ref.watch(feedingschedulesProvider.future);
   final petDetails = ref.watch(petdetailsProvider.future);
+  final petActvities = ref.watch(petActivityProvider.future);
   return AllData(
       feedingSchedules: await feedingSchedules,
       petDetails: await petDetails,
       users: await users,
+      petActivities: await petActvities,
       currentUserID: currentUserID,
       currentPetID: currentPetID);
 }

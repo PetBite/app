@@ -1,3 +1,7 @@
+import 'package:app/features/activity_log/domain/pet_activity.dart';
+import 'package:app/features/activity_log/domain/pet_activity_collection.dart';
+import 'package:app/features/activity_log/presentation/pet_activity_controller.dart';
+import 'package:app/features/all_data_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -5,7 +9,6 @@ import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:intl/intl.dart';
 
 import '../../../common/pet_id_provider.dart';
-import '../../domain/pet_activity_db.dart';
 
 class AddActivity extends ConsumerWidget {
   AddActivity({Key? key}) : super(key: key);
@@ -20,7 +23,28 @@ class AddActivity extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final ActivityDB activityDB = ref.watch(activityDBProvider);
+    final AsyncValue<AllData> asyncAllData = ref.watch(allDataProvider);
+    return asyncAllData.when(
+      data: (allData) {
+        return _build(
+            context: context,
+            ref: ref,
+            petActivities: allData.petActivities,
+            currentUserID: allData.currentUserID,
+            currentPetID: allData.currentPetID);
+      },
+      loading: () => const Center(child: CircularProgressIndicator()),
+      error: (error, stackTrace) => Text('Error: $error'),
+    );
+  }
+
+  Widget _build(
+      {required BuildContext context,
+      required WidgetRef ref,
+      required List<PetActivity> petActivities,
+      required String currentUserID,
+      required String currentPetID}) {
+    PetActivityCollection activityDB = PetActivityCollection(petActivities);
 
     List<String> activityIDs = activityDB.getActivityIDs();
     activityIDs.sort();
@@ -53,15 +77,25 @@ class AddActivity extends ConsumerWidget {
       String type = _typeFieldKey.currentState?.value;
       String content = _contentFieldKey.currentState?.value;
       String timestamp = _timestampFieldKey.currentState?.value;
-      activityDB.updateActivities(
+
+      PetActivity newActivity = PetActivity(
         id: incrementString(backwardsIds[0]),
-        petid: ref.watch(petIdProvider),
+        petId: ref.watch(petIdProvider),
         title: title,
         type: type,
         content: content,
         timestamp: timestamp,
         date: DateFormat('yMd').format(DateTime.now()),
       );
+
+      ref.read(petActivityControllerProvider.notifier).updatePetActivity(
+          activity: newActivity,
+          petId: currentPetID,
+          userId: currentUserID,
+          onSuccess: () {
+            Navigator.pop(context);
+          });
+
       Navigator.pop(context);
     }
 
