@@ -20,7 +20,10 @@ class _FeedingCardState extends ConsumerState<FeedingCard> {
     final AsyncValue<AllData> asyncAllData = ref.watch(allDataProvider);
     return asyncAllData.when(
       data: (allData) {
-        return _build(context: context, schedules: allData.feedingSchedules);
+        return _build(
+            context: context,
+            schedules: allData.feedingSchedules,
+            currentUserID: allData.currentUserID);
       },
       loading: () => const Center(child: CircularProgressIndicator()),
       error: (error, stackTrace) => Text('Error: $error'),
@@ -29,6 +32,7 @@ class _FeedingCardState extends ConsumerState<FeedingCard> {
 
   Widget _build(
       {required BuildContext context,
+      required String currentUserID,
       required List<FeedingScheduleData> schedules}) {
     FeedingScheduleCollection feedingScheduleDB =
         FeedingScheduleCollection(schedules);
@@ -77,6 +81,7 @@ class _FeedingCardState extends ConsumerState<FeedingCard> {
                               .updateScheduleCompleted(
                                   scheduleID: scheduleId,
                                   dailySchedule: updatedSchedules,
+                                  userId: currentUserID,
                                   onSuccess: () {});
                         });
                       },

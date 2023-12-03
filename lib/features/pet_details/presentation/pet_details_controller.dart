@@ -20,11 +20,12 @@ class PetDetailsController extends _$PetDetailsController {
   Future<void> updatePetDetails({
     required PetDetailsData details,
     required VoidCallback onSuccess,
+    required String userId,
   }) async {
     state = const AsyncLoading();
     PetDetailsDatabase detailsDatabase = ref.watch(petDetailsDatabaseProvider);
-    final newState =
-        await AsyncValue.guard(() => detailsDatabase.setPetDetails(details));
+    final newState = await AsyncValue.guard(
+        () => detailsDatabase.setPetDetails(details, userId));
     if (mounted) {
       state = newState;
     }
@@ -37,11 +38,12 @@ class PetDetailsController extends _$PetDetailsController {
   Future<void> addNewPet({
     required PetDetailsData details,
     required VoidCallback onSuccess,
+    required String userId,
   }) async {
     state = const AsyncLoading();
     PetDetailsDatabase detailsDatabase = ref.watch(petDetailsDatabaseProvider);
-    final newState =
-        await AsyncValue.guard(() => detailsDatabase.setPetDetails(details));
+    final newState = await AsyncValue.guard(
+        () => detailsDatabase.setPetDetails(details, userId));
     if (mounted) {
       state = newState;
     }
@@ -54,11 +56,12 @@ class PetDetailsController extends _$PetDetailsController {
   Future<void> deletePetDetails({
     required PetDetailsData details,
     required VoidCallback onSuccess,
+    required String userId,
   }) async {
     state = const AsyncLoading();
     PetDetailsDatabase detailsDatabase = ref.watch(petDetailsDatabaseProvider);
-    final newState =
-        await AsyncValue.guard(() => detailsDatabase.deleteGarden(details));
+    final newState = await AsyncValue.guard(
+        () => detailsDatabase.deleteGarden(details, userId));
     if (mounted) {
       state = newState;
     }

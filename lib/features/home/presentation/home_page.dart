@@ -1,4 +1,5 @@
 import 'package:app/features/all_data_provider.dart';
+import 'package:app/features/common/pet_id_provider.dart';
 import 'package:app/features/home/presentation/home.dart';
 import 'package:app/features/home/presentation/info_box.dart';
 import 'package:app/features/pet_details/domain/pet_details.dart';
@@ -48,7 +49,7 @@ Container _buildGenderIcon(String gender) {
       return Container(
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(10)),
-          color: Colors.blue,
+          color: Colors.pink,
         ),
         child: const Icon(Icons.female, color: Colors.white, size: 40),
       );
@@ -56,7 +57,7 @@ Container _buildGenderIcon(String gender) {
       return Container(
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(10)),
-          color: Colors.blue,
+          color: Colors.green,
         ),
         child: const Icon(Icons.circle, color: Colors.white, size: 40),
       );
@@ -69,8 +70,7 @@ class _HomePageState extends ConsumerState<HomePage> {
   @override
   Widget build(BuildContext context) {
     final AsyncValue<AllData> asyncAllData = ref.watch(allDataProvider);
-    final String petId =
-        ModalRoute.of(context)?.settings.arguments as String? ?? 'pet-001';
+    final String petId = ref.watch(petIdProvider);
     return asyncAllData.when(
       data: (allData) {
         return _build(
@@ -85,6 +85,11 @@ class _HomePageState extends ConsumerState<HomePage> {
       {required BuildContext context,
       required List<PetDetailsData> petDetails,
       required String? petId}) {
+    if (petDetails.isEmpty) {
+      Future.microtask(
+          () => Navigator.pushReplacementNamed(context, '/pet_list'));
+      return const Center(child: CircularProgressIndicator());
+    }
     PetDetailsCollection petDB = PetDetailsCollection(petDetails);
     final List<PetDetailsData> petList = petDB.getAllPetDetails();
     return Scaffold(
@@ -109,8 +114,8 @@ class _HomePageState extends ConsumerState<HomePage> {
                           color: Colors.white,
                           onPressed: () {
                             Navigator.pushReplacementNamed(
-                                context, Home.routeName,
-                                arguments: pet.id);
+                                context, Home.routeName);
+                            ref.read(petIdProvider.notifier).state = pet.id;
                           },
                         )),
                   Ink(
@@ -165,7 +170,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                 });
               }
             },
-            child: Image.asset(petDB.getPetDetailsById('pet-001').image,
+            child: Image.asset(petDB.getPetDetailsById(petId!).image,
                 width: 300, height: 309),
           ),
         ),
@@ -206,7 +211,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                   )
                 ],
               ),
-              _buildGenderIcon(petDB.getPetDetailsById('pet-001').gender),
+              _buildGenderIcon(petDB.getPetDetailsById(petId).gender),
             ],
           ),
         ),
@@ -215,7 +220,7 @@ class _HomePageState extends ConsumerState<HomePage> {
           children: [
             const Icon(Icons.pets),
             const SizedBox(width: 10),
-            Text('About ${petDB.getPetDetailsById('pet-001').name}',
+            Text('About ${petDB.getPetDetailsById(petId).name}',
                 style:
                     const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
             IconButton(

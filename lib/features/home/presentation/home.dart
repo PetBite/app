@@ -1,21 +1,24 @@
 import 'package:app/features/activity_log/presentation/activity_log.dart';
 import 'package:app/features/community_forum/presentation/community_menu.dart';
 import 'package:app/features/feeding_schedule/presentation/feeding_schedule.dart';
-import 'package:app/features/user/domain/user_db.dart';
 import 'package:app/features/user/presentation/profile.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../all_data_provider.dart';
+import '../../user/domain/user.dart';
+import '../../user/domain/user_collection.dart';
 import 'home_page.dart';
 
-class Home extends StatefulWidget {
+class Home extends ConsumerStatefulWidget {
   const Home({Key? key}) : super(key: key);
 
   static const routeName = '/home';
 
   @override
-  State<Home> createState() => _HomeState();
+  ConsumerState<Home> createState() => _HomeState();
 }
 
-class _HomeState extends State<Home> {
+class _HomeState extends ConsumerState<Home> {
   int _selectedIndex = 0;
 
   List<Widget> pageList = [
@@ -34,6 +37,24 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    final AsyncValue<AllData> asyncAllData = ref.watch(allDataProvider);
+    return asyncAllData.when(
+      data: (allData) {
+        return _build(
+            context: context,
+            currentUserID: allData.currentUserID,
+            users: allData.users);
+      },
+      loading: () => const Center(child: CircularProgressIndicator()),
+      error: (error, stackTrace) => Text('Error: $error'),
+    );
+  }
+
+  Widget _build(
+      {required BuildContext context,
+      required String currentUserID,
+      required List<User> users}) {
+    UserCollection userCollection = UserCollection(users);
     return Scaffold(
       body: Center(
         child: pageList.elementAt(_selectedIndex),
@@ -61,9 +82,9 @@ class _HomeState extends State<Home> {
           BottomNavigationBarItem(
             icon: CircleAvatar(
               backgroundImage: AssetImage(
-                  userDB.getUser(currentUserID).imagePath ??
+                  userCollection.getUser(currentUserID).imagePath ??
                       'assets/images/flutter_logo.png'),
-              radius: 24,
+              radius: 18,
             ),
             label: 'Profile',
           ),
