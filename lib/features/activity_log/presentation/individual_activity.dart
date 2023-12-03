@@ -1,7 +1,9 @@
 import 'package:app/features/activity_log/data/activity_id_provider.dart';
+import 'package:app/features/activity_log/domain/pet_activity.dart';
+import 'package:app/features/activity_log/domain/pet_activity_collection.dart';
+import 'package:app/features/all_data_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../domain/pet_activity_db.dart';
 
 class IndividualActivity extends ConsumerWidget {
   const IndividualActivity({Key? key}) : super(key: key);
@@ -10,7 +12,22 @@ class IndividualActivity extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final ActivityDB activityDB = ref.watch(activityDBProvider);
+    final AsyncValue<AllData> asyncAllData = ref.watch(allDataProvider);
+    return asyncAllData.when(
+      data: (allData) {
+        return _build(
+            context: context, petActivities: allData.petActivities, ref: ref);
+      },
+      loading: () => const Center(child: CircularProgressIndicator()),
+      error: (error, stackTrace) => Text('Error: $error'),
+    );
+  }
+
+  Widget _build(
+      {required BuildContext context,
+      required List<PetActivity> petActivities,
+      required WidgetRef ref}) {
+    PetActivityCollection activityDB = PetActivityCollection(petActivities);
 
     return Scaffold(
       appBar: AppBar(
@@ -37,7 +54,9 @@ class IndividualActivity extends ConsumerWidget {
               height: 10,
             ),
             Text(
-              activityDB.getActivityById(ref.watch(activityIdProvider)).timestamp,
+              activityDB
+                  .getActivityById(ref.watch(activityIdProvider))
+                  .timestamp,
               style: Theme.of(context).textTheme.displaySmall,
             ),
             const SizedBox(
@@ -48,16 +67,17 @@ class IndividualActivity extends ConsumerWidget {
               child: AspectRatio(
                 aspectRatio: 1.32,
                 child: Container(
-                  padding: const EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(),
-                  ),
-                  child: Text(
-                    activityDB.getActivityById(ref.watch(activityIdProvider)).content,
-                    style: const TextStyle(fontSize: 18),
-                  )
-                ),
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(),
+                    ),
+                    child: Text(
+                      activityDB
+                          .getActivityById(ref.watch(activityIdProvider))
+                          .content,
+                      style: const TextStyle(fontSize: 18),
+                    )),
               ),
             ),
             const SizedBox(
@@ -71,7 +91,6 @@ class IndividualActivity extends ConsumerWidget {
                 style: const TextStyle(fontSize: 20),
               ),
             ]),
-
           ])),
     );
   }

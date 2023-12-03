@@ -27,7 +27,8 @@ class _FeedingScheduleFormState extends ConsumerState<FeedingScheduleForm> {
         return _build(
             context: context,
             schedules: allData.feedingSchedules,
-            currentUserID: allData.currentUserID);
+            currentUserID: allData.currentUserID,
+            currentPetID: allData.currentPetID);
       },
       loading: () => const Center(child: CircularProgressIndicator()),
       error: (error, stackTrace) => Text('Error: $error'),
@@ -37,7 +38,8 @@ class _FeedingScheduleFormState extends ConsumerState<FeedingScheduleForm> {
   Widget _build(
       {required BuildContext context,
       required String currentUserID,
-      required List<FeedingScheduleData> schedules}) {
+      required List<FeedingScheduleData> schedules,
+      required String currentPetID}) {
     FeedingScheduleCollection feedingScheduleDB =
         FeedingScheduleCollection(schedules);
     final List<FeedingScheduleData> feedingSchedules =
@@ -95,7 +97,10 @@ class _FeedingScheduleFormState extends ConsumerState<FeedingScheduleForm> {
       ref
           .read(editFeedingScheduleControllerProvider.notifier)
           .updateFeedingSchedule(
-              schedule: newSchedule, userId: currentUserID, onSuccess: () {});
+              schedule: newSchedule,
+              userId: currentUserID,
+              petId: currentPetID,
+              onSuccess: () {});
     }
 
     return ListView(

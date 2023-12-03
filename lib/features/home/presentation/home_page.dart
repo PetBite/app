@@ -70,11 +70,12 @@ class _HomePageState extends ConsumerState<HomePage> {
   @override
   Widget build(BuildContext context) {
     final AsyncValue<AllData> asyncAllData = ref.watch(allDataProvider);
-    final String petId = ref.watch(petIdProvider);
     return asyncAllData.when(
       data: (allData) {
         return _build(
-            context: context, petDetails: allData.petDetails, petId: petId);
+            context: context,
+            petDetails: allData.petDetails,
+            currentPetID: allData.currentPetID);
       },
       loading: () => const Center(child: CircularProgressIndicator()),
       error: (error, stackTrace) => Text('Error: $error'),
@@ -84,7 +85,7 @@ class _HomePageState extends ConsumerState<HomePage> {
   Widget _build(
       {required BuildContext context,
       required List<PetDetailsData> petDetails,
-      required String? petId}) {
+      required String currentPetID}) {
     if (petDetails.isEmpty) {
       Future.microtask(
           () => Navigator.pushReplacementNamed(context, '/pet_list'));
@@ -170,7 +171,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                 });
               }
             },
-            child: Image.asset(petDB.getPetDetailsById(petId!).image,
+            child: Image.asset(petDB.getPetDetailsById(currentPetID).image,
                 width: 300, height: 309),
           ),
         ),
@@ -198,12 +199,12 @@ class _HomePageState extends ConsumerState<HomePage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    petDB.getPetDetailsById(petId!).name,
+                    petDB.getPetDetailsById(currentPetID).name,
                     style: const TextStyle(
                         fontSize: 25, fontWeight: FontWeight.bold),
                   ),
                   Text(
-                    petDB.getPetDetailsById(petId).breed,
+                    petDB.getPetDetailsById(currentPetID).breed,
                     style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -211,7 +212,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                   )
                 ],
               ),
-              _buildGenderIcon(petDB.getPetDetailsById(petId).gender),
+              _buildGenderIcon(petDB.getPetDetailsById(currentPetID).gender),
             ],
           ),
         ),
@@ -220,7 +221,7 @@ class _HomePageState extends ConsumerState<HomePage> {
           children: [
             const Icon(Icons.pets),
             const SizedBox(width: 10),
-            Text('About ${petDB.getPetDetailsById(petId).name}',
+            Text('About ${petDB.getPetDetailsById(currentPetID).name}',
                 style:
                     const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
             IconButton(
@@ -239,19 +240,19 @@ class _HomePageState extends ConsumerState<HomePage> {
             children: <Widget>[
               InfoBox(
                   title: 'Age',
-                  value: petDB.getPetDetailsById(petId).age,
+                  value: petDB.getPetDetailsById(currentPetID).age,
                   bgColor: const Color(0xFF006A60)),
               InfoBox(
                   title: 'Height',
-                  value: '${petDB.getPetDetailsById(petId).height} cm',
+                  value: '${petDB.getPetDetailsById(currentPetID).height} cm',
                   bgColor: const Color(0xFF006A60)),
               InfoBox(
                   title: 'Weight',
-                  value: '${petDB.getPetDetailsById(petId).weight} kg',
+                  value: '${petDB.getPetDetailsById(currentPetID).weight} kg',
                   bgColor: const Color(0xFF006A60)),
               InfoBox(
                   title: 'Color',
-                  value: petDB.getPetDetailsById(petId).color,
+                  value: petDB.getPetDetailsById(currentPetID).color,
                   bgColor: const Color(0xFF006A60)),
             ],
           ),

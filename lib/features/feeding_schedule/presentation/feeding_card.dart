@@ -23,7 +23,8 @@ class _FeedingCardState extends ConsumerState<FeedingCard> {
         return _build(
             context: context,
             schedules: allData.feedingSchedules,
-            currentUserID: allData.currentUserID);
+            currentUserID: allData.currentUserID,
+            currentPetID: allData.currentPetID);
       },
       loading: () => const Center(child: CircularProgressIndicator()),
       error: (error, stackTrace) => Text('Error: $error'),
@@ -33,7 +34,8 @@ class _FeedingCardState extends ConsumerState<FeedingCard> {
   Widget _build(
       {required BuildContext context,
       required String currentUserID,
-      required List<FeedingScheduleData> schedules}) {
+      required List<FeedingScheduleData> schedules,
+      required String currentPetID}) {
     FeedingScheduleCollection feedingScheduleDB =
         FeedingScheduleCollection(schedules);
     List<DailyFeedingScheduleData> dailySchedules =
@@ -82,6 +84,7 @@ class _FeedingCardState extends ConsumerState<FeedingCard> {
                                   scheduleID: scheduleId,
                                   dailySchedule: updatedSchedules,
                                   userId: currentUserID,
+                                  petId: currentPetID,
                                   onSuccess: () {});
                         });
                       },

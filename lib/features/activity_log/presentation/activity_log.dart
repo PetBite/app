@@ -1,9 +1,11 @@
 import 'package:app/features/activity_log/data/activity_id_provider.dart';
+import 'package:app/features/activity_log/domain/pet_activity.dart';
+import 'package:app/features/activity_log/domain/pet_activity_collection.dart';
 import 'package:app/features/activity_log/presentation/detailed_activity_log.dart';
+import 'package:app/features/all_data_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-import '../domain/pet_activity_db.dart';
 
 import 'form_fields/add_activity.dart';
 import 'form_fields/edit_activity.dart';
@@ -20,14 +22,21 @@ class ActivityLogPage extends ConsumerStatefulWidget {
 
 class _ActivityLogPageState extends ConsumerState<ActivityLogPage> {
   @override
-  void initState() {
-    super.initState();
-    ref.read(activityDBProvider);
+  Widget build(BuildContext context) {
+    final AsyncValue<AllData> asyncAllData = ref.watch(allDataProvider);
+    return asyncAllData.when(
+      data: (allData) {
+        return _build(context: context, petActivities: allData.petActivities);
+      },
+      loading: () => const Center(child: CircularProgressIndicator()),
+      error: (error, stackTrace) => Text('Error: $error'),
+    );
   }
 
-  @override
-  Widget build(BuildContext context) {
-    final ActivityDB activityDB = ref.watch(activityDBProvider);
+  Widget _build(
+      {required BuildContext context,
+      required List<PetActivity> petActivities}) {
+    PetActivityCollection activityDB = PetActivityCollection(petActivities);
 
     List<String> activityIDs = activityDB.getActivityIDs();
     List<String> activityDates = activityDB.getActivityDates().toSet().toList();
@@ -90,9 +99,7 @@ class _ActivityLogPageState extends ConsumerState<ActivityLogPage> {
                                     Navigator.push(context, MaterialPageRoute(
                                         builder: (BuildContext context) {
                                       return EditActivity();
-                                    })).then((value) {
-                                      setState(() {});
-                                    });
+                                    }));
                                   },
                                 ),
                               ),
@@ -107,9 +114,7 @@ class _ActivityLogPageState extends ConsumerState<ActivityLogPage> {
           Navigator.push(context,
               MaterialPageRoute(builder: (BuildContext context) {
             return AddActivity();
-          })).then((value) {
-            setState(() {});
-          });
+          }));
         },
         child: const Icon(Icons.add),
       ),

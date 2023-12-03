@@ -31,9 +31,9 @@ _$DailyFeedingScheduleDataImpl _$$DailyFeedingScheduleDataImplFromJson(
         Map<String, dynamic> json) =>
     _$DailyFeedingScheduleDataImpl(
       name: json['name'] as String,
-      time: json['time'] as String?,
-      foodType: json['foodType'] as String?,
-      quantity: json['quantity'] as String?,
+      time: json['time'] as String? ?? "",
+      foodType: json['foodType'] as String? ?? "",
+      quantity: json['quantity'] as String? ?? "",
       complete: json['complete'] as bool? ?? false,
     );
 

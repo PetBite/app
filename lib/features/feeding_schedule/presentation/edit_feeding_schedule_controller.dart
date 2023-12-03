@@ -21,12 +21,13 @@ class EditFeedingScheduleController extends _$EditFeedingScheduleController {
     required FeedingScheduleData schedule,
     required VoidCallback onSuccess,
     required String userId,
+    required String petId,
   }) async {
     state = const AsyncLoading();
     FeedingScheduleDatabase database =
         ref.watch(feedingScheduleDatabaseProvider);
     final newState = await AsyncValue.guard(
-        () => database.setFeedingSchedule(schedule, userId));
+        () => database.setFeedingSchedule(schedule, userId, petId));
     if (mounted) {
       state = newState;
     }
@@ -39,12 +40,13 @@ class EditFeedingScheduleController extends _$EditFeedingScheduleController {
     required FeedingScheduleData schedule,
     required VoidCallback onSuccess,
     required String userId,
+    required String petId,
   }) async {
     state = const AsyncLoading();
     FeedingScheduleDatabase database =
         ref.watch(feedingScheduleDatabaseProvider);
     final newState = await AsyncValue.guard(
-        () => database.deleteFeedingSchedule(schedule, userId));
+        () => database.deleteFeedingSchedule(schedule, userId, petId));
     if (mounted) {
       state = newState;
     }
@@ -58,12 +60,13 @@ class EditFeedingScheduleController extends _$EditFeedingScheduleController {
     required List<DailyFeedingScheduleData> dailySchedule,
     required VoidCallback onSuccess,
     required String userId,
+    required String petId,
   }) async {
     state = const AsyncLoading();
     FeedingScheduleDatabase database =
         ref.watch(feedingScheduleDatabaseProvider);
-    final newState = await AsyncValue.guard(
-        () => database.updateDailySchedules(scheduleID, dailySchedule, userId));
+    final newState = await AsyncValue.guard(() => database.updateDailySchedules(
+        scheduleID, dailySchedule, userId, petId));
     if (mounted) {
       state = newState;
     }

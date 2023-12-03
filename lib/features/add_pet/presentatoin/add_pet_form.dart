@@ -79,6 +79,7 @@ class AddPetForm extends ConsumerWidget {
       ref.read(petDetailsControllerProvider.notifier).addNewPet(
             details: details,
             userId: currentUserID,
+            petId: details.id,
             onSuccess: () {
               Navigator.of(context).pop();
             },
