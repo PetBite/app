@@ -99,9 +99,7 @@ class _ActivityLogPageState extends ConsumerState<ActivityLogPage> {
                                     Navigator.push(context, MaterialPageRoute(
                                         builder: (BuildContext context) {
                                       return EditActivity();
-                                    })).then((value) {
-                                      setState(() {});
-                                    });
+                                    }));
                                   },
                                 ),
                               ),
@@ -116,9 +114,7 @@ class _ActivityLogPageState extends ConsumerState<ActivityLogPage> {
           Navigator.push(context,
               MaterialPageRoute(builder: (BuildContext context) {
             return AddActivity();
-          })).then((value) {
-            setState(() {});
-          });
+          }));
         },
         child: const Icon(Icons.add),
       ),

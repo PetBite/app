@@ -44,32 +44,6 @@ class AddActivity extends ConsumerWidget {
       required List<PetActivity> petActivities,
       required String currentUserID,
       required String currentPetID}) {
-    PetActivityCollection activityDB = PetActivityCollection(petActivities);
-
-    List<String> activityIDs = activityDB.getActivityIDs();
-    activityIDs.sort();
-    List<String> backwardsIds = activityIDs.reversed.toList();
-
-    String incrementString(String inputString) {
-      final RegExp regExp = RegExp(r'(\d+)$');
-      final Match? match = regExp.firstMatch(inputString);
-
-      if (match != null) {
-        String numberPart = match.group(1)!;
-        int number = int.parse(numberPart);
-        number += 1;
-
-        String formattedNumber =
-            number.toString().padLeft(numberPart.length, '0');
-        String newString =
-            inputString.substring(0, inputString.length - numberPart.length) +
-                formattedNumber;
-        return newString;
-      } else {
-        return inputString;
-      }
-    }
-
     void onSubmit() {
       bool isValid = _formKey.currentState?.saveAndValidate() ?? false;
       if (!isValid) return;
@@ -77,9 +51,10 @@ class AddActivity extends ConsumerWidget {
       String type = _typeFieldKey.currentState?.value;
       String content = _contentFieldKey.currentState?.value;
       String timestamp = _timestampFieldKey.currentState?.value;
-
+      int numActivities = petActivities.length;
+      String id = 'activity-${(numActivities + 1).toString().padLeft(3, '0')}';
       PetActivity newActivity = PetActivity(
-        id: incrementString(backwardsIds[0]),
+        id: id,
         petId: ref.watch(petIdProvider),
         title: title,
         type: type,
@@ -95,8 +70,6 @@ class AddActivity extends ConsumerWidget {
           onSuccess: () {
             Navigator.pop(context);
           });
-
-      Navigator.pop(context);
     }
 
     void onReset() {

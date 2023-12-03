@@ -34,13 +34,13 @@ class PetActivityDatabase {
           path: FirestorePath.petActivity(petActivityId, userId, petId),
           builder: (data, documentId) => PetActivity.fromJson(data!));
 
-  Future<void> setPetDetails(
+  Future<void> setPetActivity(
           PetActivity petActivity, String userId, String petId) =>
       _service.setData(
           path: FirestorePath.petActivity(petActivity.id, userId, petId),
           data: petActivity.toJson());
 
-  Future<void> deleteGarden(
+  Future<void> deletePetActivity(
           PetActivity petActivity, String userId, String petId) =>
       _service.deleteData(
           path: FirestorePath.petActivity(petActivity.id, userId, petId));

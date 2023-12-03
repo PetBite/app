@@ -70,8 +70,6 @@ class EditActivity extends ConsumerWidget {
           onSuccess: () {
             Navigator.pop(context);
           });
-
-      Navigator.pop(context);
     }
 
     void onReset() {
