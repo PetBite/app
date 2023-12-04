@@ -38,6 +38,7 @@ class SignInView extends StatelessWidget {
               .doc(user.email)
               .set({
             'email': user.email,
+            'id': user.email,
             'name': 'test',
             'username': 'test',
           });

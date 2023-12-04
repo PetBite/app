@@ -1,5 +1,4 @@
 import 'package:app/features/activity_log/domain/pet_activity.dart';
-import 'package:app/features/activity_log/domain/pet_activity_collection.dart';
 import 'package:app/features/activity_log/presentation/pet_activity_controller.dart';
 import 'package:app/features/all_data_provider.dart';
 import 'package:flutter/material.dart';

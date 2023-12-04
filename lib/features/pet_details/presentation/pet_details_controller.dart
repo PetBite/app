@@ -96,11 +96,7 @@ class PetDetailsController extends _$PetDetailsController {
       batch.set(docRef, data.toMap());
     }
 
-    try {
-      await batch.commit();
-    } catch (e) {
-      print('Error initializing feeding schedule: $e');
-    }
+    await batch.commit();
 
     Future<void> deletePetDetails({
       required PetDetailsData details,

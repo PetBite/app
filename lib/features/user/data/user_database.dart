@@ -29,5 +29,5 @@ class UserDatabase {
       builder: (data, documentId) => User.fromJson(data!));
 
   Future<void> setUser(User user) =>
-      _service.setData(path: FirestorePath.user(user.id), data: user.toJson());
+      _service.setData(path: FirestorePath.user(user.id!), data: user.toJson());
 }
