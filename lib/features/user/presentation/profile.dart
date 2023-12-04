@@ -62,6 +62,14 @@ class Profile extends ConsumerWidget {
             trailing: Icon(Icons.arrow_forward_ios),
           ),
           ListTile(
+            leading: const Icon(Icons.pets, size: 35),
+            title: const Text('Pet List'),
+            trailing: const Icon(Icons.arrow_forward_ios),
+            onTap: () {
+              Navigator.pushNamed(context, '/pet_list');
+            },
+          ),
+          ListTile(
             leading: const Icon(Icons.settings, size: 35),
             title: const Text('Settings'),
             trailing: const Icon(Icons.arrow_forward_ios),

@@ -17,24 +17,6 @@ class HomePage extends ConsumerStatefulWidget {
   ConsumerState<HomePage> createState() => _HomePageState();
 }
 
-List<Widget> generatePetItem(int count, BuildContext context) {
-  return List.generate(
-    count,
-    (index) => Ink(
-        decoration: const ShapeDecoration(
-          color: Colors.lightBlue,
-          shape: CircleBorder(),
-        ),
-        child: IconButton(
-          iconSize: 48.0,
-          icon: const CircleAvatar(
-              backgroundImage: AssetImage('assets/images/navbar_filler1.jpg')),
-          color: Colors.white,
-          onPressed: () {},
-        )),
-  );
-}
-
 Container _buildGenderIcon(String gender) {
   switch (gender) {
     case 'male':
@@ -99,10 +81,28 @@ class _HomePageState extends ConsumerState<HomePage> {
         if (_showPetBar)
           Container(
             color: Colors.blue,
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  for (var pet in petList)
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    for (var pet in petList)
+                      Ink(
+                          decoration: const ShapeDecoration(
+                            color: Colors.lightBlue,
+                            shape: CircleBorder(),
+                          ),
+                          child: IconButton(
+                            iconSize: 48.0,
+                            icon: CircleAvatar(
+                                backgroundImage: AssetImage(pet.image)),
+                            color: Colors.white,
+                            onPressed: () {
+                              Navigator.pushReplacementNamed(
+                                  context, Home.routeName);
+                              ref.read(petIdProvider.notifier).state = pet.id;
+                            },
+                          )),
                     Ink(
                         decoration: const ShapeDecoration(
                           color: Colors.lightBlue,
@@ -110,48 +110,33 @@ class _HomePageState extends ConsumerState<HomePage> {
                         ),
                         child: IconButton(
                           iconSize: 48.0,
-                          icon: CircleAvatar(
-                              backgroundImage: AssetImage(pet.image)),
+                          icon: const Icon(
+                            Icons.add,
+                            color: Colors.white,
+                          ),
                           color: Colors.white,
                           onPressed: () {
-                            Navigator.pushReplacementNamed(
-                                context, Home.routeName);
-                            ref.read(petIdProvider.notifier).state = pet.id;
+                            Navigator.pushNamed(context, '/add_pet_form');
                           },
                         )),
-                  Ink(
-                      decoration: const ShapeDecoration(
-                        color: Colors.lightBlue,
-                        shape: CircleBorder(),
-                      ),
-                      child: IconButton(
-                        iconSize: 48.0,
-                        icon: const Icon(
-                          Icons.add,
-                          color: Colors.white,
+                    Ink(
+                        decoration: const ShapeDecoration(
+                          color: Colors.lightBlue,
+                          shape: CircleBorder(),
                         ),
-                        color: Colors.white,
-                        onPressed: () {
-                          Navigator.pushNamed(context, '/add_pet_form');
-                        },
-                      )),
-                  Ink(
-                      decoration: const ShapeDecoration(
-                        color: Colors.lightBlue,
-                        shape: CircleBorder(),
-                      ),
-                      child: IconButton(
-                        iconSize: 48.0,
-                        icon: const Icon(
-                          Icons.list,
+                        child: IconButton(
+                          iconSize: 48.0,
+                          icon: const Icon(
+                            Icons.list,
+                            color: Colors.white,
+                          ),
                           color: Colors.white,
-                        ),
-                        color: Colors.white,
-                        onPressed: () {
-                          Navigator.pushNamed(context, '/pet_list');
-                        },
-                      )),
-                ]),
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/pet_list');
+                          },
+                        )),
+                  ]),
+            ),
           ),
         ClipRRect(
           borderRadius: const BorderRadius.only(
