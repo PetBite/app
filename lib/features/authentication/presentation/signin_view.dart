@@ -39,8 +39,8 @@ class SignInView extends StatelessWidget {
               .set({
             'email': user.email,
             'id': user.email,
-            'name': 'test',
-            'username': 'test',
+            'name': 'Fill out your account info in',
+            'username': 'Account',
           });
 
           if (context.mounted) {
