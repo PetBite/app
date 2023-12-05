@@ -16,4 +16,7 @@ class FirestorePath {
       'users/$userId/pet_details/$petId/activities/$activityId';
   static String petActivities(String userId, String petId) =>
       'users/$userId/pet_details/$petId/activities';
+
+  static String petFood(String petFoodId) => 'pet_food/$petFoodId';
+  static String petFoods() => 'pet_food';
 }
