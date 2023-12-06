@@ -1,23 +1,42 @@
+import 'package:app/features/all_data_provider.dart';
+import 'package:app/features/pet_food/domain/pet_food.dart';
+import 'package:app/features/pet_food/domain/pet_food_collection.dart';
 import 'package:flutter/material.dart';
-
-import '../domain/pet_food_db.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// Displays detailed information about a SampleItem.
-class PetFood extends StatefulWidget {
+class PetFood extends ConsumerStatefulWidget {
   const PetFood({Key? key}) : super(key: key);
 
   static const routeName = '/pet_food';
 
   @override
-  State<PetFood> createState() => _PetFoodState();
+  ConsumerState<PetFood> createState() => _PetFoodState();
 }
 
-class _PetFoodState extends State<PetFood> {
-  List<String> search = ['healthy', 'vet recommended', 'Purina'];
-  List<String> petFoodIDs = PetFoodDB.getPetFoodIDs();
-
+class _PetFoodState extends ConsumerState<PetFood> {
   @override
   Widget build(BuildContext context) {
+    final AsyncValue<AllData> asyncAllData = ref.watch(allDataProvider);
+    return asyncAllData.when(
+      data: (allData) {
+        return _build(
+          context: context,
+          petFoods: allData.petFoods,
+        );
+      },
+      loading: () => const Center(child: CircularProgressIndicator()),
+      error: (error, stackTrace) => Text('Error: $error'),
+    );
+  }
+
+  Widget _build({
+    required BuildContext context,
+    required List<PetFoodData> petFoods,
+  }) {
+    PetFoodCollection petFoodDB = PetFoodCollection(petFoods);
+    List<String> petFoodIDs = petFoodDB.getPetFoodIDs();
+    List<String> search = ['healthy', 'vet recommended', 'Purina'];
     return Scaffold(
       appBar: AppBar(
         title: const Text('Pet Food List'),
@@ -96,7 +115,7 @@ class _PetFoodState extends State<PetFood> {
       String id, String img, String name, String price, BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, '/detailed_pet_food');
+        Navigator.pushNamed(context, '/detailed_pet_food', arguments: id);
       },
       child: Column(
         children: [
@@ -106,7 +125,11 @@ class _PetFoodState extends State<PetFood> {
           ),
           Expanded(
             flex: 1,
-            child: Text(name),
+            child: Text(
+              name,
+              style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+              overflow: TextOverflow.ellipsis,
+            ),
           ),
           Expanded(
             flex: 1,
