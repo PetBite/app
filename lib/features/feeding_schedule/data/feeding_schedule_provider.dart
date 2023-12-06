@@ -1,5 +1,5 @@
 import 'package:app/features/common/pet_id_provider.dart';
-import 'package:app/features/user/data/user_providers.dart';
+import 'package:app/features/user/data/user_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../domain/feeding_schedule.dart';

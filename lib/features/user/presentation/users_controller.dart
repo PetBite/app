@@ -1,4 +1,4 @@
-import 'package:app/features/user/data/user_providers.dart';
+import 'package:app/features/user/data/user_provider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
