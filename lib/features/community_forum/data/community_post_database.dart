@@ -37,4 +37,9 @@ class CommunityPostDatabase {
       _service.setData(
           path: FirestorePath.communityPost(communityPost.id, postId),
           data: communityPost.toJson());
+
+  Future<void> deleteCommunityPost(
+          String communityId, CommunityPost communityPost) =>
+      _service.deleteData(
+          path: FirestorePath.communityPost(communityId, communityPost.id));
 }

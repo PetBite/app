@@ -43,4 +43,10 @@ class PostCommentDatabase {
           path: FirestorePath.communityPostComment(
               communityId, postId, postComment.id),
           data: postComment.toJson());
+
+  Future<void> deletePostComment(
+          PostComment postComment, String communityId, String postId) =>
+      _service.deleteData(
+          path: FirestorePath.communityPostComment(
+              communityId, postId, postComment.id));
 }
