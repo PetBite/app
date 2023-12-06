@@ -1,21 +1,41 @@
-import 'package:app/features/community_forum/domain/community_db.dart';
+import 'package:app/features/all_data_provider.dart';
+import 'package:app/features/common/community_id_provider.dart';
+import 'package:app/features/community_forum/domain/community.dart';
+import 'package:app/features/community_forum/domain/community_collection.dart';
 import 'package:app/features/community_forum/presentation/create_post.dart';
 import 'package:flutter/material.dart';
 import 'package:app/features/community_forum/presentation/forum_post.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class ForumHomePage extends StatefulWidget {
+class ForumHomePage extends ConsumerStatefulWidget {
   const ForumHomePage({Key? key}) : super(key: key);
 
   static const routeName = '/forum_home';
 
   @override
-  State<ForumHomePage> createState() => _ForumHomePageState();
+  ConsumerState<ForumHomePage> createState() => _ForumHomePageState();
 }
 
-class _ForumHomePageState extends State<ForumHomePage> {
+class _ForumHomePageState extends ConsumerState<ForumHomePage> {
   @override
   Widget build(BuildContext context) {
+    final AsyncValue<AllData> asyncAllData = ref.watch(allDataProvider);
+    return asyncAllData.when(
+      data: (allData) {
+        return _build(context: context, communities: allData.communities);
+      },
+      loading: () => const Center(child: CircularProgressIndicator()),
+      error: (error, stackTrace) => Text('Error: $error'),
+    );
+  }
+
+  Widget _build(
+      {required BuildContext context, required List<Community> communities}) {
+    CommunityCollection communityDB = CommunityCollection(communities);
     List<String> communityIDs = communityDB.getCommunityIDs();
+    final currentCommunityID = ref.watch(communityIdProvider);
+    final currentCommunityPosts =
+        communityDB.getCommunityById(currentCommunityID).posts;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Forum Home'),
@@ -53,7 +73,9 @@ class _ForumHomePageState extends State<ForumHomePage> {
                       icon: Image.asset(
                           communityDB.getCommunityById(element).imagePath),
                       color: Colors.white,
-                      onPressed: () {},
+                      onPressed: () {
+                        ref.read(communityIdProvider.notifier).state = element;
+                      },
                     )))
                 .toList(),
           ),
@@ -68,7 +90,11 @@ class _ForumHomePageState extends State<ForumHomePage> {
               ),
             ],
           ),
-          const ForumPostCard(),
+          if (currentCommunityPosts != null)
+            for (var post in currentCommunityPosts)
+              ForumPostCard(postData: post)
+          else
+            const Text('No posts yet!'),
         ],
       )),
       floatingActionButton: FloatingActionButton(

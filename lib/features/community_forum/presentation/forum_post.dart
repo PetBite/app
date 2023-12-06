@@ -1,12 +1,14 @@
-import 'package:app/features/community_forum/domain/post_db.dart';
+import 'package:app/features/community_forum/domain/community_post.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class ForumPostCard extends StatelessWidget {
-  final String url;
-  const ForumPostCard({super.key, this.url = ''});
+class ForumPostCard extends ConsumerWidget {
+  const ForumPostCard({Key? key, required this.postData}) : super(key: key);
+
+  final CommunityPost postData;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Card(
       child: Padding(
         padding: const EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 0.0),
@@ -19,7 +21,7 @@ class ForumPostCard extends StatelessWidget {
                 radius: 16,
               ),
               const SizedBox(width: 9),
-              Text(postDB.getPost('post-001').authorName),
+              Text(postData.authorName),
               const SizedBox(width: 9),
               const Text(
                 '1d',
@@ -30,13 +32,13 @@ class ForumPostCard extends StatelessWidget {
             Container(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  postDB.getPost('post-001').title,
+                  postData.title,
                   style: const TextStyle(
                       fontSize: 20, fontWeight: FontWeight.bold),
                 )),
             const SizedBox(height: 2),
             Text(
-              postDB.getPost('post-001').content,
+              postData.content,
               overflow: TextOverflow.ellipsis,
               maxLines: 2,
             ),
@@ -51,7 +53,7 @@ class ForumPostCard extends StatelessWidget {
                     children: [
                       const Icon(Icons.thumb_up, color: Colors.blue),
                       const SizedBox(width: 8),
-                      Text(postDB.getPost('post-001').likesCount.toString(),
+                      Text(postData.likesCount.toString(),
                           style: const TextStyle(color: Colors.blue)),
                     ],
                   ),

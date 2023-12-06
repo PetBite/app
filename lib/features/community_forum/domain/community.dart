@@ -11,7 +11,7 @@ class Community with _$Community {
     required String name,
     required String description,
     required String imagePath,
-    required List<CommunityPost> posts,
+    @Default([]) List<CommunityPost> posts,
   }) = _Community;
 
   const Community._();

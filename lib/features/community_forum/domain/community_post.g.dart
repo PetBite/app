@@ -16,8 +16,8 @@ _$CommunityPostImpl _$$CommunityPostImplFromJson(Map<String, dynamic> json) =>
       content: json['content'] as String,
       likesCount: json['likesCount'] as int,
       timestamp: json['timestamp'] as String,
-      comments: (json['comments'] as List<dynamic>)
-          .map((e) => PostComment.fromJson(e as Map<String, dynamic>))
+      comments: (json['comments'] as List<dynamic>?)
+          ?.map((e) => PostComment.fromJson(e as Map<String, dynamic>))
           .toList(),
       imagePath: json['imagePath'] as String?,
     );

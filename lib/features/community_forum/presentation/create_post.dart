@@ -1,18 +1,35 @@
-import 'package:app/features/community_forum/domain/community_db.dart';
+import 'package:app/features/all_data_provider.dart';
+import 'package:app/features/community_forum/domain/community.dart';
+import 'package:app/features/community_forum/domain/community_collection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class CreatePost extends StatefulWidget {
+class CreatePost extends ConsumerStatefulWidget {
   const CreatePost({super.key});
 
   @override
-  State<CreatePost> createState() => _CreatePostState();
+  ConsumerState<CreatePost> createState() => _CreatePostState();
 }
 
-class _CreatePostState extends State<CreatePost> {
-  CommunityData? selectedCommunity;
+class _CreatePostState extends ConsumerState<CreatePost> {
+  Community? selectedCommunity;
 
   @override
   Widget build(BuildContext context) {
+    final AsyncValue<AllData> asyncAllData = ref.watch(allDataProvider);
+    return asyncAllData.when(
+      data: (allData) {
+        return _build(context: context, communities: allData.communities);
+      },
+      loading: () => const Center(child: CircularProgressIndicator()),
+      error: (error, stackTrace) => Text('Error: $error'),
+    );
+  }
+
+  Widget _build(
+      {required BuildContext context, required List<Community> communities}) {
+    CommunityCollection communityDB = CommunityCollection(communities);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Create Post"),
@@ -26,16 +43,16 @@ class _CreatePostState extends State<CreatePost> {
                 children: [
                   const SizedBox(height: 20),
                   const Text('Select a community'),
-                  DropdownButtonFormField<CommunityData>(
+                  DropdownButtonFormField<Community>(
                     value: selectedCommunity,
-                    onChanged: (CommunityData? community) {
+                    onChanged: (Community? community) {
                       setState(() {
                         selectedCommunity = community;
                       });
                     },
                     items: communityDB
                         .getCommunityIDs()
-                        .map((element) => DropdownMenuItem<CommunityData>(
+                        .map((element) => DropdownMenuItem<Community>(
                               value: communityDB.getCommunityById(element),
                               child: Text(
                                   communityDB.getCommunityById(element).name),
