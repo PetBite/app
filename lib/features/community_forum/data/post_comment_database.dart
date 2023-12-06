@@ -12,29 +12,29 @@ class PostCommentDatabase {
   final _service = FirestoreService.instance;
 
   Stream<List<PostComment>> watchPostComments(
-          String communityPostId, String postId) =>
+          String communityId, String postId) =>
       _service.watchCollection(
-          path: FirestorePath.communityPostComments(communityPostId, postId),
+          path: FirestorePath.communityPostComments(communityId, postId),
           builder: (data, documentId) => PostComment.fromJson(data!));
 
   Stream<PostComment> watchPostComment(
-          String communityPostId, String postId, String commentId) =>
+          String communityId, String postId, String commentId) =>
       _service.watchDocument(
           path: FirestorePath.communityPostComment(
-              communityPostId, postId, commentId),
+              communityId, postId, commentId),
           builder: (data, documentId) => PostComment.fromJson(data!));
 
   Future<List<PostComment>> fetchPostComments(
-          String communityPostId, String postId) =>
+          String communityId, String postId) =>
       _service.fetchCollection(
-          path: FirestorePath.communityPostComments(communityPostId, postId),
+          path: FirestorePath.communityPostComments(communityId, postId),
           builder: (data, documentId) => PostComment.fromJson(data!));
 
   Future<PostComment> fetchPostComment(
-          String communityPostId, String postId, String commentId) =>
+          String communityId, String postId, String commentId) =>
       _service.fetchDocument(
           path: FirestorePath.communityPostComment(
-              communityPostId, postId, commentId),
+              communityId, postId, commentId),
           builder: (data, documentId) => PostComment.fromJson(data!));
 
   Future<void> setPostComment(

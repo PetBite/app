@@ -1,3 +1,5 @@
+import 'package:app/features/common/community_id_provider.dart';
+import 'package:app/features/common/post_id_provider.dart';
 import 'package:app/features/community_forum/domain/post_comment.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -13,5 +15,7 @@ PostCommentDatabase postCommentDatabase(PostCommentDatabaseRef ref) {
 @riverpod
 Stream<List<PostComment>> postComment(PostCommentRef ref) {
   final database = ref.watch(postCommentDatabaseProvider);
-  return database.watchPostComments();
+  final communityId = ref.watch(communityIdProvider);
+  final postId = ref.watch(postIdProvider);
+  return database.watchPostComments(communityId, postId);
 }

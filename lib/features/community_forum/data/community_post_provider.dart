@@ -1,3 +1,4 @@
+import 'package:app/features/common/community_id_provider.dart';
 import 'package:app/features/community_forum/domain/community_post.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -13,5 +14,6 @@ CommunityPostDatabase communityPostDatabase(CommunityPostDatabaseRef ref) {
 @riverpod
 Stream<List<CommunityPost>> communityPosts(CommunityPostsRef ref) {
   final database = ref.watch(communityPostDatabaseProvider);
-  return database.watchCommunityPosts();
+  final communityId = ref.watch(communityIdProvider);
+  return database.watchCommunityPosts(communityId);
 }
