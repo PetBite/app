@@ -11,7 +11,7 @@ CommunityPostDatabase communityPostDatabase(CommunityPostDatabaseRef ref) {
 }
 
 @riverpod
-Stream<List<CommunityPost>> communityPosts(CommunityPostRef ref) {
+Stream<List<CommunityPost>> communityPosts(CommunityPostsRef ref) {
   final database = ref.watch(communityPostDatabaseProvider);
   return database.watchCommunityPosts();
 }

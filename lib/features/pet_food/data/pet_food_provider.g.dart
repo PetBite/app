@@ -21,19 +21,19 @@ final petFoodDatabaseProvider = AutoDisposeProvider<PetFoodDatabase>.internal(
 );
 
 typedef PetFoodDatabaseRef = AutoDisposeProviderRef<PetFoodDatabase>;
-String _$petFoodHash() => r'd41ee2bbe05d3279c6f656ccddc1ac8b5646268e';
+String _$petFoodsHash() => r'7e7c0a4fabd8dc17e4faa88ebf13b1add805e0e9';
 
-/// See also [petFood].
-@ProviderFor(petFood)
-final petFoodProvider = AutoDisposeStreamProvider<List<PetFoodData>>.internal(
-  petFood,
-  name: r'petFoodProvider',
+/// See also [petFoods].
+@ProviderFor(petFoods)
+final petFoodsProvider = AutoDisposeStreamProvider<List<PetFoodData>>.internal(
+  petFoods,
+  name: r'petFoodsProvider',
   debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$petFoodHash,
+      const bool.fromEnvironment('dart.vm.product') ? null : _$petFoodsHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef PetFoodRef = AutoDisposeStreamProviderRef<List<PetFoodData>>;
+typedef PetFoodsRef = AutoDisposeStreamProviderRef<List<PetFoodData>>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

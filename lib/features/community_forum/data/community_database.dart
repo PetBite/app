@@ -30,5 +30,5 @@ class CommunityDatabase {
           builder: (data, documentId) => Community.fromJson(data!));
 
   Future<void> setCommunity(Community community) => _service.setData(
-      path: FirestorePath.community(community.id!), data: community.toJson());
+      path: FirestorePath.community(community.id), data: community.toJson());
 }

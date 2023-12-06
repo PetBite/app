@@ -5,7 +5,7 @@ import '../../../repositories/firestore/firestore_providers.dart';
 import '../domain/user.dart';
 import 'user_database.dart';
 
-part 'user_providers.g.dart';
+part 'user_provider.g.dart';
 
 @riverpod
 UserDatabase userDatabase(UserDatabaseRef ref) {

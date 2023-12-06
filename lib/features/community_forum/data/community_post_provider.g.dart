@@ -24,7 +24,7 @@ final communityPostDatabaseProvider =
 
 typedef CommunityPostDatabaseRef
     = AutoDisposeProviderRef<CommunityPostDatabase>;
-String _$communityPostsHash() => r'db77cbee44de302f0c5a0c96ceb3626be5767b9b';
+String _$communityPostsHash() => r'59e9c634d9805344cbfa8db0578c7f55d251ceaa';
 
 /// See also [communityPosts].
 @ProviderFor(communityPosts)

@@ -23,7 +23,7 @@ final postCommentDatabaseProvider =
 );
 
 typedef PostCommentDatabaseRef = AutoDisposeProviderRef<PostCommentDatabase>;
-String _$postCommentHash() => r'a90e66f5b878b45df08b9c8cc6982bcdeeceec6e';
+String _$postCommentHash() => r'01d11796e5ebc69b170ad32e02292c376f7a240e';
 
 /// See also [postComment].
 @ProviderFor(postComment)

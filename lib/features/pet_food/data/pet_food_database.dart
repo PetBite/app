@@ -20,14 +20,13 @@ class PetFoodDatabase {
       path: FirestorePath.petFood(petFoodId),
       builder: (data, documentId) => PetFoodData.fromJson(data!));
 
-  Future<List<PetFoodData>> fetchPetFood() => _service.fetchCollection(
+  Future<List<PetFoodData>> fetchPetFoods() => _service.fetchCollection(
       path: FirestorePath.petFoods(),
       builder: (data, documentId) => PetFoodData.fromJson(data!));
 
-  Future<PetFoodData> fetchPetDetail(String petFoodId) =>
-      _service.fetchDocument(
-          path: FirestorePath.petFood(petFoodId),
-          builder: (data, documentId) => PetFoodData.fromJson(data!));
+  Future<PetFoodData> fetchPetFood(String petFoodId) => _service.fetchDocument(
+      path: FirestorePath.petFood(petFoodId),
+      builder: (data, documentId) => PetFoodData.fromJson(data!));
 
   Future<void> setPetFood(PetFoodData food, String petFoodId) => _service
       .setData(path: FirestorePath.petFood(petFoodId), data: food.toJson());

@@ -35,6 +35,6 @@ class CommunityPostDatabase {
 
   Future<void> setCommunityPost(CommunityPost communityPost, String postId) =>
       _service.setData(
-          path: FirestorePath.communityPost(communityPost.id!, postId),
+          path: FirestorePath.communityPost(communityPost.id, postId),
           data: communityPost.toJson());
 }
