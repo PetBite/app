@@ -10,7 +10,7 @@ class PostComment with _$PostComment {
     required String authorID,
     required String authorName,
     required String content,
-    required int likesCount,
+    @Default(0) int likesCount,
     required String timestamp,
   }) = _PostComment;
 

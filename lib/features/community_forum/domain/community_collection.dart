@@ -12,4 +12,8 @@ class CommunityCollection {
   List<String> getCommunityIDs() {
     return _communities.map((element) => element.id).toList();
   }
+
+  String getCommunityIdByName(String name) {
+    return _communities.firstWhere((element) => element.name == name).id;
+  }
 }

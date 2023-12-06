@@ -24,7 +24,7 @@ mixin _$Community {
   String get name => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   String get imagePath => throw _privateConstructorUsedError;
-  List<CommunityPost>? get posts => throw _privateConstructorUsedError;
+  List<CommunityPost> get posts => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -42,7 +42,7 @@ abstract class $CommunityCopyWith<$Res> {
       String name,
       String description,
       String imagePath,
-      List<CommunityPost>? posts});
+      List<CommunityPost> posts});
 }
 
 /// @nodoc
@@ -62,7 +62,7 @@ class _$CommunityCopyWithImpl<$Res, $Val extends Community>
     Object? name = null,
     Object? description = null,
     Object? imagePath = null,
-    Object? posts = freezed,
+    Object? posts = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -81,10 +81,10 @@ class _$CommunityCopyWithImpl<$Res, $Val extends Community>
           ? _value.imagePath
           : imagePath // ignore: cast_nullable_to_non_nullable
               as String,
-      posts: freezed == posts
+      posts: null == posts
           ? _value.posts
           : posts // ignore: cast_nullable_to_non_nullable
-              as List<CommunityPost>?,
+              as List<CommunityPost>,
     ) as $Val);
   }
 }
@@ -102,7 +102,7 @@ abstract class _$$CommunityImplCopyWith<$Res>
       String name,
       String description,
       String imagePath,
-      List<CommunityPost>? posts});
+      List<CommunityPost> posts});
 }
 
 /// @nodoc
@@ -120,7 +120,7 @@ class __$$CommunityImplCopyWithImpl<$Res>
     Object? name = null,
     Object? description = null,
     Object? imagePath = null,
-    Object? posts = freezed,
+    Object? posts = null,
   }) {
     return _then(_$CommunityImpl(
       id: null == id
@@ -139,10 +139,10 @@ class __$$CommunityImplCopyWithImpl<$Res>
           ? _value.imagePath
           : imagePath // ignore: cast_nullable_to_non_nullable
               as String,
-      posts: freezed == posts
+      posts: null == posts
           ? _value._posts
           : posts // ignore: cast_nullable_to_non_nullable
-              as List<CommunityPost>?,
+              as List<CommunityPost>,
     ));
   }
 }
@@ -155,7 +155,7 @@ class _$CommunityImpl extends _Community {
       required this.name,
       required this.description,
       required this.imagePath,
-      final List<CommunityPost>? posts})
+      final List<CommunityPost> posts = const []})
       : _posts = posts,
         super._();
 
@@ -170,14 +170,13 @@ class _$CommunityImpl extends _Community {
   final String description;
   @override
   final String imagePath;
-  final List<CommunityPost>? _posts;
+  final List<CommunityPost> _posts;
   @override
-  List<CommunityPost>? get posts {
-    final value = _posts;
-    if (value == null) return null;
+  @JsonKey()
+  List<CommunityPost> get posts {
     if (_posts is EqualUnmodifiableListView) return _posts;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
+    return EqualUnmodifiableListView(_posts);
   }
 
   @override
@@ -224,7 +223,7 @@ abstract class _Community extends Community {
       required final String name,
       required final String description,
       required final String imagePath,
-      final List<CommunityPost>? posts}) = _$CommunityImpl;
+      final List<CommunityPost> posts}) = _$CommunityImpl;
   const _Community._() : super._();
 
   factory _Community.fromJson(Map<String, dynamic> json) =
@@ -239,7 +238,7 @@ abstract class _Community extends Community {
   @override
   String get imagePath;
   @override
-  List<CommunityPost>? get posts;
+  List<CommunityPost> get posts;
   @override
   @JsonKey(ignore: true)
   _$$CommunityImplCopyWith<_$CommunityImpl> get copyWith =>

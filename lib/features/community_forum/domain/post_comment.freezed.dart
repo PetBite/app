@@ -169,7 +169,7 @@ class _$PostCommentImpl extends _PostComment {
       required this.authorID,
       required this.authorName,
       required this.content,
-      required this.likesCount,
+      this.likesCount = 0,
       required this.timestamp})
       : super._();
 
@@ -185,6 +185,7 @@ class _$PostCommentImpl extends _PostComment {
   @override
   final String content;
   @override
+  @JsonKey()
   final int likesCount;
   @override
   final String timestamp;
@@ -236,7 +237,7 @@ abstract class _PostComment extends PostComment {
       required final String authorID,
       required final String authorName,
       required final String content,
-      required final int likesCount,
+      final int likesCount,
       required final String timestamp}) = _$PostCommentImpl;
   const _PostComment._() : super._();
 

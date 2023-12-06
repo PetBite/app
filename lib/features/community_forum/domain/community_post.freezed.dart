@@ -28,7 +28,7 @@ mixin _$CommunityPost {
   String get content => throw _privateConstructorUsedError;
   int get likesCount => throw _privateConstructorUsedError;
   String get timestamp => throw _privateConstructorUsedError;
-  List<PostComment>? get comments => throw _privateConstructorUsedError;
+  List<PostComment> get comments => throw _privateConstructorUsedError;
   String? get imagePath => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -52,7 +52,7 @@ abstract class $CommunityPostCopyWith<$Res> {
       String content,
       int likesCount,
       String timestamp,
-      List<PostComment>? comments,
+      List<PostComment> comments,
       String? imagePath});
 }
 
@@ -77,7 +77,7 @@ class _$CommunityPostCopyWithImpl<$Res, $Val extends CommunityPost>
     Object? content = null,
     Object? likesCount = null,
     Object? timestamp = null,
-    Object? comments = freezed,
+    Object? comments = null,
     Object? imagePath = freezed,
   }) {
     return _then(_value.copyWith(
@@ -113,10 +113,10 @@ class _$CommunityPostCopyWithImpl<$Res, $Val extends CommunityPost>
           ? _value.timestamp
           : timestamp // ignore: cast_nullable_to_non_nullable
               as String,
-      comments: freezed == comments
+      comments: null == comments
           ? _value.comments
           : comments // ignore: cast_nullable_to_non_nullable
-              as List<PostComment>?,
+              as List<PostComment>,
       imagePath: freezed == imagePath
           ? _value.imagePath
           : imagePath // ignore: cast_nullable_to_non_nullable
@@ -142,7 +142,7 @@ abstract class _$$CommunityPostImplCopyWith<$Res>
       String content,
       int likesCount,
       String timestamp,
-      List<PostComment>? comments,
+      List<PostComment> comments,
       String? imagePath});
 }
 
@@ -165,7 +165,7 @@ class __$$CommunityPostImplCopyWithImpl<$Res>
     Object? content = null,
     Object? likesCount = null,
     Object? timestamp = null,
-    Object? comments = freezed,
+    Object? comments = null,
     Object? imagePath = freezed,
   }) {
     return _then(_$CommunityPostImpl(
@@ -201,10 +201,10 @@ class __$$CommunityPostImplCopyWithImpl<$Res>
           ? _value.timestamp
           : timestamp // ignore: cast_nullable_to_non_nullable
               as String,
-      comments: freezed == comments
+      comments: null == comments
           ? _value._comments
           : comments // ignore: cast_nullable_to_non_nullable
-              as List<PostComment>?,
+              as List<PostComment>,
       imagePath: freezed == imagePath
           ? _value.imagePath
           : imagePath // ignore: cast_nullable_to_non_nullable
@@ -223,9 +223,9 @@ class _$CommunityPostImpl extends _CommunityPost {
       required this.communityID,
       required this.title,
       required this.content,
-      required this.likesCount,
+      this.likesCount = 0,
       required this.timestamp,
-      final List<PostComment>? comments,
+      final List<PostComment> comments = const [],
       this.imagePath})
       : _comments = comments,
         super._();
@@ -246,17 +246,17 @@ class _$CommunityPostImpl extends _CommunityPost {
   @override
   final String content;
   @override
+  @JsonKey()
   final int likesCount;
   @override
   final String timestamp;
-  final List<PostComment>? _comments;
+  final List<PostComment> _comments;
   @override
-  List<PostComment>? get comments {
-    final value = _comments;
-    if (value == null) return null;
+  @JsonKey()
+  List<PostComment> get comments {
     if (_comments is EqualUnmodifiableListView) return _comments;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
+    return EqualUnmodifiableListView(_comments);
   }
 
   @override
@@ -327,9 +327,9 @@ abstract class _CommunityPost extends CommunityPost {
       required final String communityID,
       required final String title,
       required final String content,
-      required final int likesCount,
+      final int likesCount,
       required final String timestamp,
-      final List<PostComment>? comments,
+      final List<PostComment> comments,
       final String? imagePath}) = _$CommunityPostImpl;
   const _CommunityPost._() : super._();
 
@@ -353,7 +353,7 @@ abstract class _CommunityPost extends CommunityPost {
   @override
   String get timestamp;
   @override
-  List<PostComment>? get comments;
+  List<PostComment> get comments;
   @override
   String? get imagePath;
   @override

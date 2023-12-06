@@ -14,11 +14,12 @@ _$CommunityPostImpl _$$CommunityPostImplFromJson(Map<String, dynamic> json) =>
       communityID: json['communityID'] as String,
       title: json['title'] as String,
       content: json['content'] as String,
-      likesCount: json['likesCount'] as int,
+      likesCount: json['likesCount'] as int? ?? 0,
       timestamp: json['timestamp'] as String,
       comments: (json['comments'] as List<dynamic>?)
-          ?.map((e) => PostComment.fromJson(e as Map<String, dynamic>))
-          .toList(),
+              ?.map((e) => PostComment.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
       imagePath: json['imagePath'] as String?,
     );
 

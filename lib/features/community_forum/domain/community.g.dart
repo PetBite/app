@@ -13,8 +13,9 @@ _$CommunityImpl _$$CommunityImplFromJson(Map<String, dynamic> json) =>
       description: json['description'] as String,
       imagePath: json['imagePath'] as String,
       posts: (json['posts'] as List<dynamic>?)
-          ?.map((e) => CommunityPost.fromJson(e as Map<String, dynamic>))
-          .toList(),
+              ?.map((e) => CommunityPost.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
     );
 
 Map<String, dynamic> _$$CommunityImplToJson(_$CommunityImpl instance) =>

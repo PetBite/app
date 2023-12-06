@@ -13,7 +13,7 @@ class CommunityPost with _$CommunityPost {
     required String communityID,
     required String title,
     required String content,
-    required int likesCount,
+    @Default(0) int likesCount,
     required String timestamp,
     @Default([]) List<PostComment> comments,
     String? imagePath,

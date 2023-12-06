@@ -12,7 +12,7 @@ _$PostCommentImpl _$$PostCommentImplFromJson(Map<String, dynamic> json) =>
       authorID: json['authorID'] as String,
       authorName: json['authorName'] as String,
       content: json['content'] as String,
-      likesCount: json['likesCount'] as int,
+      likesCount: json['likesCount'] as int? ?? 0,
       timestamp: json['timestamp'] as String,
     );
 
