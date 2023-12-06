@@ -19,4 +19,16 @@ class FirestorePath {
 
   static String petFood(String petFoodId) => 'pet_food/$petFoodId';
   static String petFoods() => 'pet_food';
+
+  static String communities() => 'communities';
+  static String community(String communityId) => 'communities/$communityId';
+  static String communityPosts(String communityId) =>
+      'communities/$communityId/posts';
+  static String communityPost(String communityId, String postId) =>
+      'communities/$communityId/posts/$postId';
+  static String communityPostComment(
+          String communityId, String postId, String commentId) =>
+      'communities/$communityId/posts/$postId/comments/$commentId';
+  static String communityPostComments(String communityId, String postId) =>
+      'communities/$communityId/posts/$postId/comments';
 }

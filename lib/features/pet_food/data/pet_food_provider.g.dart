@@ -21,7 +21,7 @@ final petFoodDatabaseProvider = AutoDisposeProvider<PetFoodDatabase>.internal(
 );
 
 typedef PetFoodDatabaseRef = AutoDisposeProviderRef<PetFoodDatabase>;
-String _$petFoodHash() => r'8e961f7fd4557a1dc1d8c2dd3849d8731a0fc479';
+String _$petFoodHash() => r'd41ee2bbe05d3279c6f656ccddc1ac8b5646268e';
 
 /// See also [petFood].
 @ProviderFor(petFood)

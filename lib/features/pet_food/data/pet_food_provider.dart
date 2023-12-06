@@ -13,5 +13,5 @@ PetFoodDatabase petFoodDatabase(PetFoodDatabaseRef ref) {
 @riverpod
 Stream<List<PetFoodData>> petFood(PetFoodRef ref) {
   final database = ref.watch(petFoodDatabaseProvider);
-  return database.watchPetFood();
+  return database.watchPetFoods();
 }
