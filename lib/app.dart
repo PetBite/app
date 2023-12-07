@@ -3,8 +3,8 @@ import 'package:app/features/activity_log/presentation/detailed_activity_log.dar
 import 'package:app/features/activity_log/presentation/form_fields/add_activity.dart';
 import 'package:app/features/activity_log/presentation/form_fields/edit_activity.dart';
 import 'package:app/features/activity_log/presentation/individual_activity.dart';
-import 'package:app/features/add_pet/presentatoin/pet_list.dart';
-import 'package:app/features/add_pet/presentatoin/add_pet_form.dart';
+import 'package:app/features/add_pet/presentation/pet_list.dart';
+import 'package:app/features/add_pet/presentation/add_pet_form.dart';
 import 'package:app/features/authentication/presentation/forgot_password_view.dart';
 import 'package:app/features/authentication/presentation/signin_view.dart';
 import 'package:app/features/authentication/presentation/verify_email_view.dart';
