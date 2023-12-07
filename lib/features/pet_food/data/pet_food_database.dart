@@ -12,23 +12,21 @@ class PetFoodDatabase {
 
   final _service = FirestoreService.instance;
 
-  Stream<List<PetFoodData>> watchPetFood() => _service.watchCollection(
+  Stream<List<PetFoodData>> watchPetFoods() => _service.watchCollection(
       path: FirestorePath.petFoods(),
       builder: (data, documentId) => PetFoodData.fromJson(data!));
 
-  Stream<PetFoodData> watchPetDetail(String petFoodId) =>
-      _service.watchDocument(
-          path: FirestorePath.petFood(petFoodId),
-          builder: (data, documentId) => PetFoodData.fromJson(data!));
+  Stream<PetFoodData> watchPetFood(String petFoodId) => _service.watchDocument(
+      path: FirestorePath.petFood(petFoodId),
+      builder: (data, documentId) => PetFoodData.fromJson(data!));
 
-  Future<List<PetFoodData>> fetchPetFood() => _service.fetchCollection(
+  Future<List<PetFoodData>> fetchPetFoods() => _service.fetchCollection(
       path: FirestorePath.petFoods(),
       builder: (data, documentId) => PetFoodData.fromJson(data!));
 
-  Future<PetFoodData> fetchPetDetail(String petFoodId) =>
-      _service.fetchDocument(
-          path: FirestorePath.petFood(petFoodId),
-          builder: (data, documentId) => PetFoodData.fromJson(data!));
+  Future<PetFoodData> fetchPetFood(String petFoodId) => _service.fetchDocument(
+      path: FirestorePath.petFood(petFoodId),
+      builder: (data, documentId) => PetFoodData.fromJson(data!));
 
   Future<void> setPetFood(PetFoodData food, String petFoodId) => _service
       .setData(path: FirestorePath.petFood(petFoodId), data: food.toJson());
