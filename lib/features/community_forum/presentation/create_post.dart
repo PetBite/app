@@ -51,8 +51,8 @@ class _CreatePostState extends ConsumerState<CreatePost> {
       bool isValid = _formKey.currentState?.saveAndValidate() ?? false;
       if (!isValid) return;
       String id = currentUserID;
-      String title = _titleFieldKey.currentState?.value ?? "";
-      String content = _contentFieldKey.currentState?.value ?? "";
+      String title = _titleFieldKey.currentState?.value;
+      String content = _contentFieldKey.currentState?.value;
       String authorID = currentUserID;
       String authorName = userDB.getUser(currentUserID).name;
       String timestamp = DateTime.now().toString();
@@ -68,7 +68,9 @@ class _CreatePostState extends ConsumerState<CreatePost> {
           timestamp: timestamp);
       ref.read(postControllerProvider.notifier).updatePost(
             post: newPost,
-            onSuccess: () {},
+            onSuccess: () {
+              Navigator.pop(context);
+            },
             postId: id,
           );
     }
@@ -82,74 +84,79 @@ class _CreatePostState extends ConsumerState<CreatePost> {
         children: [
           Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: Column(
-                children: [
-                  const SizedBox(height: 20),
-                  const Text('Select a community'),
-                  DropdownButtonFormField<Community>(
-                    value: selectedCommunity,
-                    onChanged: (Community? community) {
-                      setState(() {
-                        selectedCommunity = community;
-                      });
-                    },
-                    items: communityDB
-                        .getCommunityIDs()
-                        .map((element) => DropdownMenuItem<Community>(
-                              value: communityDB.getCommunityById(element),
-                              child: Text(
-                                  communityDB.getCommunityById(element).name),
-                            ))
-                        .toList(),
-                  ),
-                  const SizedBox(height: 20),
-                  const Text("Title:"),
-                  const SizedBox(height: 10),
-                  FormBuilderTextField(
-                    name: 'Title',
-                    key: _titleFieldKey,
-                    decoration: const InputDecoration(
-                      labelText: 'Title',
-                      hintText: 'Enter the post title',
+              child: FormBuilder(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    const SizedBox(height: 20),
+                    const Text('Select a community'),
+                    DropdownButtonFormField<Community>(
+                      value: selectedCommunity,
+                      onChanged: (Community? community) {
+                        setState(() {
+                          selectedCommunity = community;
+                        });
+                      },
+                      validator: FormBuilderValidators.compose([
+                        FormBuilderValidators.required(),
+                      ]),
+                      items: communityDB
+                          .getCommunityIDs()
+                          .map((element) => DropdownMenuItem<Community>(
+                                value: communityDB.getCommunityById(element),
+                                child: Text(
+                                    communityDB.getCommunityById(element).name),
+                              ))
+                          .toList(),
                     ),
-                    validator: FormBuilderValidators.compose([
-                      FormBuilderValidators.required(),
-                    ]),
-                  ),
-                  const SizedBox(height: 20),
-                  const Text("Body:"),
-                  const SizedBox(height: 10),
-                  FormBuilderTextField(
-                    name: 'Content',
-                    key: _contentFieldKey,
-                    decoration: const InputDecoration(
-                      labelText: 'Content',
-                      hintText: 'Enter the post content',
+                    const SizedBox(height: 20),
+                    const Text("Title:"),
+                    const SizedBox(height: 10),
+                    FormBuilderTextField(
+                      name: 'Title',
+                      key: _titleFieldKey,
+                      decoration: const InputDecoration(
+                        labelText: 'Title',
+                        hintText: 'Enter the post title',
+                      ),
+                      validator: FormBuilderValidators.compose([
+                        FormBuilderValidators.required(),
+                      ]),
                     ),
-                    validator: FormBuilderValidators.compose([
-                      FormBuilderValidators.required(),
-                    ]),
-                  ),
-                  const SizedBox(height: 20),
-                  ElevatedButton(
-                    onPressed: () {
-                      onSubmit();
-                      Navigator.pop(context);
-                    },
-                    style: ElevatedButton.styleFrom(
-                      shape: const StadiumBorder(),
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 140, vertical: 16),
+                    const SizedBox(height: 20),
+                    const Text("Content:"),
+                    const SizedBox(height: 10),
+                    FormBuilderTextField(
+                      name: 'Content',
+                      key: _contentFieldKey,
+                      decoration: const InputDecoration(
+                        labelText: 'Content',
+                        hintText: 'Enter the post content',
+                      ),
+                      validator: FormBuilderValidators.compose([
+                        FormBuilderValidators.required(),
+                      ]),
                     ),
-                    child: const Text(
-                      'Post',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
+                    const SizedBox(height: 20),
+                    ElevatedButton(
+                      onPressed: () {
+                        onSubmit();
+                      },
+                      style: ElevatedButton.styleFrom(
+                        shape: const StadiumBorder(),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 140, vertical: 16),
+                      ),
+                      child: const Text(
+                        'Post',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               )),
         ],
       )),
