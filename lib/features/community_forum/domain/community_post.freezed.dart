@@ -28,7 +28,6 @@ mixin _$CommunityPost {
   String get content => throw _privateConstructorUsedError;
   int get likesCount => throw _privateConstructorUsedError;
   String get timestamp => throw _privateConstructorUsedError;
-  List<PostComment> get comments => throw _privateConstructorUsedError;
   String? get imagePath => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -52,7 +51,6 @@ abstract class $CommunityPostCopyWith<$Res> {
       String content,
       int likesCount,
       String timestamp,
-      List<PostComment> comments,
       String? imagePath});
 }
 
@@ -77,7 +75,6 @@ class _$CommunityPostCopyWithImpl<$Res, $Val extends CommunityPost>
     Object? content = null,
     Object? likesCount = null,
     Object? timestamp = null,
-    Object? comments = null,
     Object? imagePath = freezed,
   }) {
     return _then(_value.copyWith(
@@ -113,10 +110,6 @@ class _$CommunityPostCopyWithImpl<$Res, $Val extends CommunityPost>
           ? _value.timestamp
           : timestamp // ignore: cast_nullable_to_non_nullable
               as String,
-      comments: null == comments
-          ? _value.comments
-          : comments // ignore: cast_nullable_to_non_nullable
-              as List<PostComment>,
       imagePath: freezed == imagePath
           ? _value.imagePath
           : imagePath // ignore: cast_nullable_to_non_nullable
@@ -142,7 +135,6 @@ abstract class _$$CommunityPostImplCopyWith<$Res>
       String content,
       int likesCount,
       String timestamp,
-      List<PostComment> comments,
       String? imagePath});
 }
 
@@ -165,7 +157,6 @@ class __$$CommunityPostImplCopyWithImpl<$Res>
     Object? content = null,
     Object? likesCount = null,
     Object? timestamp = null,
-    Object? comments = null,
     Object? imagePath = freezed,
   }) {
     return _then(_$CommunityPostImpl(
@@ -201,10 +192,6 @@ class __$$CommunityPostImplCopyWithImpl<$Res>
           ? _value.timestamp
           : timestamp // ignore: cast_nullable_to_non_nullable
               as String,
-      comments: null == comments
-          ? _value._comments
-          : comments // ignore: cast_nullable_to_non_nullable
-              as List<PostComment>,
       imagePath: freezed == imagePath
           ? _value.imagePath
           : imagePath // ignore: cast_nullable_to_non_nullable
@@ -225,10 +212,8 @@ class _$CommunityPostImpl extends _CommunityPost {
       required this.content,
       this.likesCount = 0,
       required this.timestamp,
-      final List<PostComment> comments = const [],
       this.imagePath})
-      : _comments = comments,
-        super._();
+      : super._();
 
   factory _$CommunityPostImpl.fromJson(Map<String, dynamic> json) =>
       _$$CommunityPostImplFromJson(json);
@@ -250,21 +235,12 @@ class _$CommunityPostImpl extends _CommunityPost {
   final int likesCount;
   @override
   final String timestamp;
-  final List<PostComment> _comments;
-  @override
-  @JsonKey()
-  List<PostComment> get comments {
-    if (_comments is EqualUnmodifiableListView) return _comments;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_comments);
-  }
-
   @override
   final String? imagePath;
 
   @override
   String toString() {
-    return 'CommunityPost(id: $id, authorID: $authorID, authorName: $authorName, communityID: $communityID, title: $title, content: $content, likesCount: $likesCount, timestamp: $timestamp, comments: $comments, imagePath: $imagePath)';
+    return 'CommunityPost(id: $id, authorID: $authorID, authorName: $authorName, communityID: $communityID, title: $title, content: $content, likesCount: $likesCount, timestamp: $timestamp, imagePath: $imagePath)';
   }
 
   @override
@@ -285,25 +261,14 @@ class _$CommunityPostImpl extends _CommunityPost {
                 other.likesCount == likesCount) &&
             (identical(other.timestamp, timestamp) ||
                 other.timestamp == timestamp) &&
-            const DeepCollectionEquality().equals(other._comments, _comments) &&
             (identical(other.imagePath, imagePath) ||
                 other.imagePath == imagePath));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      authorID,
-      authorName,
-      communityID,
-      title,
-      content,
-      likesCount,
-      timestamp,
-      const DeepCollectionEquality().hash(_comments),
-      imagePath);
+  int get hashCode => Object.hash(runtimeType, id, authorID, authorName,
+      communityID, title, content, likesCount, timestamp, imagePath);
 
   @JsonKey(ignore: true)
   @override
@@ -329,7 +294,6 @@ abstract class _CommunityPost extends CommunityPost {
       required final String content,
       final int likesCount,
       required final String timestamp,
-      final List<PostComment> comments,
       final String? imagePath}) = _$CommunityPostImpl;
   const _CommunityPost._() : super._();
 
@@ -352,8 +316,6 @@ abstract class _CommunityPost extends CommunityPost {
   int get likesCount;
   @override
   String get timestamp;
-  @override
-  List<PostComment> get comments;
   @override
   String? get imagePath;
   @override

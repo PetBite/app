@@ -15,7 +15,6 @@ class CommunityPost with _$CommunityPost {
     required String content,
     @Default(0) int likesCount,
     required String timestamp,
-    @Default([]) List<PostComment> comments,
     String? imagePath,
   }) = _CommunityPost;
 

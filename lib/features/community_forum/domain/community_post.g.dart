@@ -16,10 +16,6 @@ _$CommunityPostImpl _$$CommunityPostImplFromJson(Map<String, dynamic> json) =>
       content: json['content'] as String,
       likesCount: json['likesCount'] as int? ?? 0,
       timestamp: json['timestamp'] as String,
-      comments: (json['comments'] as List<dynamic>?)
-              ?.map((e) => PostComment.fromJson(e as Map<String, dynamic>))
-              .toList() ??
-          const [],
       imagePath: json['imagePath'] as String?,
     );
 
@@ -33,6 +29,5 @@ Map<String, dynamic> _$$CommunityPostImplToJson(_$CommunityPostImpl instance) =>
       'content': instance.content,
       'likesCount': instance.likesCount,
       'timestamp': instance.timestamp,
-      'comments': instance.comments,
       'imagePath': instance.imagePath,
     };
