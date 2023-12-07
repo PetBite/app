@@ -3,6 +3,7 @@ import 'package:app/features/common/pet_id_provider.dart';
 import 'package:app/features/home/presentation/home.dart';
 import 'package:app/features/pet_details/domain/pet_details.dart';
 import 'package:app/features/pet_details/domain/pet_details_collection.dart';
+import 'package:app/features/pet_details/presentation/pet_details_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -17,7 +18,10 @@ class PetListPage extends ConsumerWidget {
     return asyncAllData.when(
       data: (allData) {
         return _build(
-            context: context, petDetails: allData.petDetails, ref: ref);
+            context: context,
+            petDetails: allData.petDetails,
+            userId: allData.currentUserID,
+            ref: ref);
       },
       loading: () => const Center(child: CircularProgressIndicator()),
       error: (error, stackTrace) => Text('Error: $error'),
@@ -27,6 +31,7 @@ class PetListPage extends ConsumerWidget {
   Widget _build({
     required BuildContext context,
     required List<PetDetailsData> petDetails,
+    required String userId,
     required WidgetRef ref,
   }) {
     PetDetailsCollection petDB = PetDetailsCollection(petDetails);
@@ -49,9 +54,9 @@ class PetListPage extends ConsumerWidget {
             for (var pet in petList)
               Card(
                 clipBehavior: Clip.hardEdge,
-                elevation: 4.0, // Adds a shadow effect
+                elevation: 4.0,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10), // Rounded corners
+                  borderRadius: BorderRadius.circular(10),
                 ),
                 child: InkWell(
                   onTap: () {
@@ -76,21 +81,56 @@ class PetListPage extends ConsumerWidget {
                         ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                pet.name,
-                                style: const TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    pet.name,
+                                    style: const TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(
+                                    pet.gender,
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                ],
                               ),
-                              Text(
-                                pet.gender,
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                ),
+                              // PopupMenuButton
+                              PopupMenuButton<String>(
+                                onSelected: (String value) {
+                                  if (value == 'Edit') {
+                                    Navigator.pushNamed(
+                                        context, '/pet_details');
+                                    ref.read(petIdProvider.notifier).state =
+                                        pet.id;
+                                  } else if (value == 'Delete') {
+                                    ref
+                                        .read(petDetailsControllerProvider
+                                            .notifier)
+                                        .removePet(
+                                            petId: pet.id,
+                                            onSuccess: () {},
+                                            userId: userId);
+                                  }
+                                },
+                                itemBuilder: (BuildContext context) =>
+                                    <PopupMenuEntry<String>>[
+                                  const PopupMenuItem<String>(
+                                    value: 'Edit',
+                                    child: Text('Edit'),
+                                  ),
+                                  const PopupMenuItem<String>(
+                                    value: 'Delete',
+                                    child: Text('Delete'),
+                                  ),
+                                ],
                               ),
                             ],
                           ),

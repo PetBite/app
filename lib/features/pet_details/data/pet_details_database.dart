@@ -37,6 +37,6 @@ class PetDetailsDatabase {
           path: FirestorePath.petDetail(petDetail.id, userId),
           data: petDetail.toJson());
 
-  Future<void> deletePetDetails(PetDetailsData petDetail, String userId) =>
-      _service.deleteData(path: FirestorePath.petDetail(petDetail.id, userId));
+  Future<void> deletePetDetails(String petId, String userId) =>
+      _service.deleteData(path: FirestorePath.petDetail(petId, userId));
 }

@@ -97,23 +97,22 @@ class PetDetailsController extends _$PetDetailsController {
     }
 
     await batch.commit();
+  }
 
-    Future<void> deletePetDetails({
-      required PetDetailsData details,
-      required VoidCallback onSuccess,
-      required String userId,
-    }) async {
-      state = const AsyncLoading();
-      PetDetailsDatabase detailsDatabase =
-          ref.watch(petDetailsDatabaseProvider);
-      final newState = await AsyncValue.guard(
-          () => detailsDatabase.deletePetDetails(details, userId));
-      if (mounted) {
-        state = newState;
-      }
-      if (!state.hasError) {
-        onSuccess();
-      }
+  Future<void> removePet({
+    required String petId,
+    required VoidCallback onSuccess,
+    required String userId,
+  }) async {
+    state = const AsyncLoading();
+    PetDetailsDatabase detailsDatabase = ref.watch(petDetailsDatabaseProvider);
+    final newState = await AsyncValue.guard(
+        () => detailsDatabase.deletePetDetails(petId, userId));
+    if (mounted) {
+      state = newState;
+    }
+    if (!state.hasError) {
+      onSuccess();
     }
   }
 }
