@@ -5,6 +5,8 @@ import 'package:app/features/pet_details/data/pet_details_provider.dart';
 import 'package:app/features/pet_details/domain/pet_details.dart';
 import 'package:app/features/user/domain/user.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'pet_food/data/pet_food_provider.dart';
+import 'pet_food/domain/pet_food.dart';
 
 import 'feeding_schedule/data/feeding_schedule_provider.dart';
 import 'feeding_schedule/domain/feeding_schedule.dart';
@@ -19,7 +21,8 @@ class AllData {
       required this.users,
       required this.currentUserID,
       required this.currentPetID,
-      required this.petActivities});
+      required this.petActivities,
+      required this.petFoods});
 
   final List<FeedingScheduleData> feedingSchedules;
   final List<PetDetailsData> petDetails;
@@ -27,6 +30,7 @@ class AllData {
   final String currentUserID;
   final String currentPetID;
   final List<PetActivity> petActivities;
+  final List<PetFoodData> petFoods;
 }
 
 @riverpod
@@ -34,6 +38,7 @@ Future<AllData> allData(AllDataRef ref) async {
   final users = ref.watch(usersProvider.future);
   final feedingSchedules = ref.watch(feedingschedulesProvider.future);
   final petDetails = ref.watch(petdetailsProvider.future);
+  final petFoods = ref.watch(petFoodProvider.future);
   final currentUserID = ref.watch(currentUserIDProvider);
   final currentPetID = ref.watch(petIdProvider);
   final petActvities = ref.watch(petActivityProvider.future);
@@ -42,6 +47,7 @@ Future<AllData> allData(AllDataRef ref) async {
       petDetails: await petDetails,
       users: await users,
       petActivities: await petActvities,
+      petFoods: await petFoods,
       currentUserID: currentUserID,
       currentPetID: currentPetID);
 }
