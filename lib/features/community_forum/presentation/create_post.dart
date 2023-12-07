@@ -50,7 +50,7 @@ class _CreatePostState extends ConsumerState<CreatePost> {
     void onSubmit() {
       bool isValid = _formKey.currentState?.saveAndValidate() ?? false;
       if (!isValid) return;
-      String id = currentUserID;
+      String id = UniqueKey().toString();
       String title = _titleFieldKey.currentState?.value;
       String content = _contentFieldKey.currentState?.value;
       String authorID = currentUserID;
@@ -67,12 +67,10 @@ class _CreatePostState extends ConsumerState<CreatePost> {
           content: content,
           timestamp: timestamp);
       ref.read(postControllerProvider.notifier).updatePost(
-            post: newPost,
-            onSuccess: () {
-              Navigator.pop(context);
-            },
-            postId: id,
-          );
+          post: newPost,
+          onSuccess: () {
+            Navigator.pop(context);
+          });
     }
 
     return Scaffold(

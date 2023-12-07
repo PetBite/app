@@ -19,12 +19,11 @@ class PostController extends _$PostController {
   Future<void> updatePost({
     required CommunityPost post,
     required VoidCallback onSuccess,
-    required String postId,
   }) async {
     state = const AsyncLoading();
     CommunityPostDatabase database = ref.watch(communityPostDatabaseProvider);
     final newState =
-        await AsyncValue.guard(() => database.setCommunityPost(post, postId));
+        await AsyncValue.guard(() => database.setCommunityPost(post));
     if (mounted) {
       state = newState;
     }
