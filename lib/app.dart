@@ -16,6 +16,7 @@ import 'package:app/features/not_found/presentation/not_found.dart';
 import 'package:app/features/pet_details/presentation/pet_details.dart';
 import 'package:app/features/pet_food/presentation/detailed_pet_food.dart';
 import 'package:app/features/pet_food/presentation/pet_food.dart';
+import 'package:app/features/user/presentation/account_info.dart';
 import 'package:app/features/user/presentation/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -94,6 +95,8 @@ class MyApp extends ConsumerWidget {
                 return const PetListPage();
               case AddPetForm.routeName:
                 return AddPetForm();
+              case AccountInfo.routeName:
+                return AccountInfo();
               default:
                 return const NotFoundPage();
             }

@@ -56,10 +56,13 @@ class Profile extends ConsumerWidget {
               ),
             ),
           ),
-          const ListTile(
-            leading: Icon(Icons.manage_accounts, size: 35),
-            title: Text('Account'),
-            trailing: Icon(Icons.arrow_forward_ios),
+          ListTile(
+            leading: const Icon(Icons.manage_accounts, size: 35),
+            title: const Text('Account'),
+            trailing: const Icon(Icons.arrow_forward_ios),
+            onTap: () {
+              Navigator.pushNamed(context, '/account_info');
+            },
           ),
           ListTile(
             leading: const Icon(Icons.pets, size: 35),
