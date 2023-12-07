@@ -1,4 +1,3 @@
-import 'package:app/features/community_forum/domain/post_comment.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'community_post.freezed.dart';

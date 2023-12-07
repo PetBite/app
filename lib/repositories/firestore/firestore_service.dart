@@ -12,8 +12,6 @@ class FirestoreService {
     required Map<String, dynamic> data,
     bool merge = false,
   }) async {
-    print(path);
-    print(data);
     final reference = FirebaseFirestore.instance.doc(path);
     await reference.set(data, SetOptions(merge: merge));
   }

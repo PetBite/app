@@ -80,9 +80,6 @@ class _ForumHomePageState extends ConsumerState<ForumHomePage> {
                                     backgroundImage: AssetImage(communityDB
                                         .getCommunityById(element)
                                         .imagePath)),
-                                // icon: Image.asset(communityDB
-                                //   .getCommunityById(element)
-                                // .imagePath),
                                 color: Colors.white,
                                 onPressed: () {
                                   ref.read(communityIdProvider.notifier).state =
