@@ -131,12 +131,12 @@ class AccountInfo extends ConsumerWidget {
                   Row(
                     children: [
                       ElevatedButton(
-                        onPressed: onSubmit,
-                        child: const Text('Submit'),
-                      ),
-                      ElevatedButton(
                         onPressed: onReset,
                         child: const Text('Reset'),
+                      ),
+                      ElevatedButton(
+                        onPressed: onSubmit,
+                        child: const Text('Submit'),
                       ),
                     ],
                   ),

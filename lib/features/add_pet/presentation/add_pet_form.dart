@@ -241,18 +241,6 @@ class AddPetForm extends ConsumerWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       ElevatedButton(
-                          onPressed: onSubmit,
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: (Colors.blueAccent),
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 50, vertical: 20),
-                              textStyle: const TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold)),
-                          child: const Text(
-                            'Submit',
-                            style: TextStyle(color: Colors.white),
-                          )),
-                      ElevatedButton(
                         onPressed: onReset,
                         style: ElevatedButton.styleFrom(
                             backgroundColor: (Colors.blueAccent),
@@ -265,6 +253,18 @@ class AddPetForm extends ConsumerWidget {
                           style: TextStyle(color: Colors.white),
                         ),
                       ),
+                      ElevatedButton(
+                          onPressed: onSubmit,
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: (Colors.blueAccent),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 50, vertical: 20),
+                              textStyle: const TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold)),
+                          child: const Text(
+                            'Submit',
+                            style: TextStyle(color: Colors.white),
+                          )),
                     ]))
           ],
         ));
