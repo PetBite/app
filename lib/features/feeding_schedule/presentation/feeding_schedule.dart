@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:app/features/feeding_schedule/presentation/feeding_card.dart';
+import 'package:intl/intl.dart';
 import '../domain/feeding_schedule.dart';
 import '../../all_data_provider.dart';
 import '../domain/feeding_schedule_collection.dart';
@@ -32,6 +33,15 @@ class FeedingSchedulePage extends ConsumerWidget {
 
     weekSchedule.sort((a, b) => a.id.compareTo(b.id));
 
+    // Determine today's day
+    String todayDay = DateFormat('EEEE').format(DateTime.now());
+
+    int initialPageIndex =
+        weekSchedule.indexWhere((schedule) => schedule.day == todayDay);
+    if (initialPageIndex == -1) {
+      initialPageIndex = 0;
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -56,6 +66,7 @@ class FeedingSchedulePage extends ConsumerWidget {
           height: 400,
           child: PageView(
             physics: const PageScrollPhysics(),
+            controller: PageController(initialPage: initialPageIndex),
             children: weekSchedule
                 .map((e) => Padding(
                       padding: const EdgeInsets.all(8.0),

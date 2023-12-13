@@ -151,9 +151,9 @@ class EditActivity extends ConsumerWidget {
             Align(
               alignment: Alignment.bottomLeft,
               child: ElevatedButton(
-                onPressed: onSubmit,
+                onPressed: onReset,
                 child: const Text(
-                  'Submit',
+                  'Reset',
                   style: TextStyle(color: Colors.white),
                 ),
               ),
@@ -161,9 +161,9 @@ class EditActivity extends ConsumerWidget {
             Align(
               alignment: Alignment.bottomRight,
               child: ElevatedButton(
-                onPressed: onReset,
+                onPressed: onSubmit,
                 child: const Text(
-                  'Reset',
+                  'Submit',
                   style: TextStyle(color: Colors.white),
                 ),
               ),
